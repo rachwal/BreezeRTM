@@ -139,6 +139,9 @@
     <ProjectReference Include="..\..\breeze_rtm\rt_object\rt_object.vcxproj">
       <Project>{c710d111-4fcf-4ffb-84d7-9249aedac40b}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\stubs\stubs.vcxproj">
+      <Project>{33bd4f2c-2b46-4b3a-9d9e-c8b496725721}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

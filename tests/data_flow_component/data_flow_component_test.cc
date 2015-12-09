@@ -4,8 +4,8 @@
 
 #include <CppUnitTest.h>
 
-#include <breeze_rtm/data_flow_component.h>
-#include <breeze_rtm/execution_context_service.h>
+#include <tests/execution_context_service_stub.h>
+#include <tests/data_flow_component_stub.h>
 
 namespace breeze_rtm
 {
@@ -13,31 +13,6 @@ namespace data_flow_component_tests
 {
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace breeze_rtm;
-
-class DataFlowComponentStub :public data_flow_component::DataFlowComponent
-{
-	public:
-	DataFlowComponentStub(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service)
-		: DataFlowComponent(execution_context_service, port_service)
-	{
-		profile_.instance_name = "test";
-	}
-};
-
-class ExecutionContextServiceStub : public execution_context::ExecutionContextService
-{
-	public:
-	ExecutionContextServiceStub()
-	{
-		profile_.kind = omg_rtc::ExecutionKind::PERIODIC;
-		profile_.owner = nullptr;
-	}
-
-	omg_rtc::ExecutionContextProfile *get_profile() override
-	{
-		return &profile_;
-	};
-};
 
 TEST_CLASS(DataFlowComponentTest)
 {
@@ -49,8 +24,8 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldInitializeComponent)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		//WHEN
 		auto return_code = data_flow_component->initialize();
@@ -65,7 +40,7 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldReturnErrorCodeTryToInitializeComponentWithoutExecutionContextService)
 	{
 		//GIVEN
-		auto data_flow_component = new DataFlowComponentStub(nullptr, nullptr);
+		auto data_flow_component = new stubs::DataFlowComponentStub(nullptr, nullptr);
 
 		//WHEN
 		auto return_code = data_flow_component->initialize();
@@ -79,8 +54,8 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldNotInitializeComponentMoreThanOnce)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		//WHEN
 		auto first_return_code = data_flow_component->initialize();
@@ -97,8 +72,8 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldFinalizeComponent)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		auto first_return_code = data_flow_component->initialize();
 
@@ -116,11 +91,11 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldNotFinalizeComponentWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 		auto first_return_code = data_flow_component->initialize();
 
-		auto external_execution_context_service = new ExecutionContextServiceStub();
+		auto external_execution_context_service = new stubs::ExecutionContextServiceStub();
 		external_execution_context_service->add_component(data_flow_component);
 
 		//WHEN
@@ -139,8 +114,8 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldNotFinalizeComponentWhichIsNotInitialized)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		//WHEN
 		auto return_code = data_flow_component->finalize();
@@ -155,11 +130,11 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldBeAliveWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 		data_flow_component->initialize();
 
-		auto external_execution_context_service = new ExecutionContextServiceStub();
+		auto external_execution_context_service = new stubs::ExecutionContextServiceStub();
 		external_execution_context_service->add_component(data_flow_component);
 
 		//WHEN
@@ -177,11 +152,11 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldNotBeAliveWhenNotParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 		data_flow_component->initialize();
 
-		auto external_execution_context_service = new ExecutionContextServiceStub();
+		auto external_execution_context_service = new stubs::ExecutionContextServiceStub();
 
 		//WHEN
 		auto is_alive = data_flow_component->is_alive(external_execution_context_service);
@@ -198,10 +173,10 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldAttachContext)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
-		auto external_execution_context_service = new ExecutionContextServiceStub();
+		auto external_execution_context_service = new stubs::ExecutionContextServiceStub();
 
 		//WHEN
 		auto handle = data_flow_component->attach_context(external_execution_context_service);
@@ -218,9 +193,9 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldNotAttachTheSameContextMoreThanOnce)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
-		auto external_execution_context_service = new ExecutionContextServiceStub();
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
+		auto external_execution_context_service = new stubs::ExecutionContextServiceStub();
 
 		//WHEN
 		auto first_handle = data_flow_component->attach_context(external_execution_context_service);
@@ -239,11 +214,11 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldAttachTwoDifferentContexts)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
-		auto first_execution_context_service = new ExecutionContextServiceStub();
-		auto second_execution_context_service = new ExecutionContextServiceStub();
+		auto first_execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto second_execution_context_service = new stubs::ExecutionContextServiceStub();
 
 		//WHEN
 		auto first_handle = data_flow_component->attach_context(first_execution_context_service);
@@ -263,13 +238,13 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldDetachContext)
 	{
 		//GIVEN
-		auto execution_context_service = new ExecutionContextServiceStub();
-		auto data_flow_component = new DataFlowComponentStub(execution_context_service, nullptr);
+		auto execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto data_flow_component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
-		auto first_execution_context_service = new ExecutionContextServiceStub();
-		auto second_execution_context_service = new ExecutionContextServiceStub();
-		auto third_execution_context_service = new ExecutionContextServiceStub();
-		auto fourth_execution_context_service = new ExecutionContextServiceStub();
+		auto first_execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto second_execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto third_execution_context_service = new stubs::ExecutionContextServiceStub();
+		auto fourth_execution_context_service = new stubs::ExecutionContextServiceStub();
 
 		//WHEN
 		auto first_handle = data_flow_component->attach_context(first_execution_context_service);
@@ -297,7 +272,7 @@ TEST_CLASS(DataFlowComponentTest)
 	TEST_METHOD(ShouldNotFinalizeComponentIfNotInitializedBefore)
 	{
 		//GIVEN
-		auto component = new DataFlowComponentStub(nullptr, nullptr);
+		auto component = new stubs::DataFlowComponentStub(nullptr, nullptr);
 
 		//WHEN
 		auto finalize_component_return_code = component->finalize();
