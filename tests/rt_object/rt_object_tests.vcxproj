@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="rt_logging_object_test.cc" />
     <ClCompile Include="rt_object_test.cc" />
   </ItemGroup>
   <ItemGroup>

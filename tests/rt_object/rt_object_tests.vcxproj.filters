@@ -18,5 +18,8 @@
     <ClCompile Include="rt_object_test.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="rt_logging_object_test.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -30,14 +30,19 @@ omg_rtc::ReturnCode_t RTLoggingObject::initialize()
 {
 	logger_->Trace(profile_.instance_name, "initialize()");
 
-	logger_->Debug(profile_.instance_name, "Starting Execution Context Service");
+	auto initialization_result = RTObject::initialize();
 
-	return RTObject::initialize();
+	if (initialization_result == omg_rtc::RTC_OK)
+	{
+		logger_->Debug(profile_.instance_name, "Starting Execution Context Service");
+	}
+
+	return initialization_result;
 }
 
 omg_rtc::ReturnCode_t RTLoggingObject::finalize()
 {
-	logger_->Paranoid(profile_.instance_name, "finalize()");
+	logger_->Trace(profile_.instance_name, "finalize()");
 
 	return RTObject::finalize();
 }

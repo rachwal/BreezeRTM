@@ -20,7 +20,7 @@ TEST_CLASS(RTObjectTest)
 
 	~RTObjectTest() { }
 
-	TEST_METHOD(ShouldInitializeRTObject)
+	TEST_METHOD(RTObjectShouldInitialize)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -38,7 +38,7 @@ TEST_CLASS(RTObjectTest)
 		delete port_service;
 	}
 
-	TEST_METHOD(ShouldReturnErrorCodeTryToInitializeRTObjectWithoutExecutionContextService)
+	TEST_METHOD(RTObjectShouldReturnErrorCodeTryToInitializeWithoutExecutionContextService)
 	{
 		//GIVEN
 		auto rt_object = new stubs::RTObjectStub(nullptr, nullptr);
@@ -53,7 +53,7 @@ TEST_CLASS(RTObjectTest)
 	}
 
 
-	TEST_METHOD(ShouldNotInitializeRTObjectMoreThanOnce)
+	TEST_METHOD(RTObjectShouldNotInitializeMoreThanOnce)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -74,7 +74,7 @@ TEST_CLASS(RTObjectTest)
 	}
 
 
-	TEST_METHOD(ShouldFinalizeRTObject)
+	TEST_METHOD(RTObjectShouldFinalize)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -95,7 +95,7 @@ TEST_CLASS(RTObjectTest)
 		delete port_service;
 	}
 
-	TEST_METHOD(ShouldNotFinalizeRTObjectWhenParticipatingInExecutionContext)
+	TEST_METHOD(RTObjectShouldNotFinalizeWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -120,7 +120,7 @@ TEST_CLASS(RTObjectTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldNotFinalizeRTObjectWhichIsNotInitialized)
+	TEST_METHOD(RTObjectShouldNotFinalizeWhenIsNotInitialized)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -138,7 +138,7 @@ TEST_CLASS(RTObjectTest)
 		delete port_service;
 	}
 
-	TEST_METHOD(ShouldBeAliveWhenParticipatingInExecutionContext)
+	TEST_METHOD(RTObjectShouldBeAliveWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -162,7 +162,7 @@ TEST_CLASS(RTObjectTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldNotBeAliveWhenNotParticipatingInExecutionContext)
+	TEST_METHOD(RTObjectShouldNotBeAliveWhenNotParticipatingInExecutionContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -185,7 +185,7 @@ TEST_CLASS(RTObjectTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldAttachContext)
+	TEST_METHOD(RTObjectShouldAttachContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -207,7 +207,7 @@ TEST_CLASS(RTObjectTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldNotAttachTheSameContextMoreThanOnce)
+	TEST_METHOD(RTObjectShouldNotAttachTheSameContextMoreThanOnce)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -230,7 +230,7 @@ TEST_CLASS(RTObjectTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldAttachTwoDifferentContexts)
+	TEST_METHOD(RTObjectShouldAttachTwoDifferentContexts)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -256,7 +256,7 @@ TEST_CLASS(RTObjectTest)
 		delete second_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldDetachContext)
+	TEST_METHOD(RTObjectShouldDetachContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -292,7 +292,7 @@ TEST_CLASS(RTObjectTest)
 		delete fourth_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldNotFinalizeRTObjectIfNotInitializedBefore)
+	TEST_METHOD(RTObjectShouldNotFinalizeWhenNotInitializedBefore)
 	{
 		//GIVEN
 		auto rt_object = new stubs::RTObjectStub(nullptr, nullptr);

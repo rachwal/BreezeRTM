@@ -49,10 +49,10 @@ omg_rtc::ReturnCode_t RTObject::initialize()
 
 	owned_contexts_->push_back(execution_context_service_);
 
-	execution_context_service_->start();
-
 	initialized_ = true;
 	on_initialize();
+
+	execution_context_service_->start();
 
 	return omg_rtc::RTC_OK;
 }

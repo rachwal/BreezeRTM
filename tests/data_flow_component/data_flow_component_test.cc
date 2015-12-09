@@ -4,9 +4,6 @@
 
 #include <CppUnitTest.h>
 
-#include <tests/execution_context_service_stub.h>
-#include <tests/data_flow_component_stub.h>
-
 namespace breeze_rtm
 {
 namespace data_flow_component_tests

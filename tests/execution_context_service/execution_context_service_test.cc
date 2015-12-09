@@ -21,7 +21,7 @@ TEST_CLASS(ExecutionContextTest)
 
 	~ExecutionContextTest() { }
 
-	TEST_METHOD(ShouldAddComponent)
+	TEST_METHOD(ExecutionContextShouldAddComponent)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -42,7 +42,7 @@ TEST_CLASS(ExecutionContextTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldNotAddTheSameComponentMoreThanOnce)
+	TEST_METHOD(ExecutionContextShouldNotAddTheSameComponentMoreThanOnce)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -65,7 +65,7 @@ TEST_CLASS(ExecutionContextTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldRemoveComponent)
+	TEST_METHOD(ExecutionContextShouldRemoveComponent)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -88,7 +88,7 @@ TEST_CLASS(ExecutionContextTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldNotFinalizeComponentIfNotRemovedFromContext)
+	TEST_METHOD(ExecutionContextShouldNotFinalizeComponentIfNotRemovedFromExecutionContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
@@ -111,7 +111,7 @@ TEST_CLASS(ExecutionContextTest)
 		delete external_execution_context_service;
 	}
 
-	TEST_METHOD(ShouldFinalizeComponentIfRemovedFromContext)
+	TEST_METHOD(ExecutionContextShouldFinalizeComponentIfRemovedFromExecutionContext)
 	{
 		//GIVEN
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
