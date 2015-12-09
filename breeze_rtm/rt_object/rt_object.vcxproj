@@ -19,9 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="breeze_rtm\rt_logging_object.h" />
     <ClInclude Include="breeze_rtm\rt_object.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="breeze_rtm\rt_logging_object.cc" />
     <ClCompile Include="breeze_rtm\rt_object.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

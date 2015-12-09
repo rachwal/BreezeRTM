@@ -16,9 +16,9 @@ namespace data_flow_component
 class DataFlowComponent : public rt_object::RTObject, public omg_rtc::DataFlowComponentAction
 {
 	public:
-	virtual omg_rtc::ReturnCode_t on_execute(omg_rtc::ExecutionContextHandle_t exec_context) override;
-	virtual omg_rtc::ReturnCode_t on_state_update(omg_rtc::ExecutionContextHandle_t exec_context) override;
-	virtual omg_rtc::ReturnCode_t on_rate_changed(omg_rtc::ExecutionContextHandle_t exec_context) override;
+	virtual omg_rtc::ReturnCode_t on_execute(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t on_state_update(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t on_rate_changed(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
 	DataFlowComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service)

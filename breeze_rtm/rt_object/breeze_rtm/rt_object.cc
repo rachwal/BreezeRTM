@@ -88,7 +88,6 @@ bool RTObject::is_alive(omg_rtc::ExecutionContext* exec_context)
 			return true;
 		}
 	}
-
 	return false;
 }
 
@@ -121,16 +120,16 @@ omg_rtc::ExecutionContextHandle_t RTObject::attach_context(omg_rtc::ExecutionCon
 	return new_handle;
 }
 
-omg_rtc::ReturnCode_t RTObject::detach_context(omg_rtc::ExecutionContextHandle_t exec_handle)
+omg_rtc::ReturnCode_t RTObject::detach_context(omg_rtc::ExecutionContextHandle_t handle)
 {
-	participating_contexts_->erase(exec_handle);
+	participating_contexts_->erase(handle);
 
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ExecutionContext *RTObject::get_context(omg_rtc::ExecutionContextHandle_t exec_handle)
+omg_rtc::ExecutionContext *RTObject::get_context(omg_rtc::ExecutionContextHandle_t handle)
 {
-	return participating_contexts_->operator[](exec_handle);
+	return participating_contexts_->operator[](handle);
 }
 
 std::list<omg_rtc::ExecutionContext*> *RTObject::get_owned_contexts()
@@ -143,14 +142,14 @@ std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*> *RTObjec
 	return participating_contexts_;
 }
 
-omg_rtc::ExecutionContextHandle_t RTObject::get_context_handle(omg_rtc::ExecutionContext& cxt)
+omg_rtc::ExecutionContextHandle_t RTObject::get_context_handle(omg_rtc::ExecutionContext& exec_context)
 {
 	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
 	{
 		auto context = iterator->second;
 		auto handle = iterator->first;
 
-		if (context == &cxt)
+		if (context == &exec_context)
 		{
 			return handle;
 		}
@@ -170,7 +169,7 @@ omg_rtc::ReturnCode_t RTObject::on_finalize()
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_startup(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_startup(omg_rtc::ExecutionContextHandle_t handle)
 {
 	if (!initialized_)
 	{
@@ -180,32 +179,32 @@ omg_rtc::ReturnCode_t RTObject::on_startup(omg_rtc::ExecutionContextHandle_t exe
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_shutdown(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_shutdown(omg_rtc::ExecutionContextHandle_t handle)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_activated(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_activated(omg_rtc::ExecutionContextHandle_t handle)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_deactivated(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_deactivated(omg_rtc::ExecutionContextHandle_t handle)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_aborting(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_aborting(omg_rtc::ExecutionContextHandle_t handle)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_error(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_error(omg_rtc::ExecutionContextHandle_t handle)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t RTObject::on_reset(omg_rtc::ExecutionContextHandle_t exec_context)
+omg_rtc::ReturnCode_t RTObject::on_reset(omg_rtc::ExecutionContextHandle_t handle)
 {
 	return omg_rtc::RTC_OK;
 }

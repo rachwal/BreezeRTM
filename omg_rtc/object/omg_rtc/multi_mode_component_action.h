@@ -17,7 +17,7 @@ class MultiModeComponentAction
 	public:
 	virtual ~MultiModeComponentAction() {}
 
-	virtual ReturnCode_t on_mode_changed(ExecutionContextHandle_t exec_context) = 0;
+	virtual ReturnCode_t on_mode_changed(ExecutionContextHandle_t handle) = 0;
 };
 }
 }

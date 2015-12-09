@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="breeze_rtm\data_flow_component.h" />
+    <ClInclude Include="breeze_rtm\data_flow_logging_component.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="breeze_rtm\data_flow_component.cc" />
+    <ClCompile Include="breeze_rtm\data_flow_logging_component.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{73B77EF3-9AC3-4F28-90C2-1D58D9864017}</ProjectGuid>

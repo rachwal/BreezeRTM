@@ -10,25 +10,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="tests\logger_stub.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\data_flow_component_stub.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="tests\execution_context_service_stub.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="tests\logger_stub.h">
+    <ClInclude Include="tests\data_flow_component_stub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="tests\data_flow_component_stub.h">
+    <ClInclude Include="tests\data_flow_logging_component_stub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="tests\execution_context_service_stub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tests\logger_stub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\rt_logging_object_stub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\rt_object_stub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="tests\data_flow_component_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\data_flow_logging_component_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\execution_context_service_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\logger_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\rt_logging_object_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\rt_object_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

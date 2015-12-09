@@ -2,22 +2,20 @@
 // Created by Bartosz Rachwal. 
 // Copyright (c) 2015 Bartosz Rachwal. The National Institute of Advanced Industrial Science and Technology, Japan. All rights reserved.
 
-#ifndef BREEZE_RTM_RT_OBJECT_RT_OBJECT_H_
-#define BREEZE_RTM_RT_OBJECT_RT_OBJECT_H_
+#ifndef BREEZE_RTM_RT_OBJECT_RT_LOGGING_OBJECT_H_
+#define BREEZE_RTM_RT_OBJECT_RT_LOGGING_OBJECT_H_
 
-#include <omg_rtc/rt_object.h>
-#include <omg_rtc/execution_context_service.h>
-#include <omg_rtc/port_service.h>
+#include "rt_object.h"
+
+#include <omg_rtc/logger.h>
 
 namespace breeze_rtm
 {
 namespace rt_object
 {
-class RTObject : public omg_rtc::RTObject
+class RTLoggingObject : public RTObject
 {
 	public:
-	virtual ~RTObject();
-
 	virtual omg_rtc::ComponentProfile *get_component_profile() override;
 	virtual omg_rtc::ListInterface<omg_rtc::ServiceInterface<omg_rtc::ConnectorProfile>> *get_ports() override;
 
@@ -45,17 +43,8 @@ class RTObject : public omg_rtc::RTObject
 	virtual omg_rtc::ReturnCode_t on_reset(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service);
-
-	omg_rtc::ExecutionContext* execution_context_service_;
-	omg_rtc::PortService* port_service_;
-
-	omg_rtc::ComponentProfile profile_;
-
-	std::list<omg_rtc::ExecutionContext*>* owned_contexts_;
-	std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*>* participating_contexts_;
-
-	bool initialized_;
+	RTLoggingObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger);
+	omg_rtc::Logger* logger_;
 };
 }
 }

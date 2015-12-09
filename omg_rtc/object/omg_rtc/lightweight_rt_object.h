@@ -23,11 +23,11 @@ class LightweightRTObject : public ComponentAction
 	virtual bool is_alive(ExecutionContext* exec_context) = 0;
 	virtual ReturnCode_t exit() = 0;
 	virtual ExecutionContextHandle_t attach_context(ExecutionContext* exec_context) = 0;
-	virtual ReturnCode_t detach_context(ExecutionContextHandle_t exec_handle) = 0;
-	virtual ExecutionContext *get_context(ExecutionContextHandle_t exec_handle) = 0;
+	virtual ReturnCode_t detach_context(ExecutionContextHandle_t handle) = 0;
+	virtual ExecutionContext *get_context(ExecutionContextHandle_t handle) = 0;
 	virtual std::list<ExecutionContext*> *get_owned_contexts() = 0;
 	virtual std::map<ExecutionContextHandle_t, ExecutionContext*> *get_participating_contexts() = 0;
-	virtual ExecutionContextHandle_t get_context_handle(ExecutionContext& cxt) = 0;
+	virtual ExecutionContextHandle_t get_context_handle(ExecutionContext& exec_context) = 0;
 };
 }
 }

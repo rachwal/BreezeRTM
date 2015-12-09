@@ -19,7 +19,7 @@ class FsmObject
 	public:
 	virtual ~FsmObject() {}
 
-	virtual ReturnCode_t send_stimulus(const std::string& message, ExecutionContextHandle_t exec_context) = 0;
+	virtual ReturnCode_t send_stimulus(const std::string& message, ExecutionContextHandle_t handle) = 0;
 };
 }
 }

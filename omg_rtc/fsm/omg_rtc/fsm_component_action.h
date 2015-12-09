@@ -17,7 +17,7 @@ class FsmComponentAction
 	public:
 	virtual ~FsmComponentAction() {}
 
-	virtual ReturnCode_t on_action(ExecutionContextHandle_t exec_context) = 0;
+	virtual ReturnCode_t on_action(ExecutionContextHandle_t handle) = 0;
 };
 }
 }

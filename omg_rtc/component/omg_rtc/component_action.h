@@ -19,13 +19,13 @@ class ComponentAction
 
 	virtual ReturnCode_t on_initialize() = 0;
 	virtual ReturnCode_t on_finalize() = 0;
-	virtual ReturnCode_t on_startup(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_shutdown(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_activated(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_deactivated(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_aborting(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_error(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_reset(ExecutionContextHandle_t exec_context) = 0;
+	virtual ReturnCode_t on_startup(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_shutdown(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_activated(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_deactivated(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_aborting(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_error(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_reset(ExecutionContextHandle_t handle) = 0;
 };
 }
 }

@@ -18,9 +18,9 @@ class DataFlowComponentAction
 	virtual ~DataFlowComponentAction() {}
 
 	private:
-	virtual ReturnCode_t on_execute(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_state_update(ExecutionContextHandle_t exec_context) = 0;
-	virtual ReturnCode_t on_rate_changed(ExecutionContextHandle_t exec_context) = 0;
+	virtual ReturnCode_t on_execute(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_state_update(ExecutionContextHandle_t handle) = 0;
+	virtual ReturnCode_t on_rate_changed(ExecutionContextHandle_t handle) = 0;
 };
 }
 }
