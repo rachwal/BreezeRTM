@@ -26,9 +26,9 @@ TEST_CLASS(RTLoggingObjectTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: stub: initialize()\n") +
-			std::string("TRACE: stub: on_initialize()\n") +
-			std::string("DEBUG: stub: Starting Execution Context Service\n");
+			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context Service\n");
 
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
 		omg_rtc::PortService* port_service = nullptr;
@@ -52,7 +52,7 @@ TEST_CLASS(RTLoggingObjectTest)
 	TEST_METHOD(RTLoggingObjectShouldReturnErrorCodeTryToInitializeWithoutExecutionContextService)
 	{
 		//GIVEN
-		auto expected_logger_content = std::string("TRACE: stub: initialize()\n");
+		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: initialize()\n");
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = new stubs::RTLoggingObjectStub(nullptr, nullptr, logger);
 
@@ -73,10 +73,10 @@ TEST_CLASS(RTLoggingObjectTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: stub: initialize()\n") +
-			std::string("TRACE: stub: on_initialize()\n") +
-			std::string("DEBUG: stub: Starting Execution Context Service\n") +
-			std::string("TRACE: stub: initialize()\n");
+			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context Service\n") +
+			std::string("TRACE: RTLoggingObjectStub: initialize()\n");
 
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
 		omg_rtc::PortService* port_service = nullptr;
@@ -103,11 +103,11 @@ TEST_CLASS(RTLoggingObjectTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: stub: initialize()\n") +
-			std::string("TRACE: stub: on_initialize()\n") +
-			std::string("DEBUG: stub: Starting Execution Context Service\n") +
-			std::string("TRACE: stub: finalize()\n") +
-			std::string("TRACE: stub: on_finalize()\n");
+			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context Service\n") +
+			std::string("TRACE: RTLoggingObjectStub: finalize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_finalize()\n");
 
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
 		omg_rtc::PortService* port_service = nullptr;
@@ -134,11 +134,11 @@ TEST_CLASS(RTLoggingObjectTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: stub: initialize()\n") +
-			std::string("TRACE: stub: on_initialize()\n") +
-			std::string("DEBUG: stub: Starting Execution Context Service\n") +
-			std::string("TRACE: stub: attach_context()\n") +
-			std::string("TRACE: stub: finalize()\n");
+			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context Service\n") +
+			std::string("TRACE: RTLoggingObjectStub: attach_context()\n") +
+			std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
 		omg_rtc::PortService* port_service = nullptr;
@@ -168,7 +168,7 @@ TEST_CLASS(RTLoggingObjectTest)
 	TEST_METHOD(RTLoggingObjectShouldNotFinalizeWhenIsNotInitialized)
 	{
 		//GIVEN
-		auto expected_logger_content = std::string("TRACE: stub: finalize()\n");
+		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
 		omg_rtc::PortService* port_service = nullptr;
 		auto logger = new stubs::LoggerStub();
@@ -192,11 +192,11 @@ TEST_CLASS(RTLoggingObjectTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: stub: initialize()\n") +
-			std::string("TRACE: stub: on_initialize()\n") +
-			std::string("DEBUG: stub: Starting Execution Context Service\n") +
-			std::string("TRACE: stub: attach_context()\n") +
-			std::string("TRACE: stub: is_alive()\n");
+			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context Service\n") +
+			std::string("TRACE: RTLoggingObjectStub: attach_context()\n") +
+			std::string("TRACE: RTLoggingObjectStub: is_alive()\n");
 
 		auto execution_context_service = new stubs::ExecutionContextServiceStub();
 		omg_rtc::PortService* port_service = nullptr;
@@ -226,7 +226,7 @@ TEST_CLASS(RTLoggingObjectTest)
 	TEST_METHOD(RTLoggingObjectShouldNotFinalizeWhenNotInitializedBefore)
 	{
 		//GIVEN
-		auto expected_logger_content = std::string("TRACE: stub: finalize()\n");
+		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = new stubs::RTLoggingObjectStub(nullptr, nullptr, logger);
 

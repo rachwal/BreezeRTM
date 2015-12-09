@@ -3,6 +3,7 @@
 // Copyright (c) 2015 Bartosz Rachwal. The National Institute of Advanced Industrial Science and Technology, Japan. All rights reserved.
 
 #include <CppUnitTest.h>
+
 #include <tests/execution_context_service_stub.h>
 #include <tests/rt_object_stub.h>
 
