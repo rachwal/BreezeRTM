@@ -25,11 +25,5 @@
     <ClInclude Include="omg_rtc\rt_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="omg_rtc\rt_object_interface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="omg_rtc\rtc_list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

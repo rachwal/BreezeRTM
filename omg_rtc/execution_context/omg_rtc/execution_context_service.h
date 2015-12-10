@@ -6,16 +6,22 @@
 #define OMG_RTC_EXECUTION_CONTEXT_EXECUTION_CONTEXT_SERVICE_H_
 
 #include "execution_context.h"
-#include "execution_context_profile.h"
+
+#include "../../types/omg_rtc/unique_identifier.h"
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-class ExecutionContextService : public ExecutionContext
+class ExecutionContextService
 {
 	public:
-	virtual ExecutionContextProfile *get_profile() = 0;
+	virtual ~ExecutionContextService() {}
+
+	virtual ExecutionContext *Create(UniqueIdentifier id) const = 0;
+	virtual ExecutionContext *Retrieve(UniqueIdentifier id) const = 0;
+	virtual void Update(UniqueIdentifier id, ExecutionContext* execution_context) const = 0;
+	virtual void Destroy(UniqueIdentifier id) const = 0;
 };
 }
 }

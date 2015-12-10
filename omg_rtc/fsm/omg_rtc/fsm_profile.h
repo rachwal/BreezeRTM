@@ -7,15 +7,16 @@
 
 #include "fsm_behavior_profile.h"
 
-#include "../../common/omg_rtc/list_interface.h"
+#include <list>
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-struct FsmProfile
+class FsmProfile
 {
-	ListInterface<FsmBehaviorProfile>* behavior_profiles;
+	public:
+	std::list<FsmBehaviorProfile>* behavior_profiles;
 };
 }
 }

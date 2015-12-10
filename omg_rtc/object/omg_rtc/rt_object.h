@@ -5,20 +5,20 @@
 #ifndef OMG_RTC_OBJECT_RT_OBJECT_H_
 #define OMG_RTC_OBJECT_RT_OBJECT_H_
 
-#include "rt_object_interface.h"
 #include "lightweight_rt_object.h"
-
-#include "../../component/omg_rtc/component_profile.h"
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-class RTObject : public RTObjectInterface, public LightweightRTObject
+class PortInterface;
+class ComponentProfile;
+
+class RTObject : public LightweightRTObject
 {
 	public:
 	virtual ComponentProfile *get_component_profile() = 0;
-	virtual ListInterface<ServiceInterface<ConnectorProfile>> *get_ports() override = 0;
+	virtual std::list<PortInterface*> *get_ports() = 0;
 };
 }
 }

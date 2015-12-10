@@ -82,7 +82,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\object;..\..\omg_rtc\port;..\..\omg_rtc\component</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -93,7 +93,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\object;..\..\omg_rtc\port;..\..\omg_rtc\component</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -106,7 +106,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\object;..\..\omg_rtc\port;..\..\omg_rtc\component</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -121,7 +121,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\omg_rtc\logger;..\..\omg_rtc\object;..\..\omg_rtc\port;..\..\omg_rtc\component</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

@@ -6,21 +6,31 @@
 #define OMG_RTC_CONNECTOR_CONNECTOR_PROFILE_H_
 
 #include <string>
+#include <list>
 
-#include "../../common/omg_rtc/service_interface.h"
 #include "../../types/omg_rtc/unique_identifier.h"
-#include "../../types/omg_rtc/nv_list.h"
+#include "../../port/omg_rtc/port_interface.h"
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-struct ConnectorProfile
+class ConnectorProfile
 {
+	public:
+	ConnectorProfile()
+	{
+		ports = new std::list<PortInterface*>();
+	}
+
+	~ConnectorProfile()
+	{
+		delete ports;
+	}
+
 	std::string name;
-	UniqueIdentifier connector_id;
-	ListInterface<ServiceInterface<ConnectorProfile>>* ports;
-	NVList properties;
+	UniqueIdentifier id;
+	std::list<PortInterface*>* ports;
 };
 }
 }

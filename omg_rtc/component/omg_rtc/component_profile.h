@@ -7,17 +7,16 @@
 
 #include <string>
 
-#include "../../common/omg_rtc/list_interface.h"
 #include "../../connector/omg_rtc/connector_profile.h"
-#include "../../object/omg_rtc/rt_object_interface.h"
-#include "../../types/omg_rtc/nv_list.h"
+#include "../../object/omg_rtc/rt_object.h"
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-struct ComponentProfile
+class ComponentProfile
 {
+	public:
 	std::string instance_name;
 	std::string type_name;
 	std::string description;
@@ -25,9 +24,8 @@ struct ComponentProfile
 	std::string vendor;
 	std::string category;
 
-	ListInterface<ConnectorProfile>* port_profiles;
-	RTObjectInterface* parent;
-	NVList properties;
+	std::list<ConnectorProfile>* port_profiles;
+	RTObject* parent;
 };
 }
 }

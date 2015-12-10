@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-RTLoggingObjectStub::RTLoggingObjectStub(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) : RTLoggingObject(execution_context_service, port_service, logger)
+RTLoggingObjectStub::RTLoggingObjectStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger) : RTLoggingObject(execution_context, port, logger)
 {
 	profile_.instance_name = "RTLoggingObjectStub";
 }

@@ -10,8 +10,5 @@
     <ClInclude Include="omg_rtc\connector_profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="omg_rtc\connector_profile_list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

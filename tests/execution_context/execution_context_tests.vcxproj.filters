@@ -15,12 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="breeze_rtm\execution_context_service.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="breeze_rtm\execution_context_service.cc">
+    <ClCompile Include="execution_context_test.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

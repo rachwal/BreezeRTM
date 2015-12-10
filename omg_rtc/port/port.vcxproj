@@ -19,13 +19,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="omg_rtc\port_interface.h" />
     <ClInclude Include="omg_rtc\port_interface_polarity.h" />
     <ClInclude Include="omg_rtc\port_interface_profile.h" />
-    <ClInclude Include="omg_rtc\port_interface_profile_list.h" />
     <ClInclude Include="omg_rtc\port_profile.h" />
-    <ClInclude Include="omg_rtc\port_profile_list.h" />
-    <ClInclude Include="omg_rtc\port_service.h" />
-    <ClInclude Include="omg_rtc\port_service_list.h" />
+    <ClInclude Include="omg_rtc\port.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="omg_rtc\port_service.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{82597877-02D0-4F94-92C8-7E010CA72C31}</ProjectGuid>

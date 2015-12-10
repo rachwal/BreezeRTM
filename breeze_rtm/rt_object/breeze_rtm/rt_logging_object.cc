@@ -10,7 +10,7 @@ namespace breeze_rtm
 {
 namespace rt_object
 {
-RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) : RTObject(execution_context_service, port_service), logger_(logger) {}
+RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger) : RTObject(execution_context, port), logger_(logger) {}
 
 omg_rtc::ComponentProfile *RTLoggingObject::get_component_profile()
 {
@@ -19,7 +19,7 @@ omg_rtc::ComponentProfile *RTLoggingObject::get_component_profile()
 	return RTObject::get_component_profile();
 }
 
-omg_rtc::ListInterface<omg_rtc::ServiceInterface<omg_rtc::ConnectorProfile>> *RTLoggingObject::get_ports()
+std::list<omg_rtc::PortInterface*> *RTLoggingObject::get_ports()
 {
 	logger_->Paranoid(profile_.instance_name, "get_ports()");
 
@@ -34,7 +34,7 @@ omg_rtc::ReturnCode_t RTLoggingObject::initialize()
 
 	if (initialization_result == omg_rtc::RTC_OK)
 	{
-		logger_->Debug(profile_.instance_name, "Starting Execution Context Service");
+		logger_->Debug(profile_.instance_name, "Starting Execution Context");
 	}
 
 	return initialization_result;

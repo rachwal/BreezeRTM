@@ -7,6 +7,7 @@
 
 #include "life_cycle_state.h"
 #include "execution_kind.h"
+#include "execution_context_profile.h"
 
 #include "../../types/omg_rtc/return_code_t.h"
 
@@ -20,6 +21,8 @@ class ExecutionContext
 {
 	public:
 	virtual ~ExecutionContext() {}
+
+	virtual ExecutionContextProfile *get_profile() = 0;
 
 	virtual bool is_running() = 0;
 	virtual ReturnCode_t start() = 0;

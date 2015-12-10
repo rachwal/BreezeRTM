@@ -8,8 +8,8 @@ namespace breeze_rtm
 {
 namespace rt_object
 {
-RTObject::RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service) :
-	execution_context_service_(execution_context_service), port_service_(port_service), initialized_(false)
+RTObject::RTObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port) :
+	execution_context_(execution_context), port_(port), initialized_(false)
 {
 	owned_contexts_ = new std::list<omg_rtc::ExecutionContext*>();
 	participating_contexts_ = new std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*>();
@@ -30,7 +30,7 @@ omg_rtc::ComponentProfile *RTObject::get_component_profile()
 	return &profile_;
 }
 
-omg_rtc::ListInterface<omg_rtc::ServiceInterface<omg_rtc::ConnectorProfile>> *RTObject::get_ports()
+std::list<omg_rtc::PortInterface*> *RTObject::get_ports()
 {
 	return nullptr;
 }
@@ -42,17 +42,17 @@ omg_rtc::ReturnCode_t RTObject::initialize()
 		return omg_rtc::ReturnCode_t::PRECONDITION_NOT_MET;
 	}
 
-	if (execution_context_service_ == nullptr)
+	if (execution_context_ == nullptr)
 	{
 		return omg_rtc::RTC_ERROR;
 	}
 
-	owned_contexts_->push_back(execution_context_service_);
+	owned_contexts_->push_back(execution_context_);
 
 	initialized_ = true;
 	on_initialize();
 
-	execution_context_service_->start();
+	execution_context_->start();
 
 	return omg_rtc::RTC_OK;
 }

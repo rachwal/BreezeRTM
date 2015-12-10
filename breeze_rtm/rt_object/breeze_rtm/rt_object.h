@@ -6,8 +6,8 @@
 #define BREEZE_RTM_RT_OBJECT_RT_OBJECT_H_
 
 #include <omg_rtc/rt_object.h>
-#include <omg_rtc/execution_context_service.h>
-#include <omg_rtc/port_service.h>
+#include <omg_rtc/port.h>
+#include <omg_rtc/component_profile.h>
 
 namespace breeze_rtm
 {
@@ -19,7 +19,7 @@ class RTObject : public omg_rtc::RTObject
 	virtual ~RTObject();
 
 	virtual omg_rtc::ComponentProfile *get_component_profile() override;
-	virtual omg_rtc::ListInterface<omg_rtc::ServiceInterface<omg_rtc::ConnectorProfile>> *get_ports() override;
+	virtual std::list<omg_rtc::PortInterface*> *get_ports() override;
 
 	virtual omg_rtc::ReturnCode_t initialize() override;
 	virtual omg_rtc::ReturnCode_t finalize() override;
@@ -45,10 +45,10 @@ class RTObject : public omg_rtc::RTObject
 	virtual omg_rtc::ReturnCode_t on_reset(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service);
+	RTObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port);
 
-	omg_rtc::ExecutionContext* execution_context_service_;
-	omg_rtc::PortService* port_service_;
+	omg_rtc::ExecutionContext* execution_context_;
+	omg_rtc::Port* port_;
 
 	omg_rtc::ComponentProfile profile_;
 

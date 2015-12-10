@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="execution_context_service_test.cc">
+    <ClCompile Include="port_test.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

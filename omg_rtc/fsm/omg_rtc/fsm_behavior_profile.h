@@ -13,8 +13,9 @@ namespace breeze_rtm
 {
 namespace omg_rtc
 {
-struct FsmBehaviorProfile
+class FsmBehaviorProfile
 {
+	public:
 	FsmComponentAction* comp;
 	UniqueIdentifier id;
 };

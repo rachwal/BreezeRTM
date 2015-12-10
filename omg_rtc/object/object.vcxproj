@@ -24,9 +24,7 @@
     <ClInclude Include="omg_rtc\mode_capable.h" />
     <ClInclude Include="omg_rtc\multi_mode_component_action.h" />
     <ClInclude Include="omg_rtc\multi_mode_object.h" />
-    <ClInclude Include="omg_rtc\rtc_list.h" />
     <ClInclude Include="omg_rtc\rt_object.h" />
-    <ClInclude Include="omg_rtc\rt_object_interface.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E3A3F906-ACBC-48D3-9DD3-384141425CF3}</ProjectGuid>

@@ -10,25 +10,13 @@
     <ClInclude Include="omg_rtc\execution_context.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="omg_rtc\execution_context_factory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="omg_rtc\execution_context_handle_t.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="omg_rtc\execution_context_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="omg_rtc\execution_context_profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="omg_rtc\execution_context_profile_list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="omg_rtc\execution_context_service.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="omg_rtc\execution_context_service_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="omg_rtc\execution_kind.h">

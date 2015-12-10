@@ -2,33 +2,33 @@
 // Created by Bartosz Rachwal. 
 // Copyright (c) 2015 Bartosz Rachwal. The National Institute of Advanced Industrial Science and Technology, Japan. All rights reserved.
 
-#include "execution_context_service.h"
+#include "execution_context.h"
 
 namespace breeze_rtm
 {
 namespace execution_context
 {
-ExecutionContextService::ExecutionContextService(): rate_(1)
+ExecutionContext::ExecutionContext() : rate_(1)
 {
 	components_ = new std::map<omg_rtc::LightweightRTObject*, omg_rtc::ExecutionContextHandle_t>();
 }
 
-ExecutionContextService::~ExecutionContextService()
+ExecutionContext::~ExecutionContext()
 {
 	delete components_;
 }
 
-omg_rtc::ExecutionContextProfile *ExecutionContextService::get_profile()
+omg_rtc::ExecutionContextProfile *ExecutionContext::get_profile()
 {
 	return &profile_;
 }
 
-bool ExecutionContextService::is_running()
+bool ExecutionContext::is_running()
 {
 	return true;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::start()
+omg_rtc::ReturnCode_t ExecutionContext::start()
 {
 	for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator)
 	{
@@ -39,7 +39,7 @@ omg_rtc::ReturnCode_t ExecutionContextService::start()
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::stop()
+omg_rtc::ReturnCode_t ExecutionContext::stop()
 {
 	for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator)
 	{
@@ -50,18 +50,18 @@ omg_rtc::ReturnCode_t ExecutionContextService::stop()
 	return omg_rtc::RTC_OK;
 }
 
-double ExecutionContextService::get_rate()
+double ExecutionContext::get_rate()
 {
 	return rate_;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::set_rate(double rate)
+omg_rtc::ReturnCode_t ExecutionContext::set_rate(double rate)
 {
 	rate_ = rate;
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::add_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::add_component(omg_rtc::LightweightRTObject* comp)
 {
 	for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator)
 	{
@@ -78,7 +78,7 @@ omg_rtc::ReturnCode_t ExecutionContextService::add_component(omg_rtc::Lightweigh
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::remove_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::remove_component(omg_rtc::LightweightRTObject* comp)
 {
 	auto handle = components_->operator[](comp);
 
@@ -92,27 +92,27 @@ omg_rtc::ReturnCode_t ExecutionContextService::remove_component(omg_rtc::Lightwe
 	return omg_rtc::RTC_ERROR;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::activate_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::activate_component(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::deactivate_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::deactivate_component(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContextService::reset_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::reset_component(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::LifeCycleState ExecutionContextService::get_component_state(omg_rtc::LightweightRTObject* comp)
+omg_rtc::LifeCycleState ExecutionContext::get_component_state(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::LifeCycleState::CREATED_STATE;
 }
 
-omg_rtc::ExecutionKind ExecutionContextService::get_kind()
+omg_rtc::ExecutionKind ExecutionContext::get_kind()
 {
 	return profile_.kind;
 }

@@ -6,27 +6,26 @@
 #define OMG_RTC_PORT_PORT_PROFILE_H_
 
 #include "port_interface_profile.h"
+#include "port_interface.h"
 
 #include <string>
+#include <list>
 
-#include "../../common/omg_rtc/list_interface.h"
-#include "../../common/omg_rtc/service_interface.h"
-#include "../../connector/omg_rtc/connector_profile.h"
-#include "../../object/omg_rtc/rt_object_interface.h"
+#include "../../object/omg_rtc/rt_object.h"
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-struct PortProfile
+class PortProfile
 {
+	public:
 	std::string name;
 
-	ListInterface<PortInterfaceProfile>* interfaces;
-	ServiceInterface<ConnectorProfile>* port_ref;
-	ListInterface<ConnectorProfile>* connector_profiles;
-	RTObjectInterface* owner;
-	NVList properties;
+	std::list<PortInterfaceProfile>* interfaces;
+	PortInterface* port_ref;
+	std::list<ConnectorProfile>* connector_profiles;
+	RTObject* owner;
 };
 }
 }

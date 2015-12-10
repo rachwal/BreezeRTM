@@ -2,8 +2,8 @@
 // Created by Bartosz Rachwal. 
 // Copyright (c) 2015 Bartosz Rachwal. The National Institute of Advanced Industrial Science and Technology, Japan. All rights reserved.
 
-#ifndef OPENRTM_DATA_FLOW_COMPONENT_BASE_H_
-#define OPENRTM_DATA_FLOW_COMPONENT_BASE_H_
+#ifndef BREEZE_RTM_DATA_FLOW_COMPONENT_DATA_FLOW_COMPONENT_H_
+#define BREEZE_RTM_DATA_FLOW_COMPONENT_DATA_FLOW_COMPONENT_H_
 
 #include <breeze_rtm/rt_object.h>
 
@@ -21,8 +21,7 @@ class DataFlowComponent : public rt_object::RTObject, public omg_rtc::DataFlowCo
 	virtual omg_rtc::ReturnCode_t on_rate_changed(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	DataFlowComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service)
-		: RTObject(execution_context_service, port_service) {}
+	DataFlowComponent(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port);
 };
 }
 }

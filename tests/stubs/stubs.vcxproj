@@ -21,16 +21,18 @@
   <ItemGroup>
     <ClInclude Include="tests\data_flow_component_stub.h" />
     <ClInclude Include="tests\data_flow_logging_component_stub.h" />
-    <ClInclude Include="tests\execution_context_service_stub.h" />
+    <ClInclude Include="tests\execution_context_stub.h" />
     <ClInclude Include="tests\logger_stub.h" />
+    <ClInclude Include="tests\port_stub.h" />
     <ClInclude Include="tests\rt_logging_object_stub.h" />
     <ClInclude Include="tests\rt_object_stub.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tests\data_flow_component_stub.cc" />
     <ClCompile Include="tests\data_flow_logging_component_stub.cc" />
-    <ClCompile Include="tests\execution_context_service_stub.cc" />
+    <ClCompile Include="tests\execution_context_stub.cc" />
     <ClCompile Include="tests\logger_stub.cc" />
+    <ClCompile Include="tests\port_stub.cc" />
     <ClCompile Include="tests\rt_logging_object_stub.cc" />
     <ClCompile Include="tests\rt_object_stub.cc" />
   </ItemGroup>
@@ -90,7 +92,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\breeze_rtm\port;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -101,7 +103,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\breeze_rtm\port;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -114,7 +116,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\breeze_rtm\port;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -129,7 +131,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\breeze_rtm\port;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

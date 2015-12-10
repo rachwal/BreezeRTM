@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="omg_rtc\fsm.h" />
     <ClInclude Include="omg_rtc\fsm_behavior_profile.h" />
-    <ClInclude Include="omg_rtc\fsm_behavior_profile_list.h" />
     <ClInclude Include="omg_rtc\fsm_component_action.h" />
     <ClInclude Include="omg_rtc\fsm_object.h" />
     <ClInclude Include="omg_rtc\fsm_participant.h" />

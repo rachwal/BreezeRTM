@@ -74,7 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\rt_object;..\..\omg_rtc\component;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -86,7 +86,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\rt_object;..\..\omg_rtc\component;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -100,7 +100,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\rt_object;..\..\omg_rtc\component;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -116,7 +116,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\rt_object;..\..\omg_rtc\component;..\..\omg_rtc\logger;..\..\omg_rtc\port;..\..\omg_rtc\execution_context;..\..\omg_rtc\object;..\..\utils\utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -126,11 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="rt_logging_object_test.cc" />
-    <ClCompile Include="rt_object_test.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\breeze_rtm\execution_context_service\execution_context_service.vcxproj">
+    <ProjectReference Include="..\..\breeze_rtm\execution_context\execution_context.vcxproj">
       <Project>{3264fee4-6d2d-4cfa-8f70-e5ee51b24922}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\breeze_rtm\rt_object\rt_object.vcxproj">
@@ -139,6 +135,10 @@
     <ProjectReference Include="..\stubs\stubs.vcxproj">
       <Project>{33bd4f2c-2b46-4b3a-9d9e-c8b496725721}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="rt_logging_object_test.cc" />
+    <ClCompile Include="rt_object_test.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

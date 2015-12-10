@@ -13,9 +13,6 @@
     <ClInclude Include="omg_rtc\fsm_behavior_profile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="omg_rtc\fsm_behavior_profile_list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="omg_rtc\fsm_component_action.h">
       <Filter>Header Files</Filter>
     </ClInclude>

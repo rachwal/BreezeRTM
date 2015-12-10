@@ -20,7 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="omg_rtc\connector_profile.h" />
-    <ClInclude Include="omg_rtc\connector_profile_list.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{178E4390-AE2F-4D49-9F20-5D00AD13FF70}</ProjectGuid>

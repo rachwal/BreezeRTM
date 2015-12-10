@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClInclude Include="omg_rtc\component_action.h" />
     <ClInclude Include="omg_rtc\component_profile.h" />
-    <ClInclude Include="omg_rtc\component_profile_list.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{29C35978-1494-4347-9D80-5EAD70F07F04}</ProjectGuid>

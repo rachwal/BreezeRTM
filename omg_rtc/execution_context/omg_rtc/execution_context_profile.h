@@ -7,21 +7,21 @@
 
 #include "execution_kind.h"
 
-#include "../../object/omg_rtc/rt_object.h"
-#include "../../common/omg_rtc/list_interface.h"
-#include "../../types/omg_rtc/nv_list.h"
+#include <list>
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-struct ExecutionContextProfile
+class RTObject;
+
+class ExecutionContextProfile
 {
+	public:
 	ExecutionKind kind;
 	double rate;
 	RTObject* owner;
-	ListInterface<RTObject>* participants;
-	NVList properties;
+	std::list<RTObject*>* participants;
 };
 }
 }

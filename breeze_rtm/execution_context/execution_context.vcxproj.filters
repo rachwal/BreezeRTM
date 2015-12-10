@@ -15,10 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="rt_logging_object_test.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="rt_object_test.cc">
+    <ClInclude Include="breeze_rtm\execution_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="breeze_rtm\execution_context.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

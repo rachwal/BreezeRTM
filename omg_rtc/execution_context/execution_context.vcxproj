@@ -20,13 +20,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="omg_rtc\execution_context.h" />
-    <ClInclude Include="omg_rtc\execution_context_factory.h" />
     <ClInclude Include="omg_rtc\execution_context_handle_t.h" />
-    <ClInclude Include="omg_rtc\execution_context_list.h" />
     <ClInclude Include="omg_rtc\execution_context_profile.h" />
-    <ClInclude Include="omg_rtc\execution_context_profile_list.h" />
     <ClInclude Include="omg_rtc\execution_context_service.h" />
-    <ClInclude Include="omg_rtc\execution_context_service_list.h" />
     <ClInclude Include="omg_rtc\execution_kind.h" />
     <ClInclude Include="omg_rtc\life_cycle_state.h" />
   </ItemGroup>

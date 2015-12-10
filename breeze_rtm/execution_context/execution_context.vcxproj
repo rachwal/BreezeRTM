@@ -19,16 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="breeze_rtm\execution_context_service.h" />
+    <ClInclude Include="breeze_rtm\execution_context.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="breeze_rtm\execution_context_service.cc" />
+    <ClCompile Include="breeze_rtm\execution_context.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3264FEE4-6D2D-4CFA-8F70-E5EE51B24922}</ProjectGuid>
     <RootNamespace>execution_context_base</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>execution_context_service</ProjectName>
+    <ProjectName>execution_context</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

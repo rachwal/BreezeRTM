@@ -7,9 +7,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="omg_rtc\nv_list.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="omg_rtc\return_code_t.h">
       <Filter>Header Files</Filter>
     </ClInclude>

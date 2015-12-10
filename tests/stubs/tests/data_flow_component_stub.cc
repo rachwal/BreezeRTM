@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-DataFlowComponentStub::DataFlowComponentStub(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service) : DataFlowComponent(execution_context_service, port_service)
+DataFlowComponentStub::DataFlowComponentStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port) : DataFlowComponent(execution_context, port)
 {
 	profile_.instance_name = "DataFlowComponentStub";
 }
