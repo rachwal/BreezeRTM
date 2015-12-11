@@ -31,7 +31,7 @@ TEST_CLASS(PortLoggingTest)
 		auto logger = new stubs::LoggerStub();
 		auto port = new stubs::PortLoggingStub("alpha", logger);
 
-		auto connector_profile = new omg_rtc::ConnectorProfile("profile 1", "1");
+		auto connector_profile = new omg_rtc::ConnectorProfile("test", "1");
 
 		//WHEN
 		port->connect(connector_profile);

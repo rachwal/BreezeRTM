@@ -20,13 +20,11 @@ Port::~Port()
 
 omg_rtc::ReturnCode_t Port::connect(omg_rtc::ConnectorProfile* profile)
 {
-	auto connector_profile = get_connector_profile(profile->id());
-
-	if (connector_profile)
+	if(is_connected(profile))
 	{
 		return omg_rtc::RTC_OK;
 	}
-
+	
 	profile_->add_connector_profile(profile);
 
 	notify_connect(profile);
@@ -92,7 +90,6 @@ omg_rtc::ConnectorProfile *Port::get_connector_profile(const omg_rtc::UniqueIden
 			return profile->second;
 		}
 	}
-
 	return nullptr;
 }
 }

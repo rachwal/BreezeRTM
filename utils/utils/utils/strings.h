@@ -15,7 +15,6 @@ namespace utils
 class Strings
 {
 	public:
-
 	static std::vector<std::string> split(const std::string& s, char delimiter)
 	{
 		//ref http://stackoverflow.com/a/236803/5329823
