@@ -18,10 +18,36 @@ class RTObject;
 class ExecutionContextProfile
 {
 	public:
-	ExecutionKind kind;
-	double rate;
+	explicit ExecutionContextProfile(ExecutionKind kind) : kind_(kind), rate_(0), owner(nullptr)
+	{
+		participants_ = new std::list<RTObject*>();
+	};
+
+	double rate() const
+	{
+		return rate_;
+	}
+
+	void rate(const double& value)
+	{
+		rate_ = value;
+	}
+
+	ExecutionKind kind() const
+	{
+		return kind_;
+	};
+
+	void kind(const ExecutionKind& value)
+	{
+		kind_ = value;
+	}
+
+	private:
+	ExecutionKind kind_;
+	double rate_;
 	RTObject* owner;
-	std::list<RTObject*>* participants;
+	std::list<RTObject*>* participants_;
 };
 }
 }

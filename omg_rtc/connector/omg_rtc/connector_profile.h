@@ -18,19 +18,45 @@ namespace omg_rtc
 class ConnectorProfile
 {
 	public:
-	ConnectorProfile()
+	ConnectorProfile(std::string name, UniqueIdentifier id) : name_(name), id_(id)
 	{
-		ports = new std::list<PortInterface*>();
+		ports_ = new std::list<PortInterface*>();
 	}
 
 	~ConnectorProfile()
 	{
-		delete ports;
+		delete ports_;
 	}
 
-	std::string name;
-	UniqueIdentifier id;
-	std::list<PortInterface*>* ports;
+	std::string name() const
+	{
+		return name_;
+	}
+
+	UniqueIdentifier id() const
+	{
+		return id_;
+	}
+
+	std::list<PortInterface*> *ports() const
+	{
+		return ports_;
+	}
+
+	void AddPort(PortInterface* port) const
+	{
+		ports_->push_back(port);
+	};
+
+	void RemovePort(PortInterface* port) const
+	{
+		ports_->remove(port);
+	};
+
+	private:
+	std::string name_;
+	UniqueIdentifier id_;
+	std::list<PortInterface*>* ports_;
 };
 }
 }

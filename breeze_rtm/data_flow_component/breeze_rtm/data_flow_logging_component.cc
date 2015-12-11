@@ -16,7 +16,7 @@ omg_rtc::ReturnCode_t DataFlowLoggingComponent::on_execute(omg_rtc::ExecutionCon
 {
 	std::stringstream stream;
 	stream << "on_execute" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name, stream.str());
+	logger_->Trace(profile_.instance_name(), stream.str());
 
 	return omg_rtc::RTC_OK;
 }
@@ -25,7 +25,7 @@ omg_rtc::ReturnCode_t DataFlowLoggingComponent::on_state_update(omg_rtc::Executi
 {
 	std::stringstream stream;
 	stream << "on_state_update" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name, stream.str());
+	logger_->Trace(profile_.instance_name(), stream.str());
 
 	return omg_rtc::RTC_OK;
 }
@@ -34,7 +34,7 @@ omg_rtc::ReturnCode_t DataFlowLoggingComponent::on_rate_changed(omg_rtc::Executi
 {
 	std::stringstream stream;
 	stream << "on_rate_changed" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name, stream.str());
+	logger_->Trace(profile_.instance_name(), stream.str());
 
 	return omg_rtc::RTC_OK;
 }

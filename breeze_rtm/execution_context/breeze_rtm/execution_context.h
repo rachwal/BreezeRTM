@@ -41,7 +41,7 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	ExecutionContext();
 
 	std::map<omg_rtc::LightweightRTObject*, omg_rtc::ExecutionContextHandle_t>* components_;
-	omg_rtc::ExecutionContextProfile profile_;
+	omg_rtc::ExecutionContextProfile* profile_;
 
 	private:
 	double rate_;

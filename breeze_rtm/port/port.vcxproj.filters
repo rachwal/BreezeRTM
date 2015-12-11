@@ -18,9 +18,15 @@
     <ClCompile Include="breeze_rtm\port.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="breeze_rtm\port_logging.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="breeze_rtm\port.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="breeze_rtm\port_logging.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,7 +10,7 @@ namespace stubs
 {
 RTLoggingObjectStub::RTLoggingObjectStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger) : RTLoggingObject(execution_context, port, logger)
 {
-	profile_.instance_name = "RTLoggingObjectStub";
+	profile_.instance_name("RTLoggingObjectStub");
 }
 }
 }

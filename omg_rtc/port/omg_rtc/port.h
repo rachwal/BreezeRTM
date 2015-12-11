@@ -22,8 +22,8 @@ class Port :public PortInterface
 
 	virtual PortProfile *get_port_profile() = 0;
 
-	virtual std::list<ConnectorProfile> *get_connector_profiles() = 0;
-	virtual ConnectorProfile *get_connector_profile(const UniqueIdentifier connector_id) = 0;
+	virtual std::list<ConnectorProfile*> *get_connector_profiles() = 0;
+	virtual ConnectorProfile *get_connector_profile(const UniqueIdentifier& connector_id) = 0;
 };
 }
 }

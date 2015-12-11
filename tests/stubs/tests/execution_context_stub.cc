@@ -10,13 +10,12 @@ namespace stubs
 {
 ExecutionContextStub::ExecutionContextStub()
 {
-	profile_.kind = omg_rtc::ExecutionKind::PERIODIC;
-	profile_.owner = nullptr;
+	profile_->kind(omg_rtc::ExecutionKind::PERIODIC);
 }
 
 omg_rtc::ExecutionContextProfile *ExecutionContextStub::get_profile()
 {
-	return &profile_;
+	return profile_;
 }
 }
 }

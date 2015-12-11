@@ -18,5 +18,8 @@
     <ClCompile Include="port_test.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="port_logging_test.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

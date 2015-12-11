@@ -10,6 +10,7 @@ namespace execution_context
 {
 ExecutionContext::ExecutionContext() : rate_(1)
 {
+	profile_ = new omg_rtc::ExecutionContextProfile(omg_rtc::OTHER);
 	components_ = new std::map<omg_rtc::LightweightRTObject*, omg_rtc::ExecutionContextHandle_t>();
 }
 
@@ -20,7 +21,7 @@ ExecutionContext::~ExecutionContext()
 
 omg_rtc::ExecutionContextProfile *ExecutionContext::get_profile()
 {
-	return &profile_;
+	return profile_;
 }
 
 bool ExecutionContext::is_running()
@@ -114,7 +115,7 @@ omg_rtc::LifeCycleState ExecutionContext::get_component_state(omg_rtc::Lightweig
 
 omg_rtc::ExecutionKind ExecutionContext::get_kind()
 {
-	return profile_.kind;
+	return profile_->kind();
 }
 }
 }

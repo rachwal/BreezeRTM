@@ -10,7 +10,7 @@ namespace stubs
 {
 RTObjectStub::RTObjectStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port) : RTObject(execution_context, port)
 {
-	profile_.instance_name = "RTObjectStub";
+	profile_.instance_name("RTObjectStub");
 }
 }
 }
