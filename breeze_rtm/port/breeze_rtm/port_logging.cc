@@ -11,21 +11,6 @@ namespace port
 {
 PortLogging::PortLogging(omg_rtc::Logger* logger) : Port(), logger_(logger) {}
 
-omg_rtc::PortProfile *PortLogging::get_port_profile()
-{
-	return Port::get_port_profile();
-}
-
-std::list<omg_rtc::ConnectorProfile*> *PortLogging::get_connector_profiles()
-{
-	return Port::get_connector_profiles();
-}
-
-omg_rtc::ConnectorProfile *PortLogging::get_connector_profile(const omg_rtc::UniqueIdentifier& connector_id)
-{
-	return Port::get_connector_profile(connector_id);
-}
-
 omg_rtc::ReturnCode_t PortLogging::connect(omg_rtc::ConnectorProfile* connector_profile)
 {
 	std::stringstream stream;
