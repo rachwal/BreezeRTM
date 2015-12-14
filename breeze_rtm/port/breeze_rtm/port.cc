@@ -78,6 +78,19 @@ omg_rtc::ReturnCode_t Port::notify_disconnect(const omg_rtc::UniqueIdentifier& c
 
 omg_rtc::ReturnCode_t Port::disconnect_all()
 {
+	auto ids = new std::list<omg_rtc::UniqueIdentifier>();
+	auto profiles = get_connector_profiles();
+	for (auto profile = profiles->begin(); profile != profiles->end(); ++profile)
+	{
+		ids->push_back((*profile)->id());
+	}
+
+	for (auto id = ids->begin(); id != ids->end(); ++id)
+	{
+		disconnect(*id);
+	}
+
+	delete ids;
 	return omg_rtc::RTC_OK;
 }
 

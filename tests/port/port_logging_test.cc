@@ -143,6 +143,61 @@ TEST_CLASS(PortLoggingTest)
 
 		delete logger;
 	}
+
+	TEST_METHOD(PortLoggingShouldNotifyAllPortsWhenDisconnectedAll)
+	{
+		//GIVEN
+		auto expected_logger_content =
+			std::string("TRACE: Port 1: connect(1)\n") +
+			std::string("TRACE: Port 1: notify_connect(1)\n") +
+			std::string("TRACE: Port 0: connect(1)\n") +
+			std::string("TRACE: Port 0: notify_connect(1)\n") +
+			std::string("TRACE: Port 2: connect(1)\n") +
+			std::string("TRACE: Port 2: notify_connect(1)\n") +
+			std::string("TRACE: Port 3: connect(1)\n") +
+			std::string("TRACE: Port 3: notify_connect(1)\n") +
+			std::string("TRACE: Port 1: disconnect_all()\n") +
+			std::string("TRACE: Port 1: disconnect(1)\n") +
+			std::string("TRACE: Port 1: notify_disconnect(1)\n") +
+			std::string("TRACE: Port 0: disconnect(1)\n") +
+			std::string("TRACE: Port 0: notify_disconnect(1)\n") +
+			std::string("TRACE: Port 2: disconnect(1)\n") +
+			std::string("TRACE: Port 2: notify_disconnect(1)\n") +
+			std::string("TRACE: Port 3: disconnect(1)\n") +
+			std::string("TRACE: Port 3: notify_disconnect(1)\n");
+
+		auto logger = new stubs::LoggerStub();
+
+		auto alpha = new stubs::PortLoggingStub("Port 0", logger);
+		auto beta = new stubs::PortLoggingStub("Port 1", logger);
+		auto gamma = new stubs::PortLoggingStub("Port 2", logger);
+		auto delta = new stubs::PortLoggingStub("Port 3", logger);
+
+		auto external_connector = new omg_rtc::ConnectorProfile("external", "1");
+		external_connector->AddPort(alpha);
+		external_connector->AddPort(beta);
+		external_connector->AddPort(gamma);
+		external_connector->AddPort(delta);
+
+		beta->connect(external_connector);
+
+		//WHEN
+		beta->disconnect_all();
+
+		//THEN
+		auto logger_content = logger->content();
+
+		Assert::AreEqual(expected_logger_content, logger_content);
+
+		delete alpha;
+		delete beta;
+		delete gamma;
+		delete delta;
+
+		delete external_connector;
+
+		delete logger;
+	}
 };
 }
 }
