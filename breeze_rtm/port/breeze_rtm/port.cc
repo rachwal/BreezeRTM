@@ -20,33 +20,54 @@ Port::~Port()
 
 omg_rtc::ReturnCode_t Port::connect(omg_rtc::ConnectorProfile* profile)
 {
-	if(is_connected(profile))
+	if (is_connected(profile->id()))
 	{
 		return omg_rtc::RTC_OK;
 	}
-	
+
 	profile_->add_connector_profile(profile);
 
 	notify_connect(profile);
+
+	auto ports = profile->ports();
+	for (auto port = ports->begin(); port != ports->end(); ++port)
+	{
+		if (!(*port)->is_connected(profile->id()))
+		{
+			(*port)->connect(profile);
+		}
+	}
 
 	return omg_rtc::RTC_OK;
 }
 
 omg_rtc::ReturnCode_t Port::disconnect(const omg_rtc::UniqueIdentifier& connector_id)
 {
+	auto profile = get_connector_profile(connector_id);
+	if (!profile)
+	{
+		return omg_rtc::RTC_OK;
+	}
+
+	auto ports = profile->ports();
+
+	profile_->remove_connector_profile(connector_id);
+
+	notify_disconnect(connector_id);
+
+	for (auto port = ports->begin(); port != ports->end(); ++port)
+	{
+		if ((*port)->is_connected(profile->id()))
+		{
+			(*port)->disconnect(connector_id);
+		}
+	}
+
 	return omg_rtc::RTC_OK;
 }
 
 omg_rtc::ReturnCode_t Port::notify_connect(omg_rtc::ConnectorProfile* profile)
 {
-	auto ports = profile->ports();
-	for (auto port = ports->begin(); port != ports->end(); ++port)
-	{
-		if (!(*port)->is_connected(profile))
-		{
-			(*port)->connect(profile);
-		}
-	}
 	return omg_rtc::RTC_OK;
 }
 
@@ -60,9 +81,9 @@ omg_rtc::ReturnCode_t Port::disconnect_all()
 	return omg_rtc::RTC_OK;
 }
 
-bool Port::is_connected(omg_rtc::ConnectorProfile* profile)
+bool Port::is_connected(const omg_rtc::UniqueIdentifier& connector_id)
 {
-	if (get_connector_profile(profile->id()))
+	if (get_connector_profile(connector_id))
 	{
 		return true;
 	}

@@ -31,12 +31,14 @@ omg_rtc::ReturnCode_t PortLogging::connect(omg_rtc::ConnectorProfile* connector_
 	std::stringstream stream;
 	stream << "connect" << "(" << connector_profile->id() << ")";
 	logger_->Trace(profile_->name(), stream.str());
-
 	return Port::connect(connector_profile);
 }
 
 omg_rtc::ReturnCode_t PortLogging::disconnect(const omg_rtc::UniqueIdentifier& connector_id)
 {
+	std::stringstream stream;
+	stream << "disconnect" << "(" << connector_id << ")";
+	logger_->Trace(profile_->name(), stream.str());
 	return Port::disconnect(connector_id);
 }
 
@@ -45,23 +47,23 @@ omg_rtc::ReturnCode_t PortLogging::notify_connect(omg_rtc::ConnectorProfile* con
 	std::stringstream stream;
 	stream << "notify_connect" << "(" << connector_profile->id() << ")";
 	logger_->Trace(profile_->name(), stream.str());
-
 	return Port::notify_connect(connector_profile);
 }
 
 omg_rtc::ReturnCode_t PortLogging::notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id)
 {
+	std::stringstream stream;
+	stream << "notify_disconnect" << "(" << connector_id << ")";
+	logger_->Trace(profile_->name(), stream.str());
 	return Port::notify_disconnect(connector_id);
 }
 
 omg_rtc::ReturnCode_t PortLogging::disconnect_all()
 {
+	std::stringstream stream;
+	stream << "disconnect_all()";
+	logger_->Trace(profile_->name(), stream.str());
 	return Port::disconnect_all();
-}
-
-bool PortLogging::is_connected(omg_rtc::ConnectorProfile* profile)
-{
-	return Port::is_connected(profile);
 }
 }
 }

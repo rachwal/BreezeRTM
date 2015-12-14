@@ -24,7 +24,7 @@ class PortInterface
 	virtual ReturnCode_t notify_connect(ConnectorProfile* connector_profile) = 0;
 	virtual ReturnCode_t notify_disconnect(const UniqueIdentifier& connector_id) = 0;
 	virtual ReturnCode_t disconnect_all() = 0;
-	virtual bool is_connected(ConnectorProfile* profile) = 0;
+	virtual bool is_connected(const UniqueIdentifier& connector_id) = 0;
 };
 }
 }

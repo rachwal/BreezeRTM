@@ -44,7 +44,12 @@ class PortProfile
 	void add_connector_profile(ConnectorProfile* profile) const
 	{
 		connector_profiles_->operator[](profile->id()) = profile;
-	};
+	}
+
+	void remove_connector_profile(const UniqueIdentifier connector_id) const
+	{
+		connector_profiles_->erase(connector_id);
+	}
 
 	private:
 	std::string name_;

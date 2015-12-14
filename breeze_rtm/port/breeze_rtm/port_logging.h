@@ -24,7 +24,6 @@ class PortLogging : public Port
 	virtual omg_rtc::ReturnCode_t notify_connect(omg_rtc::ConnectorProfile* connector_profile) override;
 	virtual omg_rtc::ReturnCode_t notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
 	virtual omg_rtc::ReturnCode_t disconnect_all() override;
-	bool is_connected(omg_rtc::ConnectorProfile* profile) override;
 
 	protected:
 	explicit PortLogging(omg_rtc::Logger* logger);

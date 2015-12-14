@@ -27,7 +27,7 @@ class Port : public omg_rtc::Port
 	virtual omg_rtc::ReturnCode_t notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
 	virtual omg_rtc::ReturnCode_t disconnect_all() override;
 
-	bool is_connected(omg_rtc::ConnectorProfile* profile) override;
+	bool is_connected(const omg_rtc::UniqueIdentifier& connector_id) override;
 
 	protected:
 	Port();
