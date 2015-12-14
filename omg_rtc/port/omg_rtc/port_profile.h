@@ -23,7 +23,7 @@ class PortProfile
 	public:
 	explicit PortProfile(std::string name) : name_(name), interfaces(nullptr), port_ref(nullptr), owner(nullptr)
 	{
-		connector_profiles_ = new std::map<UniqueIdentifier, ConnectorProfile*>();
+		connector_profiles_ = new std::list<ConnectorProfile*>();
 	}
 
 	std::string name() const
@@ -36,19 +36,26 @@ class PortProfile
 		name_ = name;
 	}
 
-	std::map<UniqueIdentifier, ConnectorProfile*> *connector_profiles() const
+	std::list<ConnectorProfile*> *connector_profiles() const
 	{
 		return connector_profiles_;
 	}
 
 	void add_connector_profile(ConnectorProfile* profile) const
 	{
-		connector_profiles_->operator[](profile->id()) = profile;
+		connector_profiles_->push_back(profile);
 	}
 
 	void remove_connector_profile(const UniqueIdentifier connector_id) const
 	{
-		connector_profiles_->erase(connector_id);
+		for (auto profile = connector_profiles_->begin(); profile != connector_profiles_->end(); ++profile)
+		{
+			if ((*profile)->id() == connector_id)
+			{
+				connector_profiles_->remove(*profile);
+				return;
+			}
+		}
 	}
 
 	private:
@@ -56,7 +63,7 @@ class PortProfile
 
 	std::list<PortInterfaceProfile>* interfaces;
 	PortInterface* port_ref;
-	std::map<UniqueIdentifier, ConnectorProfile*>* connector_profiles_;
+	std::list<ConnectorProfile*>* connector_profiles_;
 	RTObject* owner;
 };
 }

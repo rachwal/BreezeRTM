@@ -97,7 +97,7 @@ omg_rtc::PortProfile *Port::get_port_profile()
 
 std::list<omg_rtc::ConnectorProfile*> *Port::get_connector_profiles()
 {
-	return nullptr;
+	return profile_->connector_profiles();
 }
 
 omg_rtc::ConnectorProfile *Port::get_connector_profile(const omg_rtc::UniqueIdentifier& connector_id)
@@ -106,9 +106,9 @@ omg_rtc::ConnectorProfile *Port::get_connector_profile(const omg_rtc::UniqueIden
 
 	for (auto profile = profiles->begin(); profile != profiles->end(); ++profile)
 	{
-		if (profile->first == connector_id)
+		if ((*profile)->id() == connector_id)
 		{
-			return profile->second;
+			return *profile;
 		}
 	}
 	return nullptr;
