@@ -23,12 +23,13 @@ class RTObject : public omg_rtc::RTObject
 
 	virtual omg_rtc::ReturnCode_t initialize() override;
 	virtual omg_rtc::ReturnCode_t finalize() override;
+	virtual omg_rtc::ReturnCode_t exit() override;
 
 	virtual bool is_alive(omg_rtc::ExecutionContext* exec_context) override;
 
-	virtual omg_rtc::ReturnCode_t exit() override;
 	virtual omg_rtc::ExecutionContextHandle_t attach_context(omg_rtc::ExecutionContext* exec_context) override;
 	virtual omg_rtc::ReturnCode_t detach_context(omg_rtc::ExecutionContextHandle_t handle) override;
+
 	virtual omg_rtc::ExecutionContext *get_context(omg_rtc::ExecutionContextHandle_t handle) override;
 	virtual std::list<omg_rtc::ExecutionContext*> *get_owned_contexts() override;
 	virtual std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*> *get_participating_contexts() override;

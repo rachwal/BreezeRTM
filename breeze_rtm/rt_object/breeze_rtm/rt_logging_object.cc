@@ -77,26 +77,6 @@ omg_rtc::ReturnCode_t RTLoggingObject::detach_context(omg_rtc::ExecutionContextH
 	return RTObject::detach_context(handle);
 }
 
-omg_rtc::ExecutionContext *RTLoggingObject::get_context(omg_rtc::ExecutionContextHandle_t handle)
-{
-	return RTObject::get_context(handle);
-}
-
-std::list<omg_rtc::ExecutionContext*> *RTLoggingObject::get_owned_contexts()
-{
-	return RTObject::get_owned_contexts();
-}
-
-std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*> *RTLoggingObject::get_participating_contexts()
-{
-	return RTObject::get_participating_contexts();
-}
-
-omg_rtc::ExecutionContextHandle_t RTLoggingObject::get_context_handle(omg_rtc::ExecutionContext& exec_context)
-{
-	return RTObject::get_context_handle(exec_context);
-}
-
 omg_rtc::ReturnCode_t RTLoggingObject::on_initialize()
 {
 	logger_->Trace(profile_.instance_name(), "on_initialize()");
