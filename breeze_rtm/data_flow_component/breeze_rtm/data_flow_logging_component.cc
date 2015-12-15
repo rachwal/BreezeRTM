@@ -12,29 +12,29 @@ namespace data_flow_component
 {
 DataFlowLoggingComponent::DataFlowLoggingComponent(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger) : RTLoggingObject(execution_context, port, logger) {}
 
-omg_rtc::ReturnCode_t DataFlowLoggingComponent::on_execute(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnExecute(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_execute" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t DataFlowLoggingComponent::on_state_update(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnStateUpdate(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_state_update" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t DataFlowLoggingComponent::on_rate_changed(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnRateChanged(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_rate_changed" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
 	return omg_rtc::RTC_OK;
 }

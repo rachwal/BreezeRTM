@@ -6,6 +6,8 @@
 
 #include <tests/logger_stub.h>
 #include <tests/port_logging_stub.h>
+#include <tests/port_service_stub.h>
+#include <tests/connector_profile_service_stub.h>
 
 namespace breeze_rtm
 {
@@ -24,17 +26,19 @@ TEST_CLASS(PortLoggingTest)
 	TEST_METHOD(PortLoggingShouldConnect)
 	{
 		//GIVEN
-		std::string expected_logger_content =
+		auto expected_logger_content =
 			std::string("TRACE: alpha: connect(1)\n") +
 			std::string("TRACE: alpha: notify_connect(1)\n");
-
+		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
+		auto port_service = new stubs::PortServiceStub(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
-		auto port = new stubs::PortLoggingStub("alpha", logger);
+		auto port = port_service->Create("alpha", "p1", logger);
 
-		auto connector_profile = new omg_rtc::ConnectorProfile("test", "1");
+		auto connector_profile = new omg_rtc::ConnectorProfile();
+		connector_profile->id("1");
 
 		//WHEN
-		port->connect(connector_profile);
+		port->Connect(connector_profile);
 
 		//THEN
 		auto logger_content = logger->content();
@@ -42,7 +46,10 @@ TEST_CLASS(PortLoggingTest)
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete port;
+		delete port_service;
+		delete connector_profile_service;
 		delete logger;
+
 		delete connector_profile;
 	}
 
@@ -59,21 +66,23 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: connect(1)\n") +
 			std::string("TRACE: Port 3: notify_connect(1)\n");
 
+		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
+		auto port_service = new stubs::PortServiceStub(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 
-		auto alpha = new stubs::PortLoggingStub("Port 0", logger);
-		auto beta = new stubs::PortLoggingStub("Port 1", logger);
-		auto gamma = new stubs::PortLoggingStub("Port 2", logger);
-		auto delta = new stubs::PortLoggingStub("Port 3", logger);
+		auto alpha = port_service->Create("Port 0", "p0", logger);
+		auto beta = port_service->Create("Port 1", "p1", logger);
+		auto gamma = port_service->Create("Port 2", "p2", logger);
+		auto delta = port_service->Create("Port 3", "p3", logger);
 
 		//WHEN
-		auto external_connector = new omg_rtc::ConnectorProfile("external", "1");
-		external_connector->AddPort(alpha);
-		external_connector->AddPort(beta);
-		external_connector->AddPort(gamma);
-		external_connector->AddPort(delta);
+		auto external_connector = connector_profile_service->Create("external", "1");
+		external_connector->AddPortId("p0");
+		external_connector->AddPortId("p1");
+		external_connector->AddPortId("p2");
+		external_connector->AddPortId("p3");
 
-		beta->connect(external_connector);
+		beta->Connect(external_connector);
 
 		//THEN
 		auto logger_content = logger->content();
@@ -84,6 +93,9 @@ TEST_CLASS(PortLoggingTest)
 		delete beta;
 		delete gamma;
 		delete delta;
+
+		delete port_service;
+		delete connector_profile_service;
 
 		delete external_connector;
 
@@ -111,23 +123,25 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: disconnect(1)\n") +
 			std::string("TRACE: Port 3: notify_disconnect(1)\n");
 
+		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
+		auto port_service = new stubs::PortServiceStub(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 
-		auto alpha = new stubs::PortLoggingStub("Port 0", logger);
-		auto beta = new stubs::PortLoggingStub("Port 1", logger);
-		auto gamma = new stubs::PortLoggingStub("Port 2", logger);
-		auto delta = new stubs::PortLoggingStub("Port 3", logger);
+		auto alpha = port_service->Create("Port 0", "p0", logger);
+		auto beta = port_service->Create("Port 1", "p1", logger);
+		auto gamma = port_service->Create("Port 2", "p2", logger);
+		auto delta = port_service->Create("Port 3", "p3", logger);
 
-		auto external_connector = new omg_rtc::ConnectorProfile("external", "1");
-		external_connector->AddPort(alpha);
-		external_connector->AddPort(beta);
-		external_connector->AddPort(gamma);
-		external_connector->AddPort(delta);
+		auto external_connector = connector_profile_service->Create("external", "1");
+		external_connector->AddPortId("p0");
+		external_connector->AddPortId("p1");
+		external_connector->AddPortId("p2");
+		external_connector->AddPortId("p3");
 
-		beta->connect(external_connector);
+		beta->Connect(external_connector);
 
 		//WHEN
-		beta->disconnect("1");
+		beta->Disconnect("1");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -138,6 +152,9 @@ TEST_CLASS(PortLoggingTest)
 		delete beta;
 		delete gamma;
 		delete delta;
+
+		delete port_service;
+		delete connector_profile_service;
 
 		delete external_connector;
 
@@ -166,23 +183,25 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: disconnect(1)\n") +
 			std::string("TRACE: Port 3: notify_disconnect(1)\n");
 
+		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
+		auto port_service = new stubs::PortServiceStub(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 
-		auto alpha = new stubs::PortLoggingStub("Port 0", logger);
-		auto beta = new stubs::PortLoggingStub("Port 1", logger);
-		auto gamma = new stubs::PortLoggingStub("Port 2", logger);
-		auto delta = new stubs::PortLoggingStub("Port 3", logger);
+		auto alpha = port_service->Create("Port 0", "p0", logger);
+		auto beta = port_service->Create("Port 1", "p1", logger);
+		auto gamma = port_service->Create("Port 2", "p2", logger);
+		auto delta = port_service->Create("Port 3", "p3", logger);
 
-		auto external_connector = new omg_rtc::ConnectorProfile("external", "1");
-		external_connector->AddPort(alpha);
-		external_connector->AddPort(beta);
-		external_connector->AddPort(gamma);
-		external_connector->AddPort(delta);
+		auto external_connector = connector_profile_service->Create("external", "1");
+		external_connector->AddPortId("p0");
+		external_connector->AddPortId("p1");
+		external_connector->AddPortId("p2");
+		external_connector->AddPortId("p3");
 
-		beta->connect(external_connector);
+		beta->Connect(external_connector);
 
 		//WHEN
-		beta->disconnect_all();
+		beta->DisconnectAll();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -193,6 +212,9 @@ TEST_CLASS(PortLoggingTest)
 		delete beta;
 		delete gamma;
 		delete delta;
+
+		delete port_service;
+		delete connector_profile_service;
 
 		delete external_connector;
 

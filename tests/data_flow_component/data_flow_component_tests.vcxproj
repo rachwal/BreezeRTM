@@ -108,7 +108,7 @@
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile />
       <BrowseInformation>true</BrowseInformation>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc\port;..\..\omg_rtc\component;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\logger;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\utils\utils;..\..\omg_rtc\test_utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,7 +126,7 @@
       <Optimization>Disabled</Optimization>
       <UseFullPaths>true</UseFullPaths>
       <PrecompiledHeaderFile />
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc\port;..\..\omg_rtc\component;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\logger;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\utils\utils;..\..\omg_rtc\test_utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,7 +143,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc\port;..\..\omg_rtc\component;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\logger;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\utils\utils;..\..\omg_rtc\test_utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -162,7 +162,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc\port;..\..\omg_rtc\component;..\..\omg_rtc\object;..\..\omg_rtc\execution_context;..\..\omg_rtc\logger;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\utils\utils;..\..\omg_rtc\test_utils;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\data_flow_component\;..\..\breeze_rtm\execution_context_service;..\..\omg_rtc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -16,27 +16,27 @@ namespace rt_object
 class RTLoggingObject : public RTObject
 {
 	public:
-	virtual omg_rtc::ComponentProfile *get_component_profile() override;
-	virtual std::list<omg_rtc::PortInterface*> *get_ports() override;
+	virtual omg_rtc::ComponentProfile *GetComponentProfile() override;
+	virtual std::list<omg_rtc::PortInterface*> *GetPorts() override;
 
-	virtual omg_rtc::ReturnCode_t initialize() override;
-	virtual omg_rtc::ReturnCode_t finalize() override;
-	virtual omg_rtc::ReturnCode_t exit() override;
+	virtual omg_rtc::ReturnCode_t Initialize() override;
+	virtual omg_rtc::ReturnCode_t Finalize() override;
+	virtual omg_rtc::ReturnCode_t Exit() override;
 
-	virtual bool is_alive(omg_rtc::ExecutionContext* exec_context) override;
+	virtual bool IsAlive(omg_rtc::ExecutionContext* exec_context) override;
 
-	virtual omg_rtc::ExecutionContextHandle_t attach_context(omg_rtc::ExecutionContext* exec_context) override;
-	virtual omg_rtc::ReturnCode_t detach_context(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ExecutionContextHandle_t AttachContext(omg_rtc::ExecutionContext* exec_context) override;
+	virtual omg_rtc::ReturnCode_t DetachContext(omg_rtc::ExecutionContextHandle_t handle) override;
 
-	virtual omg_rtc::ReturnCode_t on_initialize() override;
-	virtual omg_rtc::ReturnCode_t on_finalize() override;
-	virtual omg_rtc::ReturnCode_t on_startup(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual omg_rtc::ReturnCode_t on_shutdown(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual omg_rtc::ReturnCode_t on_activated(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual omg_rtc::ReturnCode_t on_deactivated(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual omg_rtc::ReturnCode_t on_aborting(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual omg_rtc::ReturnCode_t on_error(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual omg_rtc::ReturnCode_t on_reset(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnInitialize() override;
+	virtual omg_rtc::ReturnCode_t OnFinalize() override;
+	virtual omg_rtc::ReturnCode_t OnStartup(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnShutdown(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnActivated(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnDeactivated(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnAborting(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnError(omg_rtc::ExecutionContextHandle_t handle) override;
+	virtual omg_rtc::ReturnCode_t OnReset(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
 	RTLoggingObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger);

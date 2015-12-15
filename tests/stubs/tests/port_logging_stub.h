@@ -14,7 +14,9 @@ namespace stubs
 class PortLoggingStub : public port::PortLogging
 {
 	public:
-	PortLoggingStub(std::string name, omg_rtc::Logger* logger);
+	PortLoggingStub(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger);
+
+	void name(const std::string name) const;
 };
 }
 }

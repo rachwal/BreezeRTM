@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-PortStub::PortStub() {}
+PortStub::PortStub(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service) : Port(id, port_service, connector_profile_service) {}
 }
 }
 

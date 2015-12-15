@@ -6,6 +6,8 @@
 #define BREEZE_RTM_PORT_PORT_H_
 
 #include <omg_rtc/port.h>
+#include <omg_rtc/port_service.h>
+#include <omg_rtc/connector_profile_service.h>
 
 namespace breeze_rtm
 {
@@ -16,23 +18,31 @@ class Port : public omg_rtc::Port
 	public:
 	virtual ~Port();
 
-	virtual omg_rtc::PortProfile *get_port_profile() override;
+	virtual omg_rtc::UniqueIdentifier id() const override;
 
-	virtual std::list<omg_rtc::ConnectorProfile*> *get_connector_profiles() override;
-	virtual omg_rtc::ConnectorProfile *get_connector_profile(const omg_rtc::UniqueIdentifier& connector_id) override;
+	virtual omg_rtc::PortProfile *port_profile() override;
 
-	virtual omg_rtc::ReturnCode_t connect(omg_rtc::ConnectorProfile* connector_profile) override;
-	virtual omg_rtc::ReturnCode_t disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
-	virtual omg_rtc::ReturnCode_t notify_connect(omg_rtc::ConnectorProfile* connector_profile) override;
-	virtual omg_rtc::ReturnCode_t notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
-	virtual omg_rtc::ReturnCode_t disconnect_all() override;
+	virtual std::list<omg_rtc::UniqueIdentifier> *Port::GetConnectorProfiles() override;
+	virtual omg_rtc::ConnectorProfile *GetConnectorProfile(const omg_rtc::UniqueIdentifier& connector_id) override;
 
-	bool is_connected(const omg_rtc::UniqueIdentifier& connector_id) override;
+	virtual omg_rtc::ReturnCode_t Connect(omg_rtc::ConnectorProfile* connector_profile) override;
+	virtual omg_rtc::ReturnCode_t Disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
+	virtual omg_rtc::ReturnCode_t NotifyConnect(omg_rtc::ConnectorProfile* connector_profile) override;
+	virtual omg_rtc::ReturnCode_t NotifyDisconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
+	virtual omg_rtc::ReturnCode_t DisconnectAll() override;
+
+	bool IsConnected(const omg_rtc::UniqueIdentifier& connector_id) override;
 
 	protected:
-	Port();
+	Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service);
 
 	omg_rtc::PortProfile* profile_;
+
+	private:
+	const omg_rtc::PortService* port_service_;
+	omg_rtc::ConnectorProfileService* connector_profile_service_;
+
+	omg_rtc::UniqueIdentifier id_;
 };
 }
 }

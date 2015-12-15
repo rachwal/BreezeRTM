@@ -10,7 +10,7 @@ namespace stubs
 {
 DataFlowComponentStub::DataFlowComponentStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port) : DataFlowComponent(execution_context, port)
 {
-	profile_.instance_name("DataFlowComponentStub");
+	profile_.instance_name = "DataFlowComponentStub";
 }
 }
 }

@@ -8,9 +8,9 @@ namespace breeze_rtm
 {
 namespace port
 {
-Port::Port()
+Port::Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service) : port_service_(port_service), connector_profile_service_(connector_profile_service), id_(id)
 {
-	profile_ = new omg_rtc::PortProfile("default");
+	profile_ = new omg_rtc::PortProfile(id);
 }
 
 Port::~Port()
@@ -18,113 +18,113 @@ Port::~Port()
 	delete profile_;
 }
 
-omg_rtc::ReturnCode_t Port::connect(omg_rtc::ConnectorProfile* profile)
+omg_rtc::UniqueIdentifier Port::id() const
 {
-	if (is_connected(profile->id()))
+	return id_;
+}
+
+omg_rtc::ReturnCode_t Port::Connect(omg_rtc::ConnectorProfile* profile)
+{
+	auto profile_id = profile->id();
+
+	if (IsConnected(profile_id))
 	{
 		return omg_rtc::RTC_OK;
 	}
 
-	profile_->add_connector_profile(profile);
+	profile_->AddConnectorProfileId(profile_id);
 
-	notify_connect(profile);
+	NotifyConnect(profile);
 
-	auto ports = profile->ports();
-	for (auto port = ports->begin(); port != ports->end(); ++port)
+	auto port_id_list = profile->GetPortIds();
+
+	for (auto port_id = port_id_list->begin(); port_id != port_id_list->end(); ++port_id)
 	{
-		if (!(*port)->is_connected(profile->id()))
+		auto port = port_service_->Retrieve(*port_id);
+		if (!port->IsConnected(profile_id))
 		{
-			(*port)->connect(profile);
+			port->Connect(profile);
 		}
 	}
+	delete port_id_list;
 
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t Port::disconnect(const omg_rtc::UniqueIdentifier& connector_id)
+omg_rtc::ReturnCode_t Port::Disconnect(const omg_rtc::UniqueIdentifier& connector_id)
 {
-	auto profile = get_connector_profile(connector_id);
-	if (!profile)
+	if (!IsConnected(connector_id))
 	{
 		return omg_rtc::RTC_OK;
 	}
 
-	auto ports = profile->ports();
+	auto profile = GetConnectorProfile(connector_id);
+	auto port_id_list = profile->GetPortIds();
 
-	profile_->remove_connector_profile(connector_id);
+	profile_->RemoveConnectorProfileId(connector_id);
 
-	notify_disconnect(connector_id);
+	NotifyDisconnect(connector_id);
 
-	for (auto port = ports->begin(); port != ports->end(); ++port)
+	for (auto port_id = port_id_list->begin(); port_id != port_id_list->end(); ++port_id)
 	{
-		if ((*port)->is_connected(profile->id()))
+		auto port = port_service_->Retrieve(*port_id);
+		if (port->IsConnected(profile->id()))
 		{
-			(*port)->disconnect(connector_id);
+			port->Disconnect(connector_id);
 		}
 	}
-
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t Port::notify_connect(omg_rtc::ConnectorProfile* profile)
+omg_rtc::ReturnCode_t Port::NotifyConnect(omg_rtc::ConnectorProfile*)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t Port::notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id)
+omg_rtc::ReturnCode_t Port::NotifyDisconnect(const omg_rtc::UniqueIdentifier&)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t Port::disconnect_all()
+omg_rtc::ReturnCode_t Port::DisconnectAll()
 {
-	auto ids = new std::list<omg_rtc::UniqueIdentifier>();
-	auto profiles = get_connector_profiles();
-	for (auto profile = profiles->begin(); profile != profiles->end(); ++profile)
+	auto connector_id_list = profile_->connector_id_list();
+
+	for (auto connector_id = connector_id_list->begin(); connector_id != connector_id_list->end(); ++connector_id)
 	{
-		ids->push_back((*profile)->id());
+		Disconnect(*connector_id);
 	}
+	delete connector_id_list;
 
-	for (auto id = ids->begin(); id != ids->end(); ++id)
-	{
-		disconnect(*id);
-	}
-
-	delete ids;
 	return omg_rtc::RTC_OK;
 }
 
-bool Port::is_connected(const omg_rtc::UniqueIdentifier& connector_id)
+bool Port::IsConnected(const omg_rtc::UniqueIdentifier& connector_id)
 {
-	if (get_connector_profile(connector_id))
+	auto connector_id_list = profile_->connector_id_list();
+	for (auto id = connector_id_list->begin(); id != connector_id_list->end(); ++id)
 	{
-		return true;
+		if (*id == connector_id)
+		{
+			return true;
+		}
 	}
 	return false;
 }
 
-omg_rtc::PortProfile *Port::get_port_profile()
+omg_rtc::PortProfile *Port::port_profile()
 {
 	return profile_;
 }
 
-std::list<omg_rtc::ConnectorProfile*> *Port::get_connector_profiles()
+std::list<omg_rtc::UniqueIdentifier> *Port::GetConnectorProfiles()
 {
-	return profile_->connector_profiles();
+	return profile_->connector_id_list();
 }
 
-omg_rtc::ConnectorProfile *Port::get_connector_profile(const omg_rtc::UniqueIdentifier& connector_id)
+omg_rtc::ConnectorProfile *Port::GetConnectorProfile(const omg_rtc::UniqueIdentifier& connector_id)
 {
-	auto profiles = profile_->connector_profiles();
-
-	for (auto profile = profiles->begin(); profile != profiles->end(); ++profile)
-	{
-		if ((*profile)->id() == connector_id)
-		{
-			return *profile;
-		}
-	}
-	return nullptr;
+	return connector_profile_service_->Retrieve(connector_id);
 }
 }
 }

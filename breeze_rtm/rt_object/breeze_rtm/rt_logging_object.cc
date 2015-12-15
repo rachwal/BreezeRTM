@@ -12,146 +12,146 @@ namespace rt_object
 {
 RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger) : RTObject(execution_context, port), logger_(logger) {}
 
-omg_rtc::ComponentProfile *RTLoggingObject::get_component_profile()
+omg_rtc::ComponentProfile *RTLoggingObject::GetComponentProfile()
 {
-	logger_->Paranoid(profile_.instance_name(), "get_component_profile()");
+	logger_->Paranoid(profile_.instance_name, "get_component_profile()");
 
-	return RTObject::get_component_profile();
+	return RTObject::GetComponentProfile();
 }
 
-std::list<omg_rtc::PortInterface*> *RTLoggingObject::get_ports()
+std::list<omg_rtc::PortInterface*> *RTLoggingObject::GetPorts()
 {
-	logger_->Paranoid(profile_.instance_name(), "get_ports()");
+	logger_->Paranoid(profile_.instance_name, "get_ports()");
 
-	return RTObject::get_ports();
+	return RTObject::GetPorts();
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::initialize()
+omg_rtc::ReturnCode_t RTLoggingObject::Initialize()
 {
-	logger_->Trace(profile_.instance_name(), "initialize()");
+	logger_->Trace(profile_.instance_name, "initialize()");
 
-	auto initialization_result = RTObject::initialize();
+	auto initialization_result = RTObject::Initialize();
 
 	if (initialization_result == omg_rtc::RTC_OK)
 	{
-		logger_->Debug(profile_.instance_name(), "Starting Execution Context");
+		logger_->Debug(profile_.instance_name, "Starting Execution Context");
 	}
 
 	return initialization_result;
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::finalize()
+omg_rtc::ReturnCode_t RTLoggingObject::Finalize()
 {
-	logger_->Trace(profile_.instance_name(), "finalize()");
+	logger_->Trace(profile_.instance_name, "finalize()");
 
-	return RTObject::finalize();
+	return RTObject::Finalize();
 }
 
-bool RTLoggingObject::is_alive(omg_rtc::ExecutionContext* exec_context)
+bool RTLoggingObject::IsAlive(omg_rtc::ExecutionContext* exec_context)
 {
-	logger_->Trace(profile_.instance_name(), "is_alive()");
+	logger_->Trace(profile_.instance_name, "is_alive()");
 
-	return RTObject::is_alive(exec_context);
+	return RTObject::IsAlive(exec_context);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::exit()
+omg_rtc::ReturnCode_t RTLoggingObject::Exit()
 {
-	logger_->Paranoid(profile_.instance_name(), "exit()");
+	logger_->Paranoid(profile_.instance_name, "exit()");
 
-	return RTObject::exit();
+	return RTObject::Exit();
 }
 
-omg_rtc::ExecutionContextHandle_t RTLoggingObject::attach_context(omg_rtc::ExecutionContext* exec_context)
+omg_rtc::ExecutionContextHandle_t RTLoggingObject::AttachContext(omg_rtc::ExecutionContext* exec_context)
 {
-	logger_->Trace(profile_.instance_name(), "attach_context()");
+	logger_->Trace(profile_.instance_name, "attach_context()");
 
-	return RTObject::attach_context(exec_context);
+	return RTObject::AttachContext(exec_context);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::detach_context(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::DetachContext(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "detach_context" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::detach_context(handle);
+	return RTObject::DetachContext(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_initialize()
+omg_rtc::ReturnCode_t RTLoggingObject::OnInitialize()
 {
-	logger_->Trace(profile_.instance_name(), "on_initialize()");
+	logger_->Trace(profile_.instance_name, "on_initialize()");
 
-	return RTObject::on_initialize();
+	return RTObject::OnInitialize();
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_finalize()
+omg_rtc::ReturnCode_t RTLoggingObject::OnFinalize()
 {
-	logger_->Trace(profile_.instance_name(), "on_finalize()");
+	logger_->Trace(profile_.instance_name, "on_finalize()");
 
-	return RTObject::on_finalize();
+	return RTObject::OnFinalize();
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_startup(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnStartup(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_startup" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_startup(handle);
+	return RTObject::OnStartup(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_shutdown(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnShutdown(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_shutdown" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_shutdown(handle);
+	return RTObject::OnShutdown(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_activated(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnActivated(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_activated" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_activated(handle);
+	return RTObject::OnActivated(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_deactivated(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnDeactivated(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_deactivated" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_deactivated(handle);
+	return RTObject::OnDeactivated(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_aborting(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnAborting(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_aborting" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_aborting(handle);
+	return RTObject::OnAborting(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_error(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnError(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_error" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_error(handle);
+	return RTObject::OnError(handle);
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::on_reset(omg_rtc::ExecutionContextHandle_t handle)
+omg_rtc::ReturnCode_t RTLoggingObject::OnReset(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
 	stream << "on_reset" << "(" << handle << ")";
-	logger_->Trace(profile_.instance_name(), stream.str());
+	logger_->Trace(profile_.instance_name, stream.str());
 
-	return RTObject::on_reset(handle);
+	return RTObject::OnReset(handle);
 }
 }
 }

@@ -75,7 +75,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\component;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;..\..\omg_rtc\execution_context;..\..\utils\utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc;..\..\utils\utils</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -87,7 +87,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\component;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;..\..\omg_rtc\execution_context;..\..\utils\utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc;..\..\utils\utils</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -101,7 +101,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\component;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;..\..\omg_rtc\execution_context;..\..\utils\utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc;..\..\utils\utils</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -117,7 +117,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc\port;..\..\omg_rtc\object;..\..\omg_rtc\component;..\..\omg_rtc\data_flow_component;..\..\omg_rtc\logger;..\..\omg_rtc\execution_context;..\..\utils\utils</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(VCInstallDir)UnitTest\include;..\stubs;..\..\breeze_rtm\execution_context_service;..\..\breeze_rtm\rt_object;..\..\breeze_rtm\execution_context;..\..\breeze_rtm\data_flow_component;..\..\omg_rtc;..\..\utils\utils</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

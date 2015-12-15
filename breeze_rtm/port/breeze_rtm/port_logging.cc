@@ -9,46 +9,46 @@ namespace breeze_rtm
 {
 namespace port
 {
-PortLogging::PortLogging(omg_rtc::Logger* logger) : Port(), logger_(logger) {}
+PortLogging::PortLogging(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger) : Port(id, port_service, connector_profile_service), logger_(logger) {}
 
-omg_rtc::ReturnCode_t PortLogging::connect(omg_rtc::ConnectorProfile* connector_profile)
+omg_rtc::ReturnCode_t PortLogging::Connect(omg_rtc::ConnectorProfile* connector_profile)
 {
 	std::stringstream stream;
 	stream << "connect" << "(" << connector_profile->id() << ")";
 	logger_->Trace(profile_->name(), stream.str());
-	return Port::connect(connector_profile);
+	return Port::Connect(connector_profile);
 }
 
-omg_rtc::ReturnCode_t PortLogging::disconnect(const omg_rtc::UniqueIdentifier& connector_id)
+omg_rtc::ReturnCode_t PortLogging::Disconnect(const omg_rtc::UniqueIdentifier& connector_id)
 {
 	std::stringstream stream;
 	stream << "disconnect" << "(" << connector_id << ")";
 	logger_->Trace(profile_->name(), stream.str());
-	return Port::disconnect(connector_id);
+	return Port::Disconnect(connector_id);
 }
 
-omg_rtc::ReturnCode_t PortLogging::notify_connect(omg_rtc::ConnectorProfile* connector_profile)
+omg_rtc::ReturnCode_t PortLogging::NotifyConnect(omg_rtc::ConnectorProfile* connector_profile)
 {
 	std::stringstream stream;
 	stream << "notify_connect" << "(" << connector_profile->id() << ")";
 	logger_->Trace(profile_->name(), stream.str());
-	return Port::notify_connect(connector_profile);
+	return Port::NotifyConnect(connector_profile);
 }
 
-omg_rtc::ReturnCode_t PortLogging::notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id)
+omg_rtc::ReturnCode_t PortLogging::NotifyDisconnect(const omg_rtc::UniqueIdentifier& connector_id)
 {
 	std::stringstream stream;
 	stream << "notify_disconnect" << "(" << connector_id << ")";
 	logger_->Trace(profile_->name(), stream.str());
-	return Port::notify_disconnect(connector_id);
+	return Port::NotifyDisconnect(connector_id);
 }
 
-omg_rtc::ReturnCode_t PortLogging::disconnect_all()
+omg_rtc::ReturnCode_t PortLogging::DisconnectAll()
 {
 	std::stringstream stream;
 	stream << "disconnect_all()";
 	logger_->Trace(profile_->name(), stream.str());
-	return Port::disconnect_all();
+	return Port::DisconnectAll();
 }
 }
 }

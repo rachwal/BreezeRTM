@@ -16,14 +16,14 @@ namespace port
 class PortLogging : public Port
 {
 	public:
-	virtual omg_rtc::ReturnCode_t connect(omg_rtc::ConnectorProfile* connector_profile) override;
-	virtual omg_rtc::ReturnCode_t disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
-	virtual omg_rtc::ReturnCode_t notify_connect(omg_rtc::ConnectorProfile* connector_profile) override;
-	virtual omg_rtc::ReturnCode_t notify_disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
-	virtual omg_rtc::ReturnCode_t disconnect_all() override;
+	virtual omg_rtc::ReturnCode_t Connect(omg_rtc::ConnectorProfile* connector_profile) override;
+	virtual omg_rtc::ReturnCode_t Disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
+	virtual omg_rtc::ReturnCode_t NotifyConnect(omg_rtc::ConnectorProfile* connector_profile) override;
+	virtual omg_rtc::ReturnCode_t NotifyDisconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
+	virtual omg_rtc::ReturnCode_t DisconnectAll() override;
 
 	protected:
-	explicit PortLogging(omg_rtc::Logger* logger);
+	explicit PortLogging(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger);
 
 	omg_rtc::Logger* logger_;
 };

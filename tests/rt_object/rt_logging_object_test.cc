@@ -36,7 +36,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
 
 		//WHEN
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -57,7 +57,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto rt_object = new stubs::RTLoggingObjectStub(nullptr, nullptr, logger);
 
 		//WHEN
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -84,8 +84,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
 
 		//WHEN
-		rt_object->initialize();
-		rt_object->initialize();
+		rt_object->Initialize();
+		rt_object->Initialize();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -114,10 +114,10 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
 
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		//WHEN
-		rt_object->finalize();
+		rt_object->Finalize();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -144,13 +144,13 @@ TEST_CLASS(RTLoggingObjectTest)
 		omg_rtc::Port* port = nullptr;
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
-		external_execution_context->add_component(rt_object);
+		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
-		rt_object->finalize();
+		rt_object->Finalize();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -175,7 +175,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
 
 		//WHEN
-		rt_object->finalize();
+		rt_object->Finalize();
 
 		//THEN
 		auto logger_content = logger->content();
@@ -202,13 +202,13 @@ TEST_CLASS(RTLoggingObjectTest)
 		omg_rtc::Port* port = nullptr;
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
-		external_execution_context->add_component(rt_object);
+		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
-		rt_object->is_alive(external_execution_context);
+		rt_object->IsAlive(external_execution_context);
 
 		//THEN
 		auto logger_content = logger->content();
@@ -231,7 +231,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto rt_object = new stubs::RTLoggingObjectStub(nullptr, nullptr, logger);
 
 		//WHEN
-		rt_object->finalize();
+		rt_object->Finalize();
 
 		//THEN
 		auto logger_content = logger->content();

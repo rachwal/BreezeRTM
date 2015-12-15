@@ -34,6 +34,12 @@
     <ClInclude Include="tests\port_logging_stub.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tests\connector_profile_service_stub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tests\port_service_stub.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tests\data_flow_component_stub.cc">
@@ -58,6 +64,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="tests\port_logging_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\connector_profile_service_stub.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="tests\port_service_stub.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

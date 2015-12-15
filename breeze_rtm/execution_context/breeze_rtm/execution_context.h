@@ -19,23 +19,24 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	public:
 	virtual ~ExecutionContext();
 
-	virtual omg_rtc::ExecutionContextProfile *get_profile() override;
+	virtual omg_rtc::ExecutionContextProfile *profile() override;
 
-	virtual bool is_running() override;
+	virtual bool IsRunning() override;
 
-	virtual omg_rtc::ReturnCode_t start() override;
-	virtual omg_rtc::ReturnCode_t stop() override;
+	virtual omg_rtc::ReturnCode_t Start() override;
+	virtual omg_rtc::ReturnCode_t Stop() override;
 
-	virtual double get_rate() override;
+	virtual omg_rtc::ReturnCode_t AddComponent(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::ReturnCode_t RemoveComponent(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::ReturnCode_t ActivateComponent(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::ReturnCode_t DeactivateComponent(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::ReturnCode_t ResetComponent(omg_rtc::LightweightRTObject* comp) override;
 
-	virtual omg_rtc::ReturnCode_t set_rate(double rate) override;
-	virtual omg_rtc::ReturnCode_t add_component(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t remove_component(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t activate_component(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t deactivate_component(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t reset_component(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::LifeCycleState get_component_state(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ExecutionKind get_kind() override;
+	virtual double rate() override;
+	virtual omg_rtc::ReturnCode_t rate(double rate) override;
+
+	virtual omg_rtc::LifeCycleState component_state(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::ExecutionKind kind() override;
 
 	protected:
 	ExecutionContext();

@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{120f3434-3fcc-48da-8b46-689e39766fe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\component">
+      <UniqueIdentifier>{8692fe3e-7ae0-4c4f-afb3-939c697b502a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\connector_profile">
+      <UniqueIdentifier>{2078621f-4f2b-4101-9404-b7dce8de9a3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\data_flow_component">
+      <UniqueIdentifier>{0f8403cb-8be7-4524-9f56-e94e0700dfc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\execution_context">
+      <UniqueIdentifier>{cb8bad6f-f9a7-4965-8c0e-f723a572621f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fsm">
+      <UniqueIdentifier>{9c395c1a-0c78-42eb-837e-9d14746628e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rt_object">
+      <UniqueIdentifier>{007cd592-d5e1-4a0c-931f-c60896b6249d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\logger">
+      <UniqueIdentifier>{4de109c4-e77a-4c4d-8145-e580f1287c78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\mode">
+      <UniqueIdentifier>{67f7d838-5399-4391-962d-3898466ece9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\port">
+      <UniqueIdentifier>{4a484bee-80e9-4151-bbc1-e7efac144589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\types">
+      <UniqueIdentifier>{55bf37d5-3fe7-4539-b8e9-08abaeedc829}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\connector_profile">
+      <UniqueIdentifier>{2d2ffb74-4bf8-4bd8-8615-35c07d9a8b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\port">
+      <UniqueIdentifier>{a067b1a7-669b-47ea-aca2-85850fd25712}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="omg_rtc\component_action.h">
+      <Filter>Header Files\component</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\component_profile.h">
+      <Filter>Header Files\component</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\connector_profile.h">
+      <Filter>Header Files\connector_profile</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\connector_profile_service.h">
+      <Filter>Header Files\connector_profile</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\data_flow_component.h">
+      <Filter>Header Files\data_flow_component</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\data_flow_component_action.h">
+      <Filter>Header Files\data_flow_component</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\execution_context.h">
+      <Filter>Header Files\execution_context</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\execution_context_handle_t.h">
+      <Filter>Header Files\execution_context</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\execution_context_profile.h">
+      <Filter>Header Files\execution_context</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\execution_context_service.h">
+      <Filter>Header Files\execution_context</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\execution_kind.h">
+      <Filter>Header Files\execution_context</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm_behavior_profile.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm_component_action.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm_object.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm_participant.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm_profile.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\fsm_service.h">
+      <Filter>Header Files\fsm</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\life_cycle_state.h">
+      <Filter>Header Files\execution_context</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\lightweight_rt_object.h">
+      <Filter>Header Files\rt_object</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\rt_object.h">
+      <Filter>Header Files\rt_object</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\logger.h">
+      <Filter>Header Files\logger</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\mode.h">
+      <Filter>Header Files\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\mode_capable.h">
+      <Filter>Header Files\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\multi_mode_component_action.h">
+      <Filter>Header Files\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\multi_mode_object.h">
+      <Filter>Header Files\mode</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\port.h">
+      <Filter>Header Files\port</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\port_interface.h">
+      <Filter>Header Files\port</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\port_interface_polarity.h">
+      <Filter>Header Files\port</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\port_interface_profile.h">
+      <Filter>Header Files\port</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\port_profile.h">
+      <Filter>Header Files\port</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\port_service.h">
+      <Filter>Header Files\port</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\return_code_t.h">
+      <Filter>Header Files\types</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\unique_identifier.h">
+      <Filter>Header Files\types</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="omg_rtc\connector_profile.cc">
+      <Filter>Source Files\connector_profile</Filter>
+    </ClCompile>
+    <ClCompile Include="omg_rtc\port_profile.cc">
+      <Filter>Source Files\port</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

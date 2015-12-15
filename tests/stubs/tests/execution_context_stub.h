@@ -16,7 +16,7 @@ class ExecutionContextStub : public execution_context::ExecutionContext
 	public:
 	ExecutionContextStub();
 
-	omg_rtc::ExecutionContextProfile *get_profile() override;;
+	omg_rtc::ExecutionContextProfile *profile() override;;
 };
 }
 }

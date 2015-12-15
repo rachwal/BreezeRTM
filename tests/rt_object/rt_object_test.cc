@@ -29,7 +29,7 @@ TEST_CLASS(RTObjectTest)
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
 
 		//WHEN
-		auto return_code = rt_object->initialize();
+		auto return_code = rt_object->Initialize();
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(return_code));
@@ -45,7 +45,7 @@ TEST_CLASS(RTObjectTest)
 		auto rt_object = new stubs::RTObjectStub(nullptr, nullptr);
 
 		//WHEN
-		auto return_code = rt_object->initialize();
+		auto return_code = rt_object->Initialize();
 
 		//THEN
 		Assert::AreEqual(1, static_cast<int>(return_code));
@@ -62,8 +62,8 @@ TEST_CLASS(RTObjectTest)
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
 
 		//WHEN
-		auto first_return_code = rt_object->initialize();
-		auto second_return_code = rt_object->initialize();
+		auto first_return_code = rt_object->Initialize();
+		auto second_return_code = rt_object->Initialize();
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
@@ -82,10 +82,10 @@ TEST_CLASS(RTObjectTest)
 		omg_rtc::Port* port = nullptr;
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
 
-		auto first_return_code = rt_object->initialize();
+		auto first_return_code = rt_object->Initialize();
 
 		//WHEN
-		auto second_return_code = rt_object->finalize();
+		auto second_return_code = rt_object->Finalize();
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
@@ -102,13 +102,13 @@ TEST_CLASS(RTObjectTest)
 		auto execution_context = new stubs::ExecutionContextStub();
 		omg_rtc::Port* port = nullptr;
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		auto first_return_code = rt_object->initialize();
+		auto first_return_code = rt_object->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
-		external_execution_context->add_component(rt_object);
+		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
-		auto second_return_code = rt_object->finalize();
+		auto second_return_code = rt_object->Finalize();
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
@@ -129,7 +129,7 @@ TEST_CLASS(RTObjectTest)
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
 
 		//WHEN
-		auto return_code = rt_object->finalize();
+		auto return_code = rt_object->Finalize();
 
 		//THEN
 		Assert::AreEqual(5, static_cast<int>(return_code));
@@ -145,13 +145,13 @@ TEST_CLASS(RTObjectTest)
 		auto execution_context = new stubs::ExecutionContextStub();
 		omg_rtc::Port* port = nullptr;
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
-		external_execution_context->add_component(rt_object);
+		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
-		auto is_alive = rt_object->is_alive(external_execution_context);
+		auto is_alive = rt_object->IsAlive(external_execution_context);
 
 		//THEN
 		Assert::IsTrue(is_alive);
@@ -169,12 +169,12 @@ TEST_CLASS(RTObjectTest)
 		auto execution_context = new stubs::ExecutionContextStub();
 		omg_rtc::Port* port = nullptr;
 		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		rt_object->initialize();
+		rt_object->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto is_alive = rt_object->is_alive(external_execution_context);
+		auto is_alive = rt_object->IsAlive(external_execution_context);
 
 		//THEN
 		Assert::IsFalse(is_alive);
@@ -196,7 +196,7 @@ TEST_CLASS(RTObjectTest)
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto handle = rt_object->attach_context(external_execution_context);
+		auto handle = rt_object->AttachContext(external_execution_context);
 
 		//THEN
 		Assert::AreEqual(1L, handle);
@@ -217,8 +217,8 @@ TEST_CLASS(RTObjectTest)
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto first_handle = rt_object->attach_context(external_execution_context);
-		auto second_handle = rt_object->attach_context(external_execution_context);
+		auto first_handle = rt_object->AttachContext(external_execution_context);
+		auto second_handle = rt_object->AttachContext(external_execution_context);
 
 		//THEN
 		Assert::AreEqual(1L, first_handle);
@@ -242,8 +242,8 @@ TEST_CLASS(RTObjectTest)
 		auto second_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto first_handle = rt_object->attach_context(first_execution_context);
-		auto second_handle = rt_object->attach_context(second_execution_context);
+		auto first_handle = rt_object->AttachContext(first_execution_context);
+		auto second_handle = rt_object->AttachContext(second_execution_context);
 
 		//THEN
 		Assert::AreEqual(1L, first_handle);
@@ -270,12 +270,12 @@ TEST_CLASS(RTObjectTest)
 		auto fourth_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto first_handle = rt_object->attach_context(first_execution_context);
-		auto second_handle = rt_object->attach_context(second_execution_context);
-		rt_object->detach_context(first_handle);
+		auto first_handle = rt_object->AttachContext(first_execution_context);
+		auto second_handle = rt_object->AttachContext(second_execution_context);
+		rt_object->DetachContext(first_handle);
 
-		auto third_handle = rt_object->attach_context(third_execution_context);
-		auto fourth_handle = rt_object->attach_context(fourth_execution_context);
+		auto third_handle = rt_object->AttachContext(third_execution_context);
+		auto fourth_handle = rt_object->AttachContext(fourth_execution_context);
 
 		//THEN
 		Assert::AreEqual(1L, first_handle);
@@ -299,7 +299,7 @@ TEST_CLASS(RTObjectTest)
 		auto rt_object = new stubs::RTObjectStub(nullptr, nullptr);
 
 		//WHEN
-		auto finalize_component_return_code = rt_object->finalize();
+		auto finalize_component_return_code = rt_object->Finalize();
 
 		//THEN
 		Assert::AreEqual(5, static_cast<int>(finalize_component_return_code));

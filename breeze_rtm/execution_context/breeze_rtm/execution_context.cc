@@ -10,7 +10,9 @@ namespace execution_context
 {
 ExecutionContext::ExecutionContext() : rate_(1)
 {
-	profile_ = new omg_rtc::ExecutionContextProfile(omg_rtc::OTHER);
+	profile_ = new omg_rtc::ExecutionContextProfile();
+	profile_->kind = omg_rtc::OTHER;
+
 	components_ = new std::map<omg_rtc::LightweightRTObject*, omg_rtc::ExecutionContextHandle_t>();
 }
 
@@ -19,50 +21,50 @@ ExecutionContext::~ExecutionContext()
 	delete components_;
 }
 
-omg_rtc::ExecutionContextProfile *ExecutionContext::get_profile()
+omg_rtc::ExecutionContextProfile *ExecutionContext::profile()
 {
 	return profile_;
 }
 
-bool ExecutionContext::is_running()
+bool ExecutionContext::IsRunning()
 {
 	return true;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::start()
+omg_rtc::ReturnCode_t ExecutionContext::Start()
 {
 	for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator)
 	{
 		auto component = iterator->first;
 		auto handle = iterator->second;
-		component->on_startup(handle);
+		component->OnStartup(handle);
 	}
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::stop()
+omg_rtc::ReturnCode_t ExecutionContext::Stop()
 {
 	for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator)
 	{
 		auto component = iterator->first;
 		auto handle = iterator->second;
-		component->on_shutdown(handle);
+		component->OnShutdown(handle);
 	}
 	return omg_rtc::RTC_OK;
 }
 
-double ExecutionContext::get_rate()
+double ExecutionContext::rate()
 {
 	return rate_;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::set_rate(double rate)
+omg_rtc::ReturnCode_t ExecutionContext::rate(double rate)
 {
 	rate_ = rate;
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::add_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::AddComponent(omg_rtc::LightweightRTObject* comp)
 {
 	for (auto iterator = components_->begin(); iterator != components_->end(); ++iterator)
 	{
@@ -73,17 +75,17 @@ omg_rtc::ReturnCode_t ExecutionContext::add_component(omg_rtc::LightweightRTObje
 		}
 	}
 
-	auto handle = comp->attach_context(this);
+	auto handle = comp->AttachContext(this);
 	components_->operator[](comp) = handle;
 
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::remove_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::RemoveComponent(omg_rtc::LightweightRTObject* comp)
 {
 	auto handle = components_->operator[](comp);
 
-	auto detach_return_code = comp->detach_context(handle);
+	auto detach_return_code = comp->DetachContext(handle);
 	if (detach_return_code == omg_rtc::RTC_OK)
 	{
 		components_->erase(comp);
@@ -93,29 +95,29 @@ omg_rtc::ReturnCode_t ExecutionContext::remove_component(omg_rtc::LightweightRTO
 	return omg_rtc::RTC_ERROR;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::activate_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::ActivateComponent(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::deactivate_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::DeactivateComponent(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t ExecutionContext::reset_component(omg_rtc::LightweightRTObject* comp)
+omg_rtc::ReturnCode_t ExecutionContext::ResetComponent(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::LifeCycleState ExecutionContext::get_component_state(omg_rtc::LightweightRTObject* comp)
+omg_rtc::LifeCycleState ExecutionContext::component_state(omg_rtc::LightweightRTObject* comp)
 {
 	return omg_rtc::LifeCycleState::CREATED_STATE;
 }
 
-omg_rtc::ExecutionKind ExecutionContext::get_kind()
+omg_rtc::ExecutionKind ExecutionContext::kind()
 {
-	return profile_->kind();
+	return profile_->kind;
 }
 }
 }

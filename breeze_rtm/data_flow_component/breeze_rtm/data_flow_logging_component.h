@@ -16,9 +16,9 @@ namespace data_flow_component
 class DataFlowLoggingComponent : public rt_object::RTLoggingObject, public omg_rtc::DataFlowComponentAction
 {
 	public:
-	omg_rtc::ReturnCode_t on_execute(omg_rtc::ExecutionContextHandle_t handle) override;
-	omg_rtc::ReturnCode_t on_state_update(omg_rtc::ExecutionContextHandle_t handle) override;
-	omg_rtc::ReturnCode_t on_rate_changed(omg_rtc::ExecutionContextHandle_t handle) override;
+	omg_rtc::ReturnCode_t OnExecute(omg_rtc::ExecutionContextHandle_t handle) override;
+	omg_rtc::ReturnCode_t OnStateUpdate(omg_rtc::ExecutionContextHandle_t handle) override;
+	omg_rtc::ReturnCode_t OnRateChanged(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
 	DataFlowLoggingComponent(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger);

@@ -26,12 +26,12 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context = new stubs::ExecutionContextStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->initialize();
+		component->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto add_component_return_code = external_execution_context->add_component(component);
+		auto add_component_return_code = external_execution_context->AddComponent(component);
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(add_component_return_code));
@@ -47,13 +47,13 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context = new stubs::ExecutionContextStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->initialize();
+		component->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto first_add_component_return_code = external_execution_context->add_component(component);
-		auto second_add_component_return_code = external_execution_context->add_component(component);
+		auto first_add_component_return_code = external_execution_context->AddComponent(component);
+		auto second_add_component_return_code = external_execution_context->AddComponent(component);
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(first_add_component_return_code));
@@ -70,13 +70,13 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context = new stubs::ExecutionContextStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->initialize();
+		component->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto first_add_component_return_code = external_execution_context->add_component(component);
-		auto second_add_component_return_code = external_execution_context->remove_component(component);
+		auto first_add_component_return_code = external_execution_context->AddComponent(component);
+		auto second_add_component_return_code = external_execution_context->RemoveComponent(component);
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(first_add_component_return_code));
@@ -93,13 +93,13 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context = new stubs::ExecutionContextStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->initialize();
+		component->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto add_component_return_code = external_execution_context->add_component(component);
-		auto finalize_component_return_code = component->finalize();
+		auto add_component_return_code = external_execution_context->AddComponent(component);
+		auto finalize_component_return_code = component->Finalize();
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(add_component_return_code));
@@ -116,14 +116,14 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context = new stubs::ExecutionContextStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->initialize();
+		component->Initialize();
 
 		auto external_execution_context = new stubs::ExecutionContextStub();
 
 		//WHEN
-		auto add_component_return_code = external_execution_context->add_component(component);
-		auto remove_component_return_code = external_execution_context->remove_component(component);
-		auto finalize_component_return_code = component->finalize();
+		auto add_component_return_code = external_execution_context->AddComponent(component);
+		auto remove_component_return_code = external_execution_context->RemoveComponent(component);
+		auto finalize_component_return_code = component->Finalize();
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(add_component_return_code));
