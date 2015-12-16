@@ -18,7 +18,7 @@ TEST_CLASS(PortTest)
 
 	~PortTest() { }
 
-	TEST_METHOD(Port_ShouldFail)
+	TEST_METHOD(PortTests)
 	{
 		//GIVEN
 

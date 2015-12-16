@@ -20,7 +20,7 @@ class LightweightRTObject : public ComponentAction
 	public:
 	virtual ~LightweightRTObject() {}
 
-	virtual ReturnCode_t Initialize() = 0;
+	virtual ReturnCode_t Initialize(ExecutionContext* execution_context) = 0;
 	virtual ReturnCode_t Finalize() = 0;
 	virtual bool IsAlive(ExecutionContext* exec_context) = 0;
 	virtual ReturnCode_t Exit() = 0;

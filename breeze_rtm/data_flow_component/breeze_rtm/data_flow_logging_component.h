@@ -21,7 +21,7 @@ class DataFlowLoggingComponent : public rt_object::RTLoggingObject, public omg_r
 	omg_rtc::ReturnCode_t OnRateChanged(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	DataFlowLoggingComponent(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger);
+	explicit DataFlowLoggingComponent(omg_rtc::Logger* logger);
 };
 }
 }

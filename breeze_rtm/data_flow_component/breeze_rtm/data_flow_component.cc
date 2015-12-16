@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace data_flow_component
 {
-DataFlowComponent::DataFlowComponent(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port) : RTObject(execution_context, port) {}
+DataFlowComponent::DataFlowComponent() : RTObject() {}
 
 omg_rtc::ReturnCode_t DataFlowComponent::OnExecute(omg_rtc::ExecutionContextHandle_t handle)
 {

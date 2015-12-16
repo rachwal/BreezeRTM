@@ -29,16 +29,16 @@ TEST_CLASS(PortLoggingTest)
 		auto expected_logger_content =
 			std::string("TRACE: alpha: connect(1)\n") +
 			std::string("TRACE: alpha: notify_connect(1)\n");
+
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
 		auto port_service = new stubs::PortServiceStub(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 		auto port = port_service->Create("alpha", "p1", logger);
 
-		auto connector_profile = new omg_rtc::ConnectorProfile();
-		connector_profile->id("1");
+		auto external_connector = connector_profile_service->Create("external", "1");
 
 		//WHEN
-		port->Connect(connector_profile);
+		port->Connect(external_connector);
 
 		//THEN
 		auto logger_content = logger->content();
@@ -50,7 +50,7 @@ TEST_CLASS(PortLoggingTest)
 		delete connector_profile_service;
 		delete logger;
 
-		delete connector_profile;
+		delete external_connector;
 	}
 
 	TEST_METHOD(PortLoggingShouldNotifyAllPortsWhenConnected)

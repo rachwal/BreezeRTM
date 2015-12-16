@@ -14,7 +14,7 @@ namespace stubs
 class RTObjectStub :public rt_object::RTObject
 {
 	public:
-	RTObjectStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port);
+	explicit RTObjectStub();
 };
 }
 }

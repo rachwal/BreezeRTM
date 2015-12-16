@@ -19,7 +19,7 @@ class RTLoggingObject : public RTObject
 	virtual omg_rtc::ComponentProfile *GetComponentProfile() override;
 	virtual std::list<omg_rtc::PortInterface*> *GetPorts() override;
 
-	virtual omg_rtc::ReturnCode_t Initialize() override;
+	virtual omg_rtc::ReturnCode_t Initialize(omg_rtc::ExecutionContext* execution_context) override;
 	virtual omg_rtc::ReturnCode_t Finalize() override;
 	virtual omg_rtc::ReturnCode_t Exit() override;
 
@@ -39,7 +39,7 @@ class RTLoggingObject : public RTObject
 	virtual omg_rtc::ReturnCode_t OnReset(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	RTLoggingObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger);
+	RTLoggingObject(omg_rtc::Logger* logger);
 	omg_rtc::Logger* logger_;
 };
 }

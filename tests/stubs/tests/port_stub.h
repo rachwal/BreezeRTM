@@ -14,7 +14,7 @@ namespace stubs
 class PortStub: public port::Port
 {
 	public:
-	PortStub(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service);
+	PortStub(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service);
 };
 }
 }

@@ -4,6 +4,7 @@
 
 #include "logger_stub.h"
 
+#include <sstream>
 #include <mutex>
 
 namespace breeze_rtm

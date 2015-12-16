@@ -23,7 +23,7 @@ class PortLogging : public Port
 	virtual omg_rtc::ReturnCode_t DisconnectAll() override;
 
 	protected:
-	explicit PortLogging(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger);
+	explicit PortLogging(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger);
 
 	omg_rtc::Logger* logger_;
 };

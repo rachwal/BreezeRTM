@@ -3,13 +3,14 @@
 // Copyright (c) 2015 Bartosz Rachwal. The National Institute of Advanced Industrial Science and Technology, Japan. All rights reserved.
 
 #include "port_logging.h"
+
 #include <sstream>
 
 namespace breeze_rtm
 {
 namespace port
 {
-PortLogging::PortLogging(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger) : Port(id, port_service, connector_profile_service), logger_(logger) {}
+PortLogging::PortLogging(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service, omg_rtc::Logger* logger) : Port(id, port_service, connector_profile_service), logger_(logger) {}
 
 omg_rtc::ReturnCode_t PortLogging::Connect(omg_rtc::ConnectorProfile* connector_profile)
 {

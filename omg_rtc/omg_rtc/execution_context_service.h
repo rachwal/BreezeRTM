@@ -6,7 +6,6 @@
 #define OMG_RTC_EXECUTION_CONTEXT_SERVICE_H_
 
 #include "execution_context.h"
-
 #include "unique_identifier.h"
 
 namespace breeze_rtm

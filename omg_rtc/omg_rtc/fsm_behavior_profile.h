@@ -6,7 +6,6 @@
 #define OMG_RTC_FSM_BEHAVIOR_PROFILE_H_
 
 #include "fsm_component_action.h"
-
 #include "unique_identifier.h"
 
 namespace breeze_rtm

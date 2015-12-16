@@ -14,9 +14,9 @@ namespace stubs
 class ExecutionContextStub : public execution_context::ExecutionContext
 {
 	public:
-	ExecutionContextStub();
+	explicit ExecutionContextStub(const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
 
-	omg_rtc::ExecutionContextProfile *profile() override;;
+	omg_rtc::ExecutionContextProfile *profile() override;
 };
 }
 }

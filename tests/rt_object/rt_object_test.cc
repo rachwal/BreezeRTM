@@ -6,6 +6,7 @@
 
 #include <tests/execution_context_stub.h>
 #include <tests/rt_object_stub.h>
+#include <tests/execution_context_service_stub.h>
 
 namespace breeze_rtm
 {
@@ -24,28 +25,28 @@ TEST_CLASS(RTObjectTest)
 	TEST_METHOD(RTObjectShouldInitialize)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
+
+		auto execution_context = execution_context_service->Create("ec");
 
 		//WHEN
-		auto return_code = rt_object->Initialize();
+		auto return_code = rt_object->Initialize(execution_context);
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(return_code));
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
+		delete execution_context_service;
 	}
 
-	TEST_METHOD(RTObjectShouldReturnErrorCodeTryToInitializeWithoutExecutionContext)
+	TEST_METHOD(RTObjectShouldReturnErrorCodeTryToInitializeWithNullExecutionContext)
 	{
 		//GIVEN
-		auto rt_object = new stubs::RTObjectStub(nullptr, nullptr);
+		auto rt_object = new stubs::RTObjectStub();
 
 		//WHEN
-		auto return_code = rt_object->Initialize();
+		auto return_code = rt_object->Initialize(nullptr);
 
 		//THEN
 		Assert::AreEqual(1, static_cast<int>(return_code));
@@ -57,34 +58,35 @@ TEST_CLASS(RTObjectTest)
 	TEST_METHOD(RTObjectShouldNotInitializeMoreThanOnce)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
+
+		auto execution_context = execution_context_service->Create("ec");
 
 		//WHEN
-		auto first_return_code = rt_object->Initialize();
-		auto second_return_code = rt_object->Initialize();
+		auto first_return_code = rt_object->Initialize(execution_context);
+		auto second_return_code = rt_object->Initialize(execution_context);
 
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
 		Assert::AreEqual(5, static_cast<int>(second_return_code));
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
+
+		delete execution_context_service;
 	}
 
 
 	TEST_METHOD(RTObjectShouldFinalize)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto first_return_code = rt_object->Initialize();
+		auto execution_context = execution_context_service->Create("ec");
 
 		//WHEN
+		auto first_return_code = rt_object->Initialize(execution_context);
 		auto second_return_code = rt_object->Finalize();
 
 		//THEN
@@ -92,19 +94,19 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(0, static_cast<int>(second_return_code));
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldNotFinalizeWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		auto first_return_code = rt_object->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("ec");
+		auto first_return_code = rt_object->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
@@ -115,18 +117,13 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(5, static_cast<int>(second_return_code));
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldNotFinalizeWhenIsNotInitialized)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto rt_object = new stubs::RTObjectStub();
 
 		//WHEN
 		auto return_code = rt_object->Finalize();
@@ -135,19 +132,18 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(5, static_cast<int>(return_code));
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
 	}
 
 	TEST_METHOD(RTObjectShouldBeAliveWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		rt_object->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("ec");
+		rt_object->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
@@ -157,21 +153,19 @@ TEST_CLASS(RTObjectTest)
 		Assert::IsTrue(is_alive);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldNotBeAliveWhenNotParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		rt_object->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("ec");
+		rt_object->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto is_alive = rt_object->IsAlive(external_execution_context);
@@ -180,20 +174,27 @@ TEST_CLASS(RTObjectTest)
 		Assert::IsFalse(is_alive);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
+
+	TEST_METHOD(RTObjectShouldExit)
+	{
+		//GIVEN
+
+		//WHEN
+
+		//THEN
+		Assert::Fail();
+	}
+
 
 	TEST_METHOD(RTObjectShouldAttachContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto handle = rt_object->AttachContext(external_execution_context);
@@ -202,19 +203,16 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(1L, handle);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldNotAttachTheSameContextMoreThanOnce)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto first_handle = rt_object->AttachContext(external_execution_context);
@@ -225,21 +223,17 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(1L, second_handle);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldAttachTwoDifferentContexts)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto first_execution_context = new stubs::ExecutionContextStub();
-		auto second_execution_context = new stubs::ExecutionContextStub();
+		auto first_execution_context = execution_context_service->Create("first_ec");
+		auto second_execution_context = execution_context_service->Create("second_ec");
 
 		//WHEN
 		auto first_handle = rt_object->AttachContext(first_execution_context);
@@ -250,24 +244,19 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(2L, second_handle);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete first_execution_context;
-		delete second_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldDetachContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
-		auto rt_object = new stubs::RTObjectStub(execution_context, port);
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto rt_object = new stubs::RTObjectStub();
 
-		auto first_execution_context = new stubs::ExecutionContextStub();
-		auto second_execution_context = new stubs::ExecutionContextStub();
-		auto third_execution_context = new stubs::ExecutionContextStub();
-		auto fourth_execution_context = new stubs::ExecutionContextStub();
+		auto first_execution_context = execution_context_service->Create("first_ec");
+		auto second_execution_context = execution_context_service->Create("second_ec");
+		auto third_execution_context = execution_context_service->Create("third_ec");
+		auto fourth_execution_context = execution_context_service->Create("fourth_ec");
 
 		//WHEN
 		auto first_handle = rt_object->AttachContext(first_execution_context);
@@ -284,19 +273,13 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(3L, fourth_handle);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete first_execution_context;
-		delete second_execution_context;
-		delete third_execution_context;
-		delete fourth_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTObjectShouldNotFinalizeWhenNotInitializedBefore)
 	{
 		//GIVEN
-		auto rt_object = new stubs::RTObjectStub(nullptr, nullptr);
+		auto rt_object = new stubs::RTObjectStub();
 
 		//WHEN
 		auto finalize_component_return_code = rt_object->Finalize();

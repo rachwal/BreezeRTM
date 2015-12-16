@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace port
 {
-Port::Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service) : port_service_(port_service), connector_profile_service_(connector_profile_service), id_(id)
+Port::Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service) : port_service_(port_service), connector_profile_service_(connector_profile_service), id_(id)
 {
 	profile_ = new omg_rtc::PortProfile(id);
 }

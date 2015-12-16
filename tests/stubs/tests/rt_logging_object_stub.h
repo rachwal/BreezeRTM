@@ -14,7 +14,7 @@ namespace stubs
 class RTLoggingObjectStub :public rt_object::RTLoggingObject
 {
 	public:
-	RTLoggingObjectStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger);
+	RTLoggingObjectStub(omg_rtc::Logger* logger);
 };
 }
 }

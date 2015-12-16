@@ -6,7 +6,6 @@
 #define OMG_RTC_PORT_SERVICE_H_
 
 #include "port.h"
-
 #include "logger.h"
 
 namespace breeze_rtm

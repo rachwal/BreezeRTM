@@ -133,8 +133,14 @@
     <ProjectReference Include="..\..\breeze_rtm\execution_context\execution_context.vcxproj">
       <Project>{3264fee4-6d2d-4cfa-8f70-e5ee51b24922}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\breeze_rtm\port\port.vcxproj">
+      <Project>{44b300bc-e228-4b0b-8537-09bb1859330e}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\breeze_rtm\rt_object\rt_object.vcxproj">
       <Project>{c710d111-4fcf-4ffb-84d7-9249aedac40b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\omg_rtc\omg_rtc.vcxproj">
+      <Project>{29c35978-1494-4347-9d80-5ead70f07f04}</Project>
     </ProjectReference>
     <ProjectReference Include="..\stubs\stubs.vcxproj">
       <Project>{33bd4f2c-2b46-4b3a-9d9e-c8b496725721}</Project>

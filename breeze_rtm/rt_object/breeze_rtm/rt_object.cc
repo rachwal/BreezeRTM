@@ -8,8 +8,7 @@ namespace breeze_rtm
 {
 namespace rt_object
 {
-RTObject::RTObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port) :
-	execution_context_(execution_context), port_(port), initialized_(false)
+RTObject::RTObject() : initialized_(false)
 {
 	owned_contexts_ = new std::list<omg_rtc::ExecutionContext*>();
 	participating_contexts_ = new std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*>();
@@ -35,24 +34,24 @@ std::list<omg_rtc::PortInterface*> *RTObject::GetPorts()
 	return nullptr;
 }
 
-omg_rtc::ReturnCode_t RTObject::Initialize()
+omg_rtc::ReturnCode_t RTObject::Initialize(omg_rtc::ExecutionContext* execution_context)
 {
 	if (initialized_)
 	{
 		return omg_rtc::ReturnCode_t::PRECONDITION_NOT_MET;
 	}
 
-	if (execution_context_ == nullptr)
+	if (execution_context == nullptr)
 	{
 		return omg_rtc::RTC_ERROR;
 	}
 
-	owned_contexts_->push_back(execution_context_);
+	owned_contexts_->push_back(execution_context);
 
 	initialized_ = true;
 	OnInitialize();
 
-	execution_context_->Start();
+	execution_context->Start();
 
 	return omg_rtc::RTC_OK;
 }

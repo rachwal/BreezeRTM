@@ -5,10 +5,10 @@
 #ifndef OMG_RTC_CONNECTOR_PROFILE_H_
 #define OMG_RTC_CONNECTOR_PROFILE_H_
 
+#include "unique_identifier.h"
+
 #include <string>
 #include <list>
-
-#include "unique_identifier.h"
 
 namespace breeze_rtm
 {

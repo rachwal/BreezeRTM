@@ -39,6 +39,7 @@
     <ClInclude Include="omg_rtc\fsm_service.h" />
     <ClInclude Include="omg_rtc\life_cycle_state.h" />
     <ClInclude Include="omg_rtc\lightweight_rt_object.h" />
+    <ClInclude Include="omg_rtc\lightweight_rt_object_service.h" />
     <ClInclude Include="omg_rtc\logger.h" />
     <ClInclude Include="omg_rtc\mode.h" />
     <ClInclude Include="omg_rtc\mode_capable.h" />

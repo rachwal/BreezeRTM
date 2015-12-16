@@ -14,7 +14,7 @@ namespace stubs
 class DataFlowLoggingComponentStub :public data_flow_component::DataFlowLoggingComponent
 {
 	public:
-	DataFlowLoggingComponentStub(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger);
+	explicit DataFlowLoggingComponentStub(omg_rtc::Logger* logger);
 };
 }
 }

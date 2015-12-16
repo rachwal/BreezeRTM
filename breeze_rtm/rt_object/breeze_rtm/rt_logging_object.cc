@@ -10,7 +10,7 @@ namespace breeze_rtm
 {
 namespace rt_object
 {
-RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port, omg_rtc::Logger* logger) : RTObject(execution_context, port), logger_(logger) {}
+RTLoggingObject::RTLoggingObject(omg_rtc::Logger* logger) : RTObject(), logger_(logger) {}
 
 omg_rtc::ComponentProfile *RTLoggingObject::GetComponentProfile()
 {
@@ -26,11 +26,11 @@ std::list<omg_rtc::PortInterface*> *RTLoggingObject::GetPorts()
 	return RTObject::GetPorts();
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::Initialize()
+omg_rtc::ReturnCode_t RTLoggingObject::Initialize(omg_rtc::ExecutionContext* execution_context)
 {
 	logger_->Trace(profile_.instance_name, "initialize()");
 
-	auto initialization_result = RTObject::Initialize();
+	auto initialization_result = RTObject::Initialize(execution_context);
 
 	if (initialization_result == omg_rtc::RTC_OK)
 	{

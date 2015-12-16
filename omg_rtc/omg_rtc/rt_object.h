@@ -6,7 +6,6 @@
 #define OMG_RTC_RT_OBJECT_H_
 
 #include "lightweight_rt_object.h"
-
 #include "component_profile.h"
 
 namespace breeze_rtm

@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace execution_context
 {
-ExecutionContext::ExecutionContext() : rate_(1)
+ExecutionContext::ExecutionContext(const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service) : rate_(1), lightweight_rt_object_service_(lightweight_rt_object_service)
 {
 	profile_ = new omg_rtc::ExecutionContextProfile();
 	profile_->kind = omg_rtc::OTHER;

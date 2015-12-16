@@ -1,12 +1,17 @@
+// BreezeRTM
+// Created by Bartosz Rachwal. 
+// Copyright (c) 2015 Bartosz Rachwal. The National Institute of Advanced Industrial Science and Technology, Japan. All rights reserved.
+
 #include "port_service_stub.h"
 #include "port_stub.h"
 #include "port_logging_stub.h"
+#include "connector_profile_service_stub.h"
 
 namespace breeze_rtm
 {
 namespace stubs
 {
-PortServiceStub::PortServiceStub(omg_rtc::ConnectorProfileService* connector_profile_service) : connector_profile_service_(connector_profile_service)
+PortServiceStub::PortServiceStub(const omg_rtc::ConnectorProfileService* connector_profile_service) : connector_profile_service_(connector_profile_service)
 {
 	ports_ = new std::map<omg_rtc::UniqueIdentifier, omg_rtc::Port*>();
 }
@@ -17,6 +22,13 @@ PortServiceStub::~PortServiceStub()
 	auto end = ports_->end();
 	ports_->erase(begin, end);
 	delete ports_;
+}
+
+PortServiceStub *PortServiceStub::CreateServiceStub()
+{
+	auto connector_profile_service = new ConnectorProfileServiceStub();
+	auto port_service = new PortServiceStub(connector_profile_service);
+	return port_service;
 }
 
 omg_rtc::Port *PortServiceStub::Create(const omg_rtc::UniqueIdentifier& id) const

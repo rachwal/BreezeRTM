@@ -6,7 +6,6 @@
 #define OMG_RTC_MODE_CAPABLE_H_
 
 #include "mode.h"
-
 #include "execution_context.h"
 
 namespace breeze_rtm

@@ -5,8 +5,6 @@
 #ifndef BREEZE_RTM_TESTS_STUBS_LOGGER_STUB_H_
 #define BREEZE_RTM_TESTS_STUBS_LOGGER_STUB_H_
 
-#include <sstream>
-
 #include <omg_rtc/logger.h>
 
 namespace breeze_rtm

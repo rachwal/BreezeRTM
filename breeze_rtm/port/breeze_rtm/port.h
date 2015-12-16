@@ -34,13 +34,13 @@ class Port : public omg_rtc::Port
 	bool IsConnected(const omg_rtc::UniqueIdentifier& connector_id) override;
 
 	protected:
-	Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, omg_rtc::ConnectorProfileService* connector_profile_service);
+	Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service);
 
 	omg_rtc::PortProfile* profile_;
 
 	private:
 	const omg_rtc::PortService* port_service_;
-	omg_rtc::ConnectorProfileService* connector_profile_service_;
+	const omg_rtc::ConnectorProfileService* connector_profile_service_;
 
 	omg_rtc::UniqueIdentifier id_;
 };

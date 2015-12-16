@@ -18,7 +18,7 @@ TEST_CLASS(DataFlowComponentTest)
 
 	~DataFlowComponentTest() { }
 
-	TEST_METHOD(DataFlowComponent_ShouldFail)
+	TEST_METHOD(DataFlowComponentTests)
 	{
 		//GIVEN
 

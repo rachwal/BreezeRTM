@@ -6,6 +6,7 @@
 
 #include <tests/execution_context_stub.h>
 #include <tests/data_flow_component_stub.h>
+#include <tests/execution_context_service_stub.h>
 
 namespace breeze_rtm
 {
@@ -24,11 +25,13 @@ TEST_CLASS(ExecutionContextTest)
 	TEST_METHOD(ExecutionContextShouldAddComponent)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto component = new stubs::DataFlowComponentStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("component_ec");
+		component->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto add_component_return_code = external_execution_context->AddComponent(component);
@@ -37,19 +40,19 @@ TEST_CLASS(ExecutionContextTest)
 		Assert::AreEqual(0, static_cast<int>(add_component_return_code));
 
 		delete component;
-		delete execution_context;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(ExecutionContextShouldNotAddTheSameComponentMoreThanOnce)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto component = new stubs::DataFlowComponentStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("component_ec");
+		component->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto first_add_component_return_code = external_execution_context->AddComponent(component);
@@ -60,19 +63,19 @@ TEST_CLASS(ExecutionContextTest)
 		Assert::AreEqual(5, static_cast<int>(second_add_component_return_code));
 
 		delete component;
-		delete execution_context;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(ExecutionContextShouldRemoveComponent)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto component = new stubs::DataFlowComponentStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("component_ec");
+		component->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto first_add_component_return_code = external_execution_context->AddComponent(component);
@@ -83,19 +86,19 @@ TEST_CLASS(ExecutionContextTest)
 		Assert::AreEqual(0, static_cast<int>(second_add_component_return_code));
 
 		delete component;
-		delete execution_context;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(ExecutionContextShouldNotFinalizeComponentIfNotRemovedFromExecutionContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto component = new stubs::DataFlowComponentStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("component_ec");
+		component->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto add_component_return_code = external_execution_context->AddComponent(component);
@@ -106,19 +109,19 @@ TEST_CLASS(ExecutionContextTest)
 		Assert::AreEqual(5, static_cast<int>(finalize_component_return_code));
 
 		delete component;
-		delete execution_context;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(ExecutionContextShouldFinalizeComponentIfRemovedFromExecutionContext)
 	{
 		//GIVEN
-		auto execution_context = new stubs::ExecutionContextStub();
-		auto component = new stubs::DataFlowComponentStub(execution_context, nullptr);
-		component->Initialize();
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
+		auto component = new stubs::DataFlowComponentStub();
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("component_ec");
+		component->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 
 		//WHEN
 		auto add_component_return_code = external_execution_context->AddComponent(component);
@@ -131,9 +134,7 @@ TEST_CLASS(ExecutionContextTest)
 		Assert::AreEqual(0, static_cast<int>(finalize_component_return_code));
 
 		delete component;
-		delete execution_context;
-
-		delete external_execution_context;
+		delete execution_context_service;
 	}
 };
 }

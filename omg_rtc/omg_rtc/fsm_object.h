@@ -5,10 +5,10 @@
 #ifndef OMG_RTC_FSM_OBJECT_H_
 #define OMG_RTC_FSM_OBJECT_H_
 
-#include <string>
-
 #include "return_code_t.h"
 #include "execution_context_handle_t.h"
+
+#include <string>
 
 namespace breeze_rtm
 {

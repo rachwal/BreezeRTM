@@ -6,7 +6,6 @@
 #define BREEZE_RTM_DATA_FLOW_COMPONENT_DATA_FLOW_COMPONENT_H_
 
 #include <breeze_rtm/rt_object.h>
-
 #include <omg_rtc/data_flow_component_action.h>
 
 namespace breeze_rtm
@@ -21,7 +20,7 @@ class DataFlowComponent : public rt_object::RTObject, public omg_rtc::DataFlowCo
 	virtual omg_rtc::ReturnCode_t OnRateChanged(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	DataFlowComponent(omg_rtc::ExecutionContext* execution_context, omg_rtc::Port* port);
+	DataFlowComponent();
 };
 }
 }

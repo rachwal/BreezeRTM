@@ -5,10 +5,11 @@
 #ifndef BREEZE_RTM_EXECUTION_CONTEXT_EXECUTION_CONTEXT_H_
 #define BREEZE_RTM_EXECUTION_CONTEXT_EXECUTION_CONTEXT_H_
 
-#include <map>
-
 #include <omg_rtc/execution_context.h>
 #include <omg_rtc/lightweight_rt_object.h>
+#include <omg_rtc/lightweight_rt_object_service.h>
+
+#include <map>
 
 namespace breeze_rtm
 {
@@ -39,13 +40,15 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	virtual omg_rtc::ExecutionKind kind() override;
 
 	protected:
-	ExecutionContext();
+	explicit ExecutionContext(const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
 
 	std::map<omg_rtc::LightweightRTObject*, omg_rtc::ExecutionContextHandle_t>* components_;
 	omg_rtc::ExecutionContextProfile* profile_;
 
 	private:
 	double rate_;
+
+	const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service_;
 };
 }
 }

@@ -6,7 +6,6 @@
 #define OMG_RTC_FSM_PARTICIPANT_H_
 
 #include "fsm_component_action.h"
-
 #include "lightweight_rt_object.h"
 
 namespace breeze_rtm

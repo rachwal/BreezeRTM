@@ -148,6 +148,9 @@
     <ClInclude Include="omg_rtc\unique_identifier.h">
       <Filter>Header Files\types</Filter>
     </ClInclude>
+    <ClInclude Include="omg_rtc\lightweight_rt_object_service.h">
+      <Filter>Header Files\rt_object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="omg_rtc\connector_profile.cc">

@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-ExecutionContextStub::ExecutionContextStub()
+ExecutionContextStub::ExecutionContextStub(const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service): ExecutionContext(lightweight_rt_object_service)
 {
 	profile_->kind = omg_rtc::ExecutionKind::PERIODIC;
 }

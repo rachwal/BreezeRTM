@@ -7,6 +7,7 @@
 #include <tests/execution_context_stub.h>
 #include <tests/rt_logging_object_stub.h>
 #include <tests/logger_stub.h>
+#include <tests/execution_context_service_stub.h>
 
 namespace breeze_rtm
 {
@@ -30,22 +31,22 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n");
 
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
+
+		auto execution_context = execution_context_service->Create("ec");
 
 		//WHEN
-		rt_object->Initialize();
+		rt_object->Initialize(execution_context);
 
 		//THEN
 		auto logger_content = logger->content();
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
 		delete logger;
+		delete execution_context_service;
 	}
 
 
@@ -54,10 +55,10 @@ TEST_CLASS(RTLoggingObjectTest)
 		//GIVEN
 		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: initialize()\n");
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(nullptr, nullptr, logger);
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
 
 		//WHEN
-		rt_object->Initialize();
+		rt_object->Initialize(nullptr);
 
 		//THEN
 		auto logger_content = logger->content();
@@ -78,14 +79,15 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n") +
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n");
 
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
+
+		auto execution_context = execution_context_service->Create("ec");
 
 		//WHEN
-		rt_object->Initialize();
-		rt_object->Initialize();
+		rt_object->Initialize(execution_context);
+		rt_object->Initialize(execution_context);
 
 		//THEN
 		auto logger_content = logger->content();
@@ -93,9 +95,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
 		delete logger;
+		delete execution_context_service;
 	}
 
 
@@ -109,12 +110,13 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("TRACE: RTLoggingObjectStub: finalize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_finalize()\n");
 
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
 
-		rt_object->Initialize();
+		auto execution_context = execution_context_service->Create("ec");
+
+		rt_object->Initialize(execution_context);
 
 		//WHEN
 		rt_object->Finalize();
@@ -125,9 +127,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
 		delete logger;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTLoggingObjectShouldNotFinalizeWhenParticipatingInExecutionContext)
@@ -140,13 +141,14 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("TRACE: RTLoggingObjectStub: attach_context()\n") +
 			std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
-		rt_object->Initialize();
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("ec");
+		rt_object->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
@@ -158,21 +160,17 @@ TEST_CLASS(RTLoggingObjectTest)
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
 		delete logger;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTLoggingObjectShouldNotFinalizeWhenIsNotInitialized)
 	{
 		//GIVEN
 		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: finalize()\n");
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
 
 		//WHEN
 		rt_object->Finalize();
@@ -183,9 +181,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
 		delete logger;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTLoggingObjectShouldBeAliveWhenParticipatingInExecutionContext)
@@ -198,13 +195,14 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("TRACE: RTLoggingObjectStub: attach_context()\n") +
 			std::string("TRACE: RTLoggingObjectStub: is_alive()\n");
 
-		auto execution_context = new stubs::ExecutionContextStub();
-		omg_rtc::Port* port = nullptr;
+		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(execution_context, port, logger);
-		rt_object->Initialize();
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
 
-		auto external_execution_context = new stubs::ExecutionContextStub();
+		auto execution_context = execution_context_service->Create("ec");
+		rt_object->Initialize(execution_context);
+
+		auto external_execution_context = execution_context_service->Create("external_ec");
 		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
@@ -216,11 +214,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		Assert::AreEqual(expected_logger_content, logger_content);
 
 		delete rt_object;
-		delete execution_context;
-		delete port;
-
-		delete external_execution_context;
 		delete logger;
+		delete execution_context_service;
 	}
 
 	TEST_METHOD(RTLoggingObjectShouldNotFinalizeWhenNotInitializedBefore)
@@ -228,7 +223,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		//GIVEN
 		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 		auto logger = new stubs::LoggerStub();
-		auto rt_object = new stubs::RTLoggingObjectStub(nullptr, nullptr, logger);
+		auto rt_object = new stubs::RTLoggingObjectStub(logger);
 
 		//WHEN
 		rt_object->Finalize();

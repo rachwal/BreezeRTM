@@ -6,9 +6,10 @@
 #define BREEZE_RTM_TESTS_STUBS_PORT_SERVICE_STUB_H_
 
 #include <omg_rtc/port_service.h>
-#include <map>
 #include <omg_rtc/connector_profile_service.h>
 #include <omg_rtc/logger.h>
+
+#include <map>
 
 namespace breeze_rtm
 {
@@ -17,8 +18,10 @@ namespace stubs
 class PortServiceStub : public omg_rtc::PortService
 {
 	public:
-	explicit PortServiceStub(omg_rtc::ConnectorProfileService* connector_profile_service);
+	explicit PortServiceStub(const omg_rtc::ConnectorProfileService* connector_profile_service);
 	~PortServiceStub();
+
+	static PortServiceStub *CreateServiceStub();
 
 	omg_rtc::Port *Create(const omg_rtc::UniqueIdentifier& id) const override;
 	omg_rtc::Port *Create(const std::string&, const omg_rtc::UniqueIdentifier& id, omg_rtc::Logger*) const override;
@@ -28,7 +31,7 @@ class PortServiceStub : public omg_rtc::PortService
 
 	private:
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::Port*>* ports_;
-	omg_rtc::ConnectorProfileService* connector_profile_service_;
+	const omg_rtc::ConnectorProfileService* connector_profile_service_;
 };
 }
 }
