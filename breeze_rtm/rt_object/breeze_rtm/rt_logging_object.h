@@ -39,7 +39,8 @@ class RTLoggingObject : public RTObject
 	virtual omg_rtc::ReturnCode_t OnReset(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	RTLoggingObject(omg_rtc::Logger* logger);
+	explicit RTLoggingObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger);
+
 	omg_rtc::Logger* logger_;
 };
 }

@@ -7,6 +7,7 @@
 
 #include "lightweight_rt_object.h"
 #include "unique_identifier.h"
+#include "logger.h"
 
 namespace breeze_rtm
 {
@@ -17,7 +18,8 @@ class LightweightRTObjectService
 	public:
 	virtual ~LightweightRTObjectService() {}
 
-	virtual LightweightRTObject *Create(const UniqueIdentifier& lightweight_rt_object_id, const UniqueIdentifier& port_id) const = 0;
+	virtual LightweightRTObject *Create(const UniqueIdentifier& lightweight_rt_object_id) const = 0;
+	virtual LightweightRTObject *Create(const UniqueIdentifier& lightweight_rt_object_id, Logger* logger) const = 0;
 	virtual LightweightRTObject *Retrieve(const UniqueIdentifier& lightweight_rt_object_id) const = 0;
 	virtual void Update(const UniqueIdentifier& lightweight_rt_object_id, const LightweightRTObject& lightweight_rt_object) const = 0;
 	virtual void Destroy(const UniqueIdentifier& lightweight_rt_object_id) const = 0;

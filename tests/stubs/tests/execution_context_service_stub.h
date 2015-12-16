@@ -17,7 +17,7 @@ namespace stubs
 class ExecutionContextServiceStub : public omg_rtc::ExecutionContextService
 {
 	public:
-	explicit ExecutionContextServiceStub(const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
+	explicit ExecutionContextServiceStub();
 	~ExecutionContextServiceStub();
 
 	static ExecutionContextServiceStub *CreateServiceStub();
@@ -27,10 +27,12 @@ class ExecutionContextServiceStub : public omg_rtc::ExecutionContextService
 	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::ExecutionContext& execution_context) const override;
 	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
+	void AttachLightweightRTObjectService(omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
+
 	private:
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::ExecutionContext*>* execution_context_map_;
 
-	const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service_;
+	omg_rtc::LightweightRTObjectService* lightweight_rt_object_service_;
 };
 }
 }

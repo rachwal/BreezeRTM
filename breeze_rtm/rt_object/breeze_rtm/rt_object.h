@@ -8,6 +8,8 @@
 #include <omg_rtc/rt_object.h>
 #include <omg_rtc/port.h>
 #include <omg_rtc/component_profile.h>
+#include <omg_rtc/execution_context_service.h>
+#include <omg_rtc/port_service.h>
 
 namespace breeze_rtm
 {
@@ -46,7 +48,7 @@ class RTObject : public omg_rtc::RTObject
 	virtual omg_rtc::ReturnCode_t OnReset(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	explicit RTObject();
+	explicit RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service);
 
 	omg_rtc::ComponentProfile profile_;
 
@@ -54,6 +56,9 @@ class RTObject : public omg_rtc::RTObject
 	std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*>* participating_contexts_;
 
 	bool initialized_;
+	private:
+	omg_rtc::ExecutionContextService* execution_context_service_;
+	omg_rtc::PortService* port_service_;
 };
 }
 }

@@ -18,7 +18,7 @@ namespace stubs
 class PortServiceStub : public omg_rtc::PortService
 {
 	public:
-	explicit PortServiceStub(const omg_rtc::ConnectorProfileService* connector_profile_service);
+	explicit PortServiceStub();
 	~PortServiceStub();
 
 	static PortServiceStub *CreateServiceStub();
@@ -29,9 +29,11 @@ class PortServiceStub : public omg_rtc::PortService
 	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::Port& port) const override;
 	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
+	void AttachConnectorProfileService(omg_rtc::ConnectorProfileService* connector_profile_service);
+
 	private:
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::Port*>* ports_;
-	const omg_rtc::ConnectorProfileService* connector_profile_service_;
+	omg_rtc::ConnectorProfileService* connector_profile_service_;
 };
 }
 }

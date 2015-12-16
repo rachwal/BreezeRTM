@@ -31,7 +31,8 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: alpha: notify_connect(1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub(connector_profile_service);
+		auto port_service = new stubs::PortServiceStub();
+		port_service->AttachConnectorProfileService(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 		auto port = port_service->Create("alpha", "p1", logger);
 
@@ -67,7 +68,8 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: notify_connect(1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub(connector_profile_service);
+		auto port_service = new stubs::PortServiceStub();
+		port_service->AttachConnectorProfileService(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 
 		auto alpha = port_service->Create("Port 0", "p0", logger);
@@ -124,7 +126,8 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: notify_disconnect(1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub(connector_profile_service);
+		auto port_service = new stubs::PortServiceStub();
+		port_service->AttachConnectorProfileService(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 
 		auto alpha = port_service->Create("Port 0", "p0", logger);
@@ -184,7 +187,8 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: notify_disconnect(1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub(connector_profile_service);
+		auto port_service = new stubs::PortServiceStub();
+		port_service->AttachConnectorProfileService(connector_profile_service);
 		auto logger = new stubs::LoggerStub();
 
 		auto alpha = port_service->Create("Port 0", "p0", logger);

@@ -11,7 +11,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-PortServiceStub::PortServiceStub(const omg_rtc::ConnectorProfileService* connector_profile_service) : connector_profile_service_(connector_profile_service)
+PortServiceStub::PortServiceStub() : connector_profile_service_(nullptr)
 {
 	ports_ = new std::map<omg_rtc::UniqueIdentifier, omg_rtc::Port*>();
 }
@@ -27,7 +27,8 @@ PortServiceStub::~PortServiceStub()
 PortServiceStub *PortServiceStub::CreateServiceStub()
 {
 	auto connector_profile_service = new ConnectorProfileServiceStub();
-	auto port_service = new PortServiceStub(connector_profile_service);
+	auto port_service = new PortServiceStub();
+	port_service->AttachConnectorProfileService(connector_profile_service);
 	return port_service;
 }
 
@@ -59,6 +60,11 @@ void PortServiceStub::Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc:
 void PortServiceStub::Destroy(const omg_rtc::UniqueIdentifier& id) const
 {
 	ports_->erase(id);
+}
+
+void PortServiceStub::AttachConnectorProfileService(omg_rtc::ConnectorProfileService* connector_profile_service)
+{
+	connector_profile_service_ = connector_profile_service;
 }
 }
 }

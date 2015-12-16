@@ -8,7 +8,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-RTObjectStub::RTObjectStub() : RTObject()
+RTObjectStub::RTObjectStub(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service) : RTObject(execution_context_service, port_service)
 {
 	profile_.instance_name = "RTObjectStub";
 }

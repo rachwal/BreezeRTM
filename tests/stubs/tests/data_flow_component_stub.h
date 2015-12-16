@@ -14,7 +14,7 @@ namespace stubs
 class DataFlowComponentStub :public data_flow_component::DataFlowComponent
 {
 	public:
-	explicit DataFlowComponentStub();
+	explicit DataFlowComponentStub(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service);
 };
 }
 }

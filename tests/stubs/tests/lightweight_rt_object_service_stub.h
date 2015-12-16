@@ -9,6 +9,7 @@
 #include <omg_rtc/port_service.h>
 
 #include <map>
+#include <omg_rtc/execution_context_service.h>
 
 namespace breeze_rtm
 {
@@ -17,17 +18,22 @@ namespace stubs
 class LightweightRTObjectServiceStub : public omg_rtc::LightweightRTObjectService
 {
 	public:
-	explicit LightweightRTObjectServiceStub(const omg_rtc::PortService* port_service);
+	explicit LightweightRTObjectServiceStub();
 	~LightweightRTObjectServiceStub();
 
-	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id, const omg_rtc::UniqueIdentifier& port_id) const override;
+	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id) const override;
+	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id, omg_rtc::Logger* logger) const override;
 	omg_rtc::LightweightRTObject *Retrieve(const omg_rtc::UniqueIdentifier& id) const override;
 	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::LightweightRTObject& execution_context) const override;
 	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
+	void AttachExecutionContextService(omg_rtc::ExecutionContextService* execution_context_service);
+	void AttachPortService(omg_rtc::PortService* port_service);
+
 	private:
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::LightweightRTObject*>* lightweight_rt_object_map_;
-	const omg_rtc::PortService* port_service_;
+	omg_rtc::PortService* port_service_;
+	omg_rtc::ExecutionContextService* execution_context_service_;
 };
 }
 }

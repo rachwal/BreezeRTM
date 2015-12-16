@@ -26,7 +26,7 @@ TEST_CLASS(ExecutionContextTest)
 	{
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto component = new stubs::DataFlowComponentStub();
+		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		auto execution_context = execution_context_service->Create("component_ec");
 		component->Initialize(execution_context);
@@ -47,7 +47,7 @@ TEST_CLASS(ExecutionContextTest)
 	{
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto component = new stubs::DataFlowComponentStub();
+		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		auto execution_context = execution_context_service->Create("component_ec");
 		component->Initialize(execution_context);
@@ -70,7 +70,7 @@ TEST_CLASS(ExecutionContextTest)
 	{
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto component = new stubs::DataFlowComponentStub();
+		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		auto execution_context = execution_context_service->Create("component_ec");
 		component->Initialize(execution_context);
@@ -93,7 +93,7 @@ TEST_CLASS(ExecutionContextTest)
 	{
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto component = new stubs::DataFlowComponentStub();
+		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		auto execution_context = execution_context_service->Create("component_ec");
 		component->Initialize(execution_context);
@@ -116,7 +116,7 @@ TEST_CLASS(ExecutionContextTest)
 	{
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto component = new stubs::DataFlowComponentStub();
+		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
 
 		auto execution_context = execution_context_service->Create("component_ec");
 		component->Initialize(execution_context);

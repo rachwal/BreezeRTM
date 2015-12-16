@@ -12,7 +12,7 @@ namespace breeze_rtm
 {
 namespace stubs
 {
-ExecutionContextServiceStub::ExecutionContextServiceStub(const omg_rtc::LightweightRTObjectService* lightweight_rt_object_service) : lightweight_rt_object_service_(lightweight_rt_object_service)
+ExecutionContextServiceStub::ExecutionContextServiceStub() : lightweight_rt_object_service_(nullptr)
 {
 	execution_context_map_ = new std::map<omg_rtc::UniqueIdentifier, omg_rtc::ExecutionContext*>();
 }
@@ -28,15 +28,22 @@ ExecutionContextServiceStub::~ExecutionContextServiceStub()
 ExecutionContextServiceStub *ExecutionContextServiceStub::CreateServiceStub()
 {
 	auto connector_profile_service = new ConnectorProfileServiceStub();
-	auto port_service = new PortServiceStub(connector_profile_service);
-	auto lightweight_rt_object_service = new LightweightRTObjectServiceStub(port_service);
-	auto execution_context_service = new ExecutionContextServiceStub(lightweight_rt_object_service);
+	auto port_service = new PortServiceStub();
+	port_service->AttachConnectorProfileService(connector_profile_service);
+
+	auto lightweight_rt_object_service = new LightweightRTObjectServiceStub();
+	lightweight_rt_object_service->AttachPortService(port_service);
+
+	auto execution_context_service = new ExecutionContextServiceStub();
+	execution_context_service->AttachLightweightRTObjectService(lightweight_rt_object_service);
+	lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+
 	return execution_context_service;
 }
 
 omg_rtc::ExecutionContext *ExecutionContextServiceStub::Create(const omg_rtc::UniqueIdentifier& id) const
 {
-	auto new_execution_context = new ExecutionContextStub(lightweight_rt_object_service_);
+	auto new_execution_context = new ExecutionContextStub(this, lightweight_rt_object_service_);
 	execution_context_map_->operator[](id) = new_execution_context;
 
 	return Retrieve(id);
@@ -50,6 +57,11 @@ omg_rtc::ExecutionContext *ExecutionContextServiceStub::Retrieve(const omg_rtc::
 void ExecutionContextServiceStub::Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::ExecutionContext& execution_context) const {}
 
 void ExecutionContextServiceStub::Destroy(const omg_rtc::UniqueIdentifier& id) const { }
+
+void ExecutionContextServiceStub::AttachLightweightRTObjectService(omg_rtc::LightweightRTObjectService* lightweight_rt_object_service)
+{
+	lightweight_rt_object_service_ = lightweight_rt_object_service;
+}
 }
 }
 
