@@ -24,9 +24,9 @@ RTObject::~RTObject()
 	delete participating_contexts_;
 }
 
-omg_rtc::ComponentProfile *RTObject::GetComponentProfile()
+omg_rtc::ComponentProfile RTObject::GetComponentProfile()
 {
-	return &profile_;
+	return profile_;
 }
 
 std::list<omg_rtc::PortInterface*> *RTObject::GetPorts()
@@ -142,12 +142,12 @@ omg_rtc::ExecutionContext *RTObject::GetContext(omg_rtc::ExecutionContextHandle_
 
 std::list<omg_rtc::UniqueIdentifier> *RTObject::GetOwnedContexts()
 {
-	return owned_contexts_;
+	return new std::list<omg_rtc::UniqueIdentifier>(*owned_contexts_);
 }
 
 std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier> *RTObject::GetParticipatingContexts()
 {
-	return participating_contexts_;
+	return new std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier>(*participating_contexts_);
 }
 
 omg_rtc::ExecutionContextHandle_t RTObject::GetContextHandle(const omg_rtc::UniqueIdentifier& execution_context_id)

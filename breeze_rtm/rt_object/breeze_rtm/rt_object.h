@@ -20,7 +20,7 @@ class RTObject : public omg_rtc::RTObject
 	public:
 	virtual ~RTObject();
 
-	virtual omg_rtc::ComponentProfile *GetComponentProfile() override;
+	virtual omg_rtc::ComponentProfile GetComponentProfile() override;
 	virtual std::list<omg_rtc::PortInterface*> *GetPorts() override;
 
 	virtual omg_rtc::ReturnCode_t Initialize(const omg_rtc::UniqueIdentifier& execution_context_id) override;

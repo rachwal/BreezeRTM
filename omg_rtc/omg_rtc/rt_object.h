@@ -17,7 +17,7 @@ class PortInterface;
 class RTObject : public LightweightRTObject
 {
 	public:
-	virtual ComponentProfile *GetComponentProfile() = 0;
+	virtual ComponentProfile GetComponentProfile() = 0;
 	virtual std::list<PortInterface*> *GetPorts() = 0;
 };
 }

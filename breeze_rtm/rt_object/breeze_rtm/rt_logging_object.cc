@@ -12,7 +12,7 @@ namespace rt_object
 {
 RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) : RTObject(execution_context_service, port_service), logger_(logger) {}
 
-omg_rtc::ComponentProfile *RTLoggingObject::GetComponentProfile()
+omg_rtc::ComponentProfile RTLoggingObject::GetComponentProfile()
 {
 	logger_->Paranoid(profile_.instance_name, "get_component_profile()");
 
