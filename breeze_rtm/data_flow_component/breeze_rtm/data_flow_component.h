@@ -44,7 +44,7 @@ class DataFlowComponent : public rt_object::RTObject, public omg_rtc::DataFlowCo
 	virtual omg_rtc::ReturnCode_t OnRateChanged(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	protected:
-	explicit DataFlowComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service);
+	DataFlowComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service);
 };
 }
 }

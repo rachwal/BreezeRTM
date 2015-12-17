@@ -17,7 +17,7 @@ namespace stubs
 class ExecutionContextServiceStub : public omg_rtc::ExecutionContextService
 {
 	public:
-	explicit ExecutionContextServiceStub();
+	ExecutionContextServiceStub();
 	~ExecutionContextServiceStub();
 
 	omg_rtc::ExecutionContext *Create(const omg_rtc::UniqueIdentifier& id) const override;

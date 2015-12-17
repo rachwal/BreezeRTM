@@ -18,7 +18,7 @@ namespace stubs
 class PortServiceStub : public omg_rtc::PortService
 {
 	public:
-	explicit PortServiceStub();
+	PortServiceStub();
 	~PortServiceStub();
 
 	omg_rtc::Port *Create(const omg_rtc::UniqueIdentifier& id) const override;

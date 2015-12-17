@@ -41,7 +41,7 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	virtual omg_rtc::ExecutionKind kind() override;
 
 	protected:
-	explicit ExecutionContext(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
+	ExecutionContext(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
 
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::ExecutionContextHandle_t>* components_map_;
 	omg_rtc::ExecutionContextProfile profile_;

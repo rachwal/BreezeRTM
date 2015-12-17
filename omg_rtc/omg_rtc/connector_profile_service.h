@@ -5,7 +5,6 @@
 #ifndef OMG_RTC_CONNECTOR_PROFILE_SERVICE_H_
 #define OMG_RTC_CONNECTOR_PROFILE_SERVICE_H_
 
-#include "port_profile.h"
 #include "connector_profile.h"
 
 namespace breeze_rtm

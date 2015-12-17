@@ -18,7 +18,7 @@ namespace stubs
 class LightweightRTObjectServiceStub : public omg_rtc::LightweightRTObjectService
 {
 	public:
-	explicit LightweightRTObjectServiceStub();
+	LightweightRTObjectServiceStub();
 	~LightweightRTObjectServiceStub();
 
 	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id) const override;

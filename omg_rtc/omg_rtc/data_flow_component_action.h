@@ -17,7 +17,6 @@ class DataFlowComponentAction
 	public:
 	virtual ~DataFlowComponentAction() {}
 
-	private:
 	virtual ReturnCode_t OnExecute(ExecutionContextHandle_t handle) = 0;
 	virtual ReturnCode_t OnStateUpdate(ExecutionContextHandle_t handle) = 0;
 	virtual ReturnCode_t OnRateChanged(ExecutionContextHandle_t handle) = 0;

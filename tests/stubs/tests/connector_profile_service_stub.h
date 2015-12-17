@@ -17,7 +17,7 @@ namespace stubs
 class ConnectorProfileServiceStub : public omg_rtc::ConnectorProfileService
 {
 	public:
-	explicit ConnectorProfileServiceStub();
+	ConnectorProfileServiceStub();
 	~ConnectorProfileServiceStub();
 
 	omg_rtc::ConnectorProfile *Create(const std::string name, const omg_rtc::UniqueIdentifier& id) const override;
