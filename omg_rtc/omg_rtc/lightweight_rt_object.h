@@ -7,6 +7,7 @@
 
 #include "component_action.h"
 #include "execution_context.h"
+#include "unique_identifier.h"
 
 #include <map>
 #include <list>
@@ -20,16 +21,16 @@ class LightweightRTObject : public ComponentAction
 	public:
 	virtual ~LightweightRTObject() {}
 
-	virtual ReturnCode_t Initialize(ExecutionContext* execution_context) = 0;
+	virtual ReturnCode_t Initialize(const UniqueIdentifier& execution_context_id) = 0;
 	virtual ReturnCode_t Finalize() = 0;
-	virtual bool IsAlive(ExecutionContext* exec_context) = 0;
+	virtual bool IsAlive(const UniqueIdentifier& execution_context_id) = 0;
 	virtual ReturnCode_t Exit() = 0;
-	virtual ExecutionContextHandle_t AttachContext(ExecutionContext* exec_context) = 0;
+	virtual ExecutionContextHandle_t AttachContext(const UniqueIdentifier& execution_context_id) = 0;
 	virtual ReturnCode_t DetachContext(ExecutionContextHandle_t handle) = 0;
 	virtual ExecutionContext *GetContext(ExecutionContextHandle_t handle) = 0;
-	virtual std::list<ExecutionContext*> *GetOwnedContexts() = 0;
-	virtual std::map<ExecutionContextHandle_t, ExecutionContext*> *GetParticipatingContexts() = 0;
-	virtual ExecutionContextHandle_t GetContextHandle(ExecutionContext& exec_context) = 0;
+	virtual std::list<UniqueIdentifier> *GetOwnedContexts() = 0;
+	virtual std::map<ExecutionContextHandle_t, UniqueIdentifier> *GetParticipatingContexts() = 0;
+	virtual ExecutionContextHandle_t GetContextHandle(const UniqueIdentifier& execution_context_id) = 0;
 };
 }
 }

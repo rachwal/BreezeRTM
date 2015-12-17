@@ -5,6 +5,7 @@
 #include "lightweight_rt_object_service_stub.h"
 #include "rt_object_stub.h"
 #include "rt_logging_object_stub.h"
+#include "execution_context_service_stub.h"
 
 namespace breeze_rtm
 {
@@ -21,6 +22,14 @@ LightweightRTObjectServiceStub::~LightweightRTObjectServiceStub()
 	auto end = lightweight_rt_object_map_->end();
 	lightweight_rt_object_map_->erase(begin, end);
 	delete lightweight_rt_object_map_;
+}
+
+LightweightRTObjectServiceStub *LightweightRTObjectServiceStub::CreateServiceStub()
+{
+	auto execution_context_service = ExecutionContextServiceStub::CreateServiceStub();
+	auto lightweight_rt_object_service = new LightweightRTObjectServiceStub();
+	lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+	return lightweight_rt_object_service;
 }
 
 omg_rtc::LightweightRTObject *LightweightRTObjectServiceStub::Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id) const

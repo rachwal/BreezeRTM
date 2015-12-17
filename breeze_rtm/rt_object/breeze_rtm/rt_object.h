@@ -23,19 +23,19 @@ class RTObject : public omg_rtc::RTObject
 	virtual omg_rtc::ComponentProfile *GetComponentProfile() override;
 	virtual std::list<omg_rtc::PortInterface*> *GetPorts() override;
 
-	virtual omg_rtc::ReturnCode_t Initialize(omg_rtc::ExecutionContext* execution_context) override;
+	virtual omg_rtc::ReturnCode_t Initialize(const omg_rtc::UniqueIdentifier& execution_context_id) override;
 	virtual omg_rtc::ReturnCode_t Finalize() override;
 	virtual omg_rtc::ReturnCode_t Exit() override;
 
-	virtual bool IsAlive(omg_rtc::ExecutionContext* exec_context) override;
+	virtual bool IsAlive(const omg_rtc::UniqueIdentifier& execution_context_id) override;
 
-	virtual omg_rtc::ExecutionContextHandle_t AttachContext(omg_rtc::ExecutionContext* exec_context) override;
+	virtual omg_rtc::ExecutionContextHandle_t AttachContext(const omg_rtc::UniqueIdentifier& execution_context_id) override;
 	virtual omg_rtc::ReturnCode_t DetachContext(omg_rtc::ExecutionContextHandle_t handle) override;
 
 	virtual omg_rtc::ExecutionContext *GetContext(omg_rtc::ExecutionContextHandle_t handle) override;
-	virtual std::list<omg_rtc::ExecutionContext*> *GetOwnedContexts() override;
-	virtual std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*> *GetParticipatingContexts() override;
-	virtual omg_rtc::ExecutionContextHandle_t GetContextHandle(omg_rtc::ExecutionContext& exec_context) override;
+	virtual std::list<omg_rtc::UniqueIdentifier> *GetOwnedContexts() override;
+	virtual std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier> *GetParticipatingContexts() override;
+	virtual omg_rtc::ExecutionContextHandle_t GetContextHandle(const omg_rtc::UniqueIdentifier& execution_context_id) override;
 
 	virtual omg_rtc::ReturnCode_t OnInitialize() override;
 	virtual omg_rtc::ReturnCode_t OnFinalize() override;
@@ -52,10 +52,11 @@ class RTObject : public omg_rtc::RTObject
 
 	omg_rtc::ComponentProfile profile_;
 
-	std::list<omg_rtc::ExecutionContext*>* owned_contexts_;
-	std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*>* participating_contexts_;
+	std::list<omg_rtc::UniqueIdentifier>* owned_contexts_;
+	std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier>* participating_contexts_;
 
 	bool initialized_;
+
 	private:
 	omg_rtc::ExecutionContextService* execution_context_service_;
 	omg_rtc::PortService* port_service_;

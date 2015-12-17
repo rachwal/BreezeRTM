@@ -44,6 +44,7 @@ ExecutionContextServiceStub *ExecutionContextServiceStub::CreateServiceStub()
 omg_rtc::ExecutionContext *ExecutionContextServiceStub::Create(const omg_rtc::UniqueIdentifier& id) const
 {
 	auto new_execution_context = new ExecutionContextStub(this, lightweight_rt_object_service_);
+	new_execution_context->profile()->id = id;
 	execution_context_map_->operator[](id) = new_execution_context;
 
 	return Retrieve(id);

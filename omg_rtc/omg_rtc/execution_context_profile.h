@@ -6,6 +6,7 @@
 #define OMG_RTC_EXECUTION_CONTEXT_PROFILE_H_
 
 #include "execution_kind.h"
+#include "unique_identifier.h"
 
 namespace breeze_rtm
 {
@@ -15,6 +16,7 @@ class RTObject;
 
 struct ExecutionContextProfile
 {
+	UniqueIdentifier id;
 	ExecutionKind kind;
 	double rate;
 };

@@ -26,11 +26,11 @@ std::list<omg_rtc::PortInterface*> *RTLoggingObject::GetPorts()
 	return RTObject::GetPorts();
 }
 
-omg_rtc::ReturnCode_t RTLoggingObject::Initialize(omg_rtc::ExecutionContext* execution_context)
+omg_rtc::ReturnCode_t RTLoggingObject::Initialize(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	logger_->Trace(profile_.instance_name, "initialize()");
 
-	auto initialization_result = RTObject::Initialize(execution_context);
+	auto initialization_result = RTObject::Initialize(execution_context_id);
 
 	if (initialization_result == omg_rtc::RTC_OK)
 	{
@@ -47,11 +47,11 @@ omg_rtc::ReturnCode_t RTLoggingObject::Finalize()
 	return RTObject::Finalize();
 }
 
-bool RTLoggingObject::IsAlive(omg_rtc::ExecutionContext* exec_context)
+bool RTLoggingObject::IsAlive(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	logger_->Trace(profile_.instance_name, "is_alive()");
 
-	return RTObject::IsAlive(exec_context);
+	return RTObject::IsAlive(execution_context_id);
 }
 
 omg_rtc::ReturnCode_t RTLoggingObject::Exit()
@@ -61,11 +61,11 @@ omg_rtc::ReturnCode_t RTLoggingObject::Exit()
 	return RTObject::Exit();
 }
 
-omg_rtc::ExecutionContextHandle_t RTLoggingObject::AttachContext(omg_rtc::ExecutionContext* exec_context)
+omg_rtc::ExecutionContextHandle_t RTLoggingObject::AttachContext(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	logger_->Trace(profile_.instance_name, "attach_context()");
 
-	return RTObject::AttachContext(exec_context);
+	return RTObject::AttachContext(execution_context_id);
 }
 
 omg_rtc::ReturnCode_t RTLoggingObject::DetachContext(omg_rtc::ExecutionContextHandle_t handle)

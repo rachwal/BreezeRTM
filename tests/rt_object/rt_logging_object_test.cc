@@ -31,16 +31,12 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n");
 
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
-		auto execution_context = execution_context_service->Create("ec");
-
 		//WHEN
-		rt_object->Initialize(execution_context);
+		rt_object->Initialize("ec");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -48,35 +44,8 @@ TEST_CLASS(RTLoggingObjectTest)
 
 		delete rt_object;
 		delete logger;
-		delete execution_context_service;
 		delete lightweight_rt_object_service;
 	}
-
-
-	TEST_METHOD(RTLoggingObjectShouldReturnErrorCodeTryToInitializeWithoutExecutionContext)
-	{
-		//GIVEN
-		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: initialize()\n");
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
-		auto logger = new stubs::LoggerStub();
-		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
-
-		//WHEN
-		rt_object->Initialize(nullptr);
-
-		//THEN
-		auto logger_content = logger->content();
-
-		Assert::AreEqual(expected_logger_content, logger_content);
-
-		delete rt_object;
-		delete logger;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
-	}
-
 
 	TEST_METHOD(RTLoggingObjectShouldNotInitializeMoreThanOnce)
 	{
@@ -87,17 +56,13 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n") +
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n");
 
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
-		auto execution_context = execution_context_service->Create("ec");
-
 		//WHEN
-		rt_object->Initialize(execution_context);
-		rt_object->Initialize(execution_context);
+		rt_object->Initialize("ec");
+		rt_object->Initialize("ec");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -106,7 +71,6 @@ TEST_CLASS(RTLoggingObjectTest)
 
 		delete rt_object;
 		delete logger;
-		delete execution_context_service;
 		delete lightweight_rt_object_service;
 	}
 
@@ -121,15 +85,11 @@ TEST_CLASS(RTLoggingObjectTest)
 			std::string("TRACE: RTLoggingObjectStub: finalize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_finalize()\n");
 
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
-		auto execution_context = execution_context_service->Create("ec");
-
-		rt_object->Initialize(execution_context);
+		rt_object->Initialize("ec");
 
 		//WHEN
 		rt_object->Finalize();
@@ -141,7 +101,6 @@ TEST_CLASS(RTLoggingObjectTest)
 
 		delete rt_object;
 		delete logger;
-		delete execution_context_service;
 		delete lightweight_rt_object_service;
 	}
 
@@ -161,8 +120,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
-		auto execution_context = execution_context_service->Create("ec");
-		rt_object->Initialize(execution_context);
+		rt_object->Initialize("ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 		external_execution_context->AddComponent(rt_object);
@@ -186,9 +144,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		//GIVEN
 		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
@@ -202,7 +158,6 @@ TEST_CLASS(RTLoggingObjectTest)
 
 		delete rt_object;
 		delete logger;
-		delete execution_context_service;
 		delete lightweight_rt_object_service;
 	}
 
@@ -222,14 +177,13 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
-		auto execution_context = execution_context_service->Create("ec");
-		rt_object->Initialize(execution_context);
+		rt_object->Initialize("ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 		external_execution_context->AddComponent(rt_object);
 
 		//WHEN
-		rt_object->IsAlive(external_execution_context);
+		rt_object->IsAlive("external_ec");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -247,9 +201,7 @@ TEST_CLASS(RTLoggingObjectTest)
 		//GIVEN
 		auto expected_logger_content = std::string("TRACE: RTLoggingObjectStub: finalize()\n");
 
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
 		auto logger = new stubs::LoggerStub();
 		auto rt_object = lightweight_rt_object_service->Create("rto1", logger);
 
@@ -263,7 +215,6 @@ TEST_CLASS(RTLoggingObjectTest)
 
 		delete rt_object;
 		delete logger;
-		delete execution_context_service;
 		delete lightweight_rt_object_service;
 	}
 };

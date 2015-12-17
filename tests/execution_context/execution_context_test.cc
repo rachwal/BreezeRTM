@@ -27,9 +27,7 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
-
-		auto execution_context = execution_context_service->Create("component_ec");
-		component->Initialize(execution_context);
+		component->Initialize("component_ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 
@@ -48,9 +46,7 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
-
-		auto execution_context = execution_context_service->Create("component_ec");
-		component->Initialize(execution_context);
+		component->Initialize("component_ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 
@@ -71,9 +67,7 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
-
-		auto execution_context = execution_context_service->Create("component_ec");
-		component->Initialize(execution_context);
+		component->Initialize("component_ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 
@@ -94,9 +88,7 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
-
-		auto execution_context = execution_context_service->Create("component_ec");
-		component->Initialize(execution_context);
+		component->Initialize("component_ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 
@@ -117,9 +109,7 @@ TEST_CLASS(ExecutionContextTest)
 		//GIVEN
 		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
 		auto component = new stubs::DataFlowComponentStub(execution_context_service, nullptr);
-
-		auto execution_context = execution_context_service->Create("component_ec");
-		component->Initialize(execution_context);
+		component->Initialize("component_ec");
 
 		auto external_execution_context = execution_context_service->Create("external_ec");
 

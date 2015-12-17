@@ -10,8 +10,8 @@ namespace rt_object
 {
 RTObject::RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service) : initialized_(false), execution_context_service_(execution_context_service), port_service_(port_service)
 {
-	owned_contexts_ = new std::list<omg_rtc::ExecutionContext*>();
-	participating_contexts_ = new std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*>();
+	owned_contexts_ = new std::list<omg_rtc::UniqueIdentifier>();
+	participating_contexts_ = new std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier>();
 }
 
 RTObject::~RTObject()
@@ -34,22 +34,29 @@ std::list<omg_rtc::PortInterface*> *RTObject::GetPorts()
 	return nullptr;
 }
 
-omg_rtc::ReturnCode_t RTObject::Initialize(omg_rtc::ExecutionContext* execution_context)
+omg_rtc::ReturnCode_t RTObject::Initialize(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	if (initialized_)
 	{
 		return omg_rtc::ReturnCode_t::PRECONDITION_NOT_MET;
 	}
 
-	if (execution_context == nullptr)
+	if (&execution_context_id == nullptr)
 	{
 		return omg_rtc::RTC_ERROR;
 	}
 
-	owned_contexts_->push_back(execution_context);
+	owned_contexts_->push_back(execution_context_id);
 
 	initialized_ = true;
 	OnInitialize();
+
+	omg_rtc::ExecutionContext* execution_context;
+	execution_context = execution_context_service_->Retrieve(execution_context_id);
+	if (!execution_context)
+	{
+		execution_context = execution_context_service_->Create(execution_context_id);
+	}
 
 	execution_context->Start();
 
@@ -68,12 +75,12 @@ omg_rtc::ReturnCode_t RTObject::Finalize()
 	return omg_rtc::RTC_OK;
 }
 
-bool RTObject::IsAlive(omg_rtc::ExecutionContext* exec_context)
+bool RTObject::IsAlive(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	for (auto iterator = owned_contexts_->begin(); iterator != owned_contexts_->end(); ++iterator)
 	{
 		auto context = *iterator;
-		if (context == exec_context)
+		if (context == execution_context_id)
 		{
 			return true;
 		}
@@ -82,7 +89,7 @@ bool RTObject::IsAlive(omg_rtc::ExecutionContext* exec_context)
 	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
 	{
 		auto context = iterator->second;
-		if (context == exec_context)
+		if (context == execution_context_id)
 		{
 			return true;
 		}
@@ -95,7 +102,7 @@ omg_rtc::ReturnCode_t RTObject::Exit()
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ExecutionContextHandle_t RTObject::AttachContext(omg_rtc::ExecutionContext* exec_context)
+omg_rtc::ExecutionContextHandle_t RTObject::AttachContext(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	omg_rtc::ExecutionContextHandle_t new_handle = 1;
 
@@ -109,13 +116,13 @@ omg_rtc::ExecutionContextHandle_t RTObject::AttachContext(omg_rtc::ExecutionCont
 			new_handle++;
 		}
 
-		if (context == exec_context)
+		if (context == execution_context_id)
 		{
 			return handle;
 		}
 	}
 
-	participating_contexts_->operator[](new_handle) = exec_context;
+	participating_contexts_->operator[](new_handle) = execution_context_id;
 	return new_handle;
 }
 
@@ -128,27 +135,29 @@ omg_rtc::ReturnCode_t RTObject::DetachContext(omg_rtc::ExecutionContextHandle_t 
 
 omg_rtc::ExecutionContext *RTObject::GetContext(omg_rtc::ExecutionContextHandle_t handle)
 {
-	return participating_contexts_->operator[](handle);
+	auto context_id = participating_contexts_->operator[](handle);
+	auto execution_context = execution_context_service_->Retrieve(context_id);
+	return execution_context;
 }
 
-std::list<omg_rtc::ExecutionContext*> *RTObject::GetOwnedContexts()
+std::list<omg_rtc::UniqueIdentifier> *RTObject::GetOwnedContexts()
 {
 	return owned_contexts_;
 }
 
-std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::ExecutionContext*> *RTObject::GetParticipatingContexts()
+std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier> *RTObject::GetParticipatingContexts()
 {
 	return participating_contexts_;
 }
 
-omg_rtc::ExecutionContextHandle_t RTObject::GetContextHandle(omg_rtc::ExecutionContext& exec_context)
+omg_rtc::ExecutionContextHandle_t RTObject::GetContextHandle(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
 	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
 	{
 		auto context = iterator->second;
 		auto handle = iterator->first;
 
-		if (context == &exec_context)
+		if (context == execution_context_id)
 		{
 			return handle;
 		}

@@ -21,6 +21,8 @@ class LightweightRTObjectServiceStub : public omg_rtc::LightweightRTObjectServic
 	explicit LightweightRTObjectServiceStub();
 	~LightweightRTObjectServiceStub();
 
+	static LightweightRTObjectServiceStub *CreateServiceStub();
+
 	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id) const override;
 	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id, omg_rtc::Logger* logger) const override;
 	omg_rtc::LightweightRTObject *Retrieve(const omg_rtc::UniqueIdentifier& id) const override;

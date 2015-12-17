@@ -75,7 +75,7 @@ omg_rtc::ReturnCode_t ExecutionContext::AddComponent(omg_rtc::LightweightRTObjec
 		}
 	}
 
-	auto handle = comp->AttachContext(this);
+	auto handle = comp->AttachContext(profile_->id);
 	components_->operator[](comp) = handle;
 
 	return omg_rtc::RTC_OK;
