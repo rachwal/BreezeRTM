@@ -27,8 +27,8 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: alpha: connect(1)\n") +
-			std::string("TRACE: alpha: notify_connect(1)\n");
+			std::string("TRACE: alpha: connect(c1)\n") +
+			std::string("TRACE: alpha: notify_connect(c1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
 		auto port_service = new stubs::PortServiceStub();
@@ -36,10 +36,10 @@ TEST_CLASS(PortLoggingTest)
 		auto logger = new stubs::LoggerStub();
 		auto port = port_service->Create("alpha", "p1", logger);
 
-		auto external_connector = connector_profile_service->Create("external", "1");
+		auto external_connector = connector_profile_service->Create("external", "c1");
 
 		//WHEN
-		port->Connect(external_connector);
+		port->Connect("c1");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -58,14 +58,14 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: Port 1: connect(1)\n") +
-			std::string("TRACE: Port 1: notify_connect(1)\n") +
-			std::string("TRACE: Port 0: connect(1)\n") +
-			std::string("TRACE: Port 0: notify_connect(1)\n") +
-			std::string("TRACE: Port 2: connect(1)\n") +
-			std::string("TRACE: Port 2: notify_connect(1)\n") +
-			std::string("TRACE: Port 3: connect(1)\n") +
-			std::string("TRACE: Port 3: notify_connect(1)\n");
+			std::string("TRACE: Port 1: connect(c1)\n") +
+			std::string("TRACE: Port 1: notify_connect(c1)\n") +
+			std::string("TRACE: Port 0: connect(c1)\n") +
+			std::string("TRACE: Port 0: notify_connect(c1)\n") +
+			std::string("TRACE: Port 2: connect(c1)\n") +
+			std::string("TRACE: Port 2: notify_connect(c1)\n") +
+			std::string("TRACE: Port 3: connect(c1)\n") +
+			std::string("TRACE: Port 3: notify_connect(c1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
 		auto port_service = new stubs::PortServiceStub();
@@ -78,13 +78,13 @@ TEST_CLASS(PortLoggingTest)
 		auto delta = port_service->Create("Port 3", "p3", logger);
 
 		//WHEN
-		auto external_connector = connector_profile_service->Create("external", "1");
+		auto external_connector = connector_profile_service->Create("external", "c1");
 		external_connector->AddPortId("p0");
 		external_connector->AddPortId("p1");
 		external_connector->AddPortId("p2");
 		external_connector->AddPortId("p3");
 
-		beta->Connect(external_connector);
+		beta->Connect("c1");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -108,22 +108,22 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: Port 1: connect(1)\n") +
-			std::string("TRACE: Port 1: notify_connect(1)\n") +
-			std::string("TRACE: Port 0: connect(1)\n") +
-			std::string("TRACE: Port 0: notify_connect(1)\n") +
-			std::string("TRACE: Port 2: connect(1)\n") +
-			std::string("TRACE: Port 2: notify_connect(1)\n") +
-			std::string("TRACE: Port 3: connect(1)\n") +
-			std::string("TRACE: Port 3: notify_connect(1)\n") +
-			std::string("TRACE: Port 1: disconnect(1)\n") +
-			std::string("TRACE: Port 1: notify_disconnect(1)\n") +
-			std::string("TRACE: Port 0: disconnect(1)\n") +
-			std::string("TRACE: Port 0: notify_disconnect(1)\n") +
-			std::string("TRACE: Port 2: disconnect(1)\n") +
-			std::string("TRACE: Port 2: notify_disconnect(1)\n") +
-			std::string("TRACE: Port 3: disconnect(1)\n") +
-			std::string("TRACE: Port 3: notify_disconnect(1)\n");
+			std::string("TRACE: Port 1: connect(c1)\n") +
+			std::string("TRACE: Port 1: notify_connect(c1)\n") +
+			std::string("TRACE: Port 0: connect(c1)\n") +
+			std::string("TRACE: Port 0: notify_connect(c1)\n") +
+			std::string("TRACE: Port 2: connect(c1)\n") +
+			std::string("TRACE: Port 2: notify_connect(c1)\n") +
+			std::string("TRACE: Port 3: connect(c1)\n") +
+			std::string("TRACE: Port 3: notify_connect(c1)\n") +
+			std::string("TRACE: Port 1: disconnect(c1)\n") +
+			std::string("TRACE: Port 1: notify_disconnect(c1)\n") +
+			std::string("TRACE: Port 0: disconnect(c1)\n") +
+			std::string("TRACE: Port 0: notify_disconnect(c1)\n") +
+			std::string("TRACE: Port 2: disconnect(c1)\n") +
+			std::string("TRACE: Port 2: notify_disconnect(c1)\n") +
+			std::string("TRACE: Port 3: disconnect(c1)\n") +
+			std::string("TRACE: Port 3: notify_disconnect(c1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
 		auto port_service = new stubs::PortServiceStub();
@@ -135,16 +135,16 @@ TEST_CLASS(PortLoggingTest)
 		auto gamma = port_service->Create("Port 2", "p2", logger);
 		auto delta = port_service->Create("Port 3", "p3", logger);
 
-		auto external_connector = connector_profile_service->Create("external", "1");
+		auto external_connector = connector_profile_service->Create("external", "c1");
 		external_connector->AddPortId("p0");
 		external_connector->AddPortId("p1");
 		external_connector->AddPortId("p2");
 		external_connector->AddPortId("p3");
 
-		beta->Connect(external_connector);
+		beta->Connect("c1");
 
 		//WHEN
-		beta->Disconnect("1");
+		beta->Disconnect("c1");
 
 		//THEN
 		auto logger_content = logger->content();
@@ -168,23 +168,23 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: Port 1: connect(1)\n") +
-			std::string("TRACE: Port 1: notify_connect(1)\n") +
-			std::string("TRACE: Port 0: connect(1)\n") +
-			std::string("TRACE: Port 0: notify_connect(1)\n") +
-			std::string("TRACE: Port 2: connect(1)\n") +
-			std::string("TRACE: Port 2: notify_connect(1)\n") +
-			std::string("TRACE: Port 3: connect(1)\n") +
-			std::string("TRACE: Port 3: notify_connect(1)\n") +
+			std::string("TRACE: Port 1: connect(c1)\n") +
+			std::string("TRACE: Port 1: notify_connect(c1)\n") +
+			std::string("TRACE: Port 0: connect(c1)\n") +
+			std::string("TRACE: Port 0: notify_connect(c1)\n") +
+			std::string("TRACE: Port 2: connect(c1)\n") +
+			std::string("TRACE: Port 2: notify_connect(c1)\n") +
+			std::string("TRACE: Port 3: connect(c1)\n") +
+			std::string("TRACE: Port 3: notify_connect(c1)\n") +
 			std::string("TRACE: Port 1: disconnect_all()\n") +
-			std::string("TRACE: Port 1: disconnect(1)\n") +
-			std::string("TRACE: Port 1: notify_disconnect(1)\n") +
-			std::string("TRACE: Port 0: disconnect(1)\n") +
-			std::string("TRACE: Port 0: notify_disconnect(1)\n") +
-			std::string("TRACE: Port 2: disconnect(1)\n") +
-			std::string("TRACE: Port 2: notify_disconnect(1)\n") +
-			std::string("TRACE: Port 3: disconnect(1)\n") +
-			std::string("TRACE: Port 3: notify_disconnect(1)\n");
+			std::string("TRACE: Port 1: disconnect(c1)\n") +
+			std::string("TRACE: Port 1: notify_disconnect(c1)\n") +
+			std::string("TRACE: Port 0: disconnect(c1)\n") +
+			std::string("TRACE: Port 0: notify_disconnect(c1)\n") +
+			std::string("TRACE: Port 2: disconnect(c1)\n") +
+			std::string("TRACE: Port 2: notify_disconnect(c1)\n") +
+			std::string("TRACE: Port 3: disconnect(c1)\n") +
+			std::string("TRACE: Port 3: notify_disconnect(c1)\n");
 
 		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
 		auto port_service = new stubs::PortServiceStub();
@@ -196,13 +196,13 @@ TEST_CLASS(PortLoggingTest)
 		auto gamma = port_service->Create("Port 2", "p2", logger);
 		auto delta = port_service->Create("Port 3", "p3", logger);
 
-		auto external_connector = connector_profile_service->Create("external", "1");
+		auto external_connector = connector_profile_service->Create("external", "c1");
 		external_connector->AddPortId("p0");
 		external_connector->AddPortId("p1");
 		external_connector->AddPortId("p2");
 		external_connector->AddPortId("p3");
 
-		beta->Connect(external_connector);
+		beta->Connect("c1");
 
 		//WHEN
 		beta->DisconnectAll();

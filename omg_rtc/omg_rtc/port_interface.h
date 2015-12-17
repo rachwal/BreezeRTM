@@ -7,7 +7,6 @@
 
 #include "return_code_t.h"
 #include "unique_identifier.h"
-#include "connector_profile.h"
 
 namespace breeze_rtm
 {
@@ -18,11 +17,13 @@ class PortInterface
 	public:
 	virtual ~PortInterface() {}
 
-	virtual ReturnCode_t Connect(ConnectorProfile* connector_profile) = 0;
+	virtual ReturnCode_t Connect(const UniqueIdentifier& connector_id) = 0;
 	virtual ReturnCode_t Disconnect(const UniqueIdentifier& connector_id) = 0;
-	virtual ReturnCode_t NotifyConnect(ConnectorProfile* connector_profile) = 0;
-	virtual ReturnCode_t NotifyDisconnect(const UniqueIdentifier& connector_id) = 0;
 	virtual ReturnCode_t DisconnectAll() = 0;
+
+	virtual ReturnCode_t NotifyConnect(const UniqueIdentifier& connector_id) = 0;
+	virtual ReturnCode_t NotifyDisconnect(const UniqueIdentifier& connector_id) = 0;
+
 	virtual bool IsConnected(const UniqueIdentifier& connector_id) = 0;
 };
 }

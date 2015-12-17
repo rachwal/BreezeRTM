@@ -22,19 +22,19 @@ class Port : public omg_rtc::Port
 
 	virtual omg_rtc::PortProfile *port_profile() override;
 
-	virtual std::list<omg_rtc::UniqueIdentifier> *Port::GetConnectorProfiles() override;
+	virtual std::list<omg_rtc::UniqueIdentifier> *GetConnectorIdList() override;
 	virtual omg_rtc::ConnectorProfile *GetConnectorProfile(const omg_rtc::UniqueIdentifier& connector_id) override;
 
-	virtual omg_rtc::ReturnCode_t Connect(omg_rtc::ConnectorProfile* connector_profile) override;
+	virtual omg_rtc::ReturnCode_t Connect(const omg_rtc::UniqueIdentifier& connector_id) override;
 	virtual omg_rtc::ReturnCode_t Disconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
-	virtual omg_rtc::ReturnCode_t NotifyConnect(omg_rtc::ConnectorProfile* connector_profile) override;
+	virtual omg_rtc::ReturnCode_t NotifyConnect(const omg_rtc::UniqueIdentifier& connector_id) override;
 	virtual omg_rtc::ReturnCode_t NotifyDisconnect(const omg_rtc::UniqueIdentifier& connector_id) override;
 	virtual omg_rtc::ReturnCode_t DisconnectAll() override;
 
 	bool IsConnected(const omg_rtc::UniqueIdentifier& connector_id) override;
 
 	protected:
-	Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service);
+	Port(const omg_rtc::UniqueIdentifier port_id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service);
 
 	omg_rtc::PortProfile* profile_;
 

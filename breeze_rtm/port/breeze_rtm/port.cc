@@ -8,9 +8,9 @@ namespace breeze_rtm
 {
 namespace port
 {
-Port::Port(const omg_rtc::UniqueIdentifier id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service) : port_service_(port_service), connector_profile_service_(connector_profile_service), id_(id)
+Port::Port(const omg_rtc::UniqueIdentifier port_id, const omg_rtc::PortService* port_service, const omg_rtc::ConnectorProfileService* connector_profile_service) : port_service_(port_service), connector_profile_service_(connector_profile_service), id_(port_id)
 {
-	profile_ = new omg_rtc::PortProfile(id);
+	profile_ = new omg_rtc::PortProfile(port_id);
 }
 
 Port::~Port()
@@ -23,8 +23,9 @@ omg_rtc::UniqueIdentifier Port::id() const
 	return id_;
 }
 
-omg_rtc::ReturnCode_t Port::Connect(omg_rtc::ConnectorProfile* profile)
+omg_rtc::ReturnCode_t Port::Connect(const omg_rtc::UniqueIdentifier& connector_id)
 {
+	auto profile = connector_profile_service_->Retrieve(connector_id);
 	auto profile_id = profile->id();
 
 	if (IsConnected(profile_id))
@@ -34,7 +35,7 @@ omg_rtc::ReturnCode_t Port::Connect(omg_rtc::ConnectorProfile* profile)
 
 	profile_->AddConnectorProfileId(profile_id);
 
-	NotifyConnect(profile);
+	NotifyConnect(connector_id);
 
 	auto port_id_list = profile->GetPortIds();
 
@@ -43,7 +44,7 @@ omg_rtc::ReturnCode_t Port::Connect(omg_rtc::ConnectorProfile* profile)
 		auto port = port_service_->Retrieve(*port_id);
 		if (!port->IsConnected(profile_id))
 		{
-			port->Connect(profile);
+			port->Connect(profile_id);
 		}
 	}
 	delete port_id_list;
@@ -76,7 +77,7 @@ omg_rtc::ReturnCode_t Port::Disconnect(const omg_rtc::UniqueIdentifier& connecto
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::ReturnCode_t Port::NotifyConnect(omg_rtc::ConnectorProfile*)
+omg_rtc::ReturnCode_t Port::NotifyConnect(const omg_rtc::UniqueIdentifier&)
 {
 	return omg_rtc::RTC_OK;
 }
@@ -117,7 +118,7 @@ omg_rtc::PortProfile *Port::port_profile()
 	return profile_;
 }
 
-std::list<omg_rtc::UniqueIdentifier> *Port::GetConnectorProfiles()
+std::list<omg_rtc::UniqueIdentifier> *Port::GetConnectorIdList()
 {
 	return profile_->connector_id_list();
 }

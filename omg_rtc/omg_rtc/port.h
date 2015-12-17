@@ -6,6 +6,7 @@
 #define OMG_RTC_PORT_H_
 
 #include "port_profile.h"
+#include "connector_profile.h"
 
 #include <list>
 
@@ -21,7 +22,7 @@ class Port :public PortInterface
 	virtual PortProfile *port_profile() = 0;
 	virtual UniqueIdentifier id() const = 0;
 
-	virtual std::list<UniqueIdentifier> *Port::GetConnectorProfiles() = 0;
+	virtual std::list<UniqueIdentifier> *GetConnectorIdList() = 0;
 	virtual ConnectorProfile *GetConnectorProfile(const UniqueIdentifier& connector_id) = 0;
 };
 }
