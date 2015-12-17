@@ -7,7 +7,7 @@
 #include <tests/logger_stub.h>
 #include <tests/port_logging_stub.h>
 #include <tests/port_service_stub.h>
-#include <tests/connector_profile_service_stub.h>
+#include <tests/system_builder_stub.h>
 
 namespace breeze_rtm
 {
@@ -30,13 +30,14 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: alpha: connect(c1)\n") +
 			std::string("TRACE: alpha: notify_connect(c1)\n");
 
-		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub();
-		port_service->AttachConnectorProfileService(connector_profile_service);
+		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
+
+		auto port_service = system_builder->port_service();
 		auto port = port_service->Create("alpha", "p1", logger);
 
-		auto external_connector = connector_profile_service->Create("external", "c1");
+		auto connector_profile_service = system_builder->connector_profile_service();
+		connector_profile_service->Create("external", "c1");
 
 		//WHEN
 		port->Connect("c1");
@@ -46,12 +47,8 @@ TEST_CLASS(PortLoggingTest)
 
 		Assert::AreEqual(expected_logger_content, logger_content);
 
-		delete port;
-		delete port_service;
-		delete connector_profile_service;
 		delete logger;
-
-		delete external_connector;
+		delete system_builder;
 	}
 
 	TEST_METHOD(PortLoggingShouldNotifyAllPortsWhenConnected)
@@ -67,41 +64,34 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: connect(c1)\n") +
 			std::string("TRACE: Port 3: notify_connect(c1)\n");
 
-		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub();
-		port_service->AttachConnectorProfileService(connector_profile_service);
+		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
 
-		auto alpha = port_service->Create("Port 0", "p0", logger);
-		auto beta = port_service->Create("Port 1", "p1", logger);
-		auto gamma = port_service->Create("Port 2", "p2", logger);
-		auto delta = port_service->Create("Port 3", "p3", logger);
+		auto port_service = system_builder->port_service();
+		port_service->Create("Port 0", "p0", logger);
+		port_service->Create("Port 1", "p1", logger);
+		port_service->Create("Port 2", "p2", logger);
+		port_service->Create("Port 3", "p3", logger);
+
+		auto connector_profile_service = system_builder->connector_profile_service();
+		auto external_connector = connector_profile_service->Create("external", "c1");
 
 		//WHEN
-		auto external_connector = connector_profile_service->Create("external", "c1");
 		external_connector->AddPortId("p0");
 		external_connector->AddPortId("p1");
 		external_connector->AddPortId("p2");
 		external_connector->AddPortId("p3");
 
-		beta->Connect("c1");
+		auto test_port = port_service->Retrieve("p1");
+		test_port->Connect("c1");
 
 		//THEN
 		auto logger_content = logger->content();
 
 		Assert::AreEqual(expected_logger_content, logger_content);
 
-		delete alpha;
-		delete beta;
-		delete gamma;
-		delete delta;
-
-		delete port_service;
-		delete connector_profile_service;
-
-		delete external_connector;
-
 		delete logger;
+		delete system_builder;
 	}
 
 	TEST_METHOD(PortLoggingShouldNotifyAllPortsWhenDisconnected)
@@ -125,43 +115,34 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: disconnect(c1)\n") +
 			std::string("TRACE: Port 3: notify_disconnect(c1)\n");
 
-		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub();
-		port_service->AttachConnectorProfileService(connector_profile_service);
+		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
 
-		auto alpha = port_service->Create("Port 0", "p0", logger);
-		auto beta = port_service->Create("Port 1", "p1", logger);
-		auto gamma = port_service->Create("Port 2", "p2", logger);
-		auto delta = port_service->Create("Port 3", "p3", logger);
+		auto port_service = system_builder->port_service();
+		port_service->Create("Port 0", "p0", logger);
+		port_service->Create("Port 1", "p1", logger);
+		port_service->Create("Port 2", "p2", logger);
+		port_service->Create("Port 3", "p3", logger);
 
+		auto connector_profile_service = system_builder->connector_profile_service();
 		auto external_connector = connector_profile_service->Create("external", "c1");
 		external_connector->AddPortId("p0");
 		external_connector->AddPortId("p1");
 		external_connector->AddPortId("p2");
 		external_connector->AddPortId("p3");
 
-		beta->Connect("c1");
-
 		//WHEN
-		beta->Disconnect("c1");
+		auto test_port = port_service->Retrieve("p1");
+		test_port->Connect("c1");
+		test_port->Disconnect("c1");
 
 		//THEN
 		auto logger_content = logger->content();
 
 		Assert::AreEqual(expected_logger_content, logger_content);
 
-		delete alpha;
-		delete beta;
-		delete gamma;
-		delete delta;
-
-		delete port_service;
-		delete connector_profile_service;
-
-		delete external_connector;
-
 		delete logger;
+		delete system_builder;
 	}
 
 	TEST_METHOD(PortLoggingShouldNotifyAllPortsWhenDisconnectedAll)
@@ -186,43 +167,34 @@ TEST_CLASS(PortLoggingTest)
 			std::string("TRACE: Port 3: disconnect(c1)\n") +
 			std::string("TRACE: Port 3: notify_disconnect(c1)\n");
 
-		auto connector_profile_service = new stubs::ConnectorProfileServiceStub();
-		auto port_service = new stubs::PortServiceStub();
-		port_service->AttachConnectorProfileService(connector_profile_service);
+		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
 
-		auto alpha = port_service->Create("Port 0", "p0", logger);
-		auto beta = port_service->Create("Port 1", "p1", logger);
-		auto gamma = port_service->Create("Port 2", "p2", logger);
-		auto delta = port_service->Create("Port 3", "p3", logger);
+		auto port_service = system_builder->port_service();
+		port_service->Create("Port 0", "p0", logger);
+		port_service->Create("Port 1", "p1", logger);
+		port_service->Create("Port 2", "p2", logger);
+		port_service->Create("Port 3", "p3", logger);
 
+		auto connector_profile_service = system_builder->connector_profile_service();
 		auto external_connector = connector_profile_service->Create("external", "c1");
 		external_connector->AddPortId("p0");
 		external_connector->AddPortId("p1");
 		external_connector->AddPortId("p2");
 		external_connector->AddPortId("p3");
 
-		beta->Connect("c1");
-
 		//WHEN
-		beta->DisconnectAll();
+		auto test_port = port_service->Retrieve("p1");
+		test_port->Connect("c1");
+		test_port->DisconnectAll();
 
 		//THEN
 		auto logger_content = logger->content();
 
 		Assert::AreEqual(expected_logger_content, logger_content);
 
-		delete alpha;
-		delete beta;
-		delete gamma;
-		delete delta;
-
-		delete port_service;
-		delete connector_profile_service;
-
-		delete external_connector;
-
 		delete logger;
+		delete system_builder;
 	}
 };
 }

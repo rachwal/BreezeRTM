@@ -25,6 +25,7 @@
     <ClInclude Include="omg_rtc\connector_profile_service.h" />
     <ClInclude Include="omg_rtc\data_flow_component.h" />
     <ClInclude Include="omg_rtc\data_flow_component_action.h" />
+    <ClInclude Include="omg_rtc\data_flow_component_service.h" />
     <ClInclude Include="omg_rtc\execution_context.h" />
     <ClInclude Include="omg_rtc\execution_context_handle_t.h" />
     <ClInclude Include="omg_rtc\execution_context_profile.h" />
@@ -53,6 +54,7 @@
     <ClInclude Include="omg_rtc\port_service.h" />
     <ClInclude Include="omg_rtc\return_code_t.h" />
     <ClInclude Include="omg_rtc\rt_object.h" />
+    <ClInclude Include="omg_rtc\lightweight_rt_object_service_partner.h" />
     <ClInclude Include="omg_rtc\unique_identifier.h" />
   </ItemGroup>
   <ItemGroup>

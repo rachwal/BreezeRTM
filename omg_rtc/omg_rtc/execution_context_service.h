@@ -19,8 +19,6 @@ class ExecutionContextService
 
 	virtual ExecutionContext *Create(const UniqueIdentifier& id) const = 0;
 	virtual ExecutionContext *Retrieve(const UniqueIdentifier& id) const = 0;
-	virtual void Update(const UniqueIdentifier& id, const ExecutionContext& execution_context) const = 0;
-	virtual void Destroy(const UniqueIdentifier& id) const = 0;
 };
 }
 }

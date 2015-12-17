@@ -21,18 +21,18 @@ class LightweightRTObjectServiceStub : public omg_rtc::LightweightRTObjectServic
 	explicit LightweightRTObjectServiceStub();
 	~LightweightRTObjectServiceStub();
 
-	static LightweightRTObjectServiceStub *CreateServiceStub();
-
 	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id) const override;
 	omg_rtc::LightweightRTObject *Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id, omg_rtc::Logger* logger) const override;
+
+	void Register(const omg_rtc::UniqueIdentifier& id, const LightweightRTObjectServicePartner* lightweight_rt_object) const override;
+
 	omg_rtc::LightweightRTObject *Retrieve(const omg_rtc::UniqueIdentifier& id) const override;
-	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::LightweightRTObject& execution_context) const override;
-	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
 	void AttachExecutionContextService(omg_rtc::ExecutionContextService* execution_context_service);
 	void AttachPortService(omg_rtc::PortService* port_service);
 
 	private:
+	std::map<omg_rtc::UniqueIdentifier, const LightweightRTObjectServicePartner*>* register_;
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::LightweightRTObject*>* lightweight_rt_object_map_;
 	omg_rtc::PortService* port_service_;
 	omg_rtc::ExecutionContextService* execution_context_service_;

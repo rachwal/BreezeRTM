@@ -6,6 +6,7 @@
 #define OMG_RTC_CONNECTOR_PROFILE_SERVICE_H_
 
 #include "port_profile.h"
+#include "connector_profile.h"
 
 namespace breeze_rtm
 {
@@ -18,8 +19,6 @@ class ConnectorProfileService
 
 	virtual ConnectorProfile *Create(const std::string name, const UniqueIdentifier& id) const = 0;
 	virtual ConnectorProfile *Retrieve(const UniqueIdentifier& id) const = 0;
-	virtual void Update(const UniqueIdentifier& id, const ConnectorProfile& port) const = 0;
-	virtual void Destroy(const UniqueIdentifier& id) const = 0;
 };
 }
 }

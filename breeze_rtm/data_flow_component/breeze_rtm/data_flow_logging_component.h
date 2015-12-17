@@ -7,13 +7,11 @@
 
 #include "data_flow_component.h"
 
-#include <breeze_rtm/rt_logging_object.h>
-
 namespace breeze_rtm
 {
 namespace data_flow_component
 {
-class DataFlowLoggingComponent : public rt_object::RTLoggingObject, public omg_rtc::DataFlowComponentAction
+class DataFlowLoggingComponent : public DataFlowComponent
 {
 	public:
 	omg_rtc::ReturnCode_t OnExecute(omg_rtc::ExecutionContextHandle_t handle) override;
@@ -22,6 +20,9 @@ class DataFlowLoggingComponent : public rt_object::RTLoggingObject, public omg_r
 
 	protected:
 	explicit DataFlowLoggingComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger);
+
+	private:
+	omg_rtc::Logger* logger_;
 };
 }
 }

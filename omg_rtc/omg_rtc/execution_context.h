@@ -15,8 +15,6 @@ namespace breeze_rtm
 {
 namespace omg_rtc
 {
-class LightweightRTObject;
-
 class ExecutionContext
 {
 	public:
@@ -32,13 +30,14 @@ class ExecutionContext
 	virtual double rate() = 0;
 	virtual ReturnCode_t rate(double rate) = 0;
 
-	virtual ReturnCode_t AddComponent(LightweightRTObject* comp) = 0;
-	virtual ReturnCode_t RemoveComponent(LightweightRTObject* comp) = 0;
-	virtual ReturnCode_t ActivateComponent(LightweightRTObject* comp) = 0;
-	virtual ReturnCode_t DeactivateComponent(LightweightRTObject* comp) = 0;
-	virtual ReturnCode_t ResetComponent(LightweightRTObject* comp) = 0;
+	virtual ReturnCode_t AddComponent(const UniqueIdentifier& component_id) = 0;
+	virtual ReturnCode_t RemoveComponent(const UniqueIdentifier& component_id) = 0;
+	virtual ReturnCode_t ActivateComponent(const UniqueIdentifier& component_id) = 0;
+	virtual ReturnCode_t DeactivateComponent(const UniqueIdentifier& component_id) = 0;
+	virtual ReturnCode_t ResetComponent(const UniqueIdentifier& component_id) = 0;
 
-	virtual LifeCycleState component_state(LightweightRTObject* comp) = 0;
+	virtual LifeCycleState component_state(const UniqueIdentifier& component_id) = 0;
+
 	virtual ExecutionKind kind() = 0;
 };
 }

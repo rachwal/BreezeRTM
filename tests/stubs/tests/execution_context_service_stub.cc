@@ -4,9 +4,6 @@
 
 #include "execution_context_service_stub.h"
 #include "execution_context_stub.h"
-#include "lightweight_rt_object_service_stub.h"
-#include "port_service_stub.h"
-#include "connector_profile_service_stub.h"
 
 namespace breeze_rtm
 {
@@ -25,22 +22,6 @@ ExecutionContextServiceStub::~ExecutionContextServiceStub()
 	delete execution_context_map_;
 }
 
-ExecutionContextServiceStub *ExecutionContextServiceStub::CreateServiceStub()
-{
-	auto connector_profile_service = new ConnectorProfileServiceStub();
-	auto port_service = new PortServiceStub();
-	port_service->AttachConnectorProfileService(connector_profile_service);
-
-	auto lightweight_rt_object_service = new LightweightRTObjectServiceStub();
-	lightweight_rt_object_service->AttachPortService(port_service);
-
-	auto execution_context_service = new ExecutionContextServiceStub();
-	execution_context_service->AttachLightweightRTObjectService(lightweight_rt_object_service);
-	lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
-
-	return execution_context_service;
-}
-
 omg_rtc::ExecutionContext *ExecutionContextServiceStub::Create(const omg_rtc::UniqueIdentifier& id) const
 {
 	auto new_execution_context = new ExecutionContextStub(this, lightweight_rt_object_service_);
@@ -54,10 +35,6 @@ omg_rtc::ExecutionContext *ExecutionContextServiceStub::Retrieve(const omg_rtc::
 {
 	return execution_context_map_->operator[](id);
 }
-
-void ExecutionContextServiceStub::Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::ExecutionContext& execution_context) const {}
-
-void ExecutionContextServiceStub::Destroy(const omg_rtc::UniqueIdentifier& id) const { }
 
 void ExecutionContextServiceStub::AttachLightweightRTObjectService(omg_rtc::LightweightRTObjectService* lightweight_rt_object_service)
 {

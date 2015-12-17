@@ -20,12 +20,8 @@ class ExecutionContextServiceStub : public omg_rtc::ExecutionContextService
 	explicit ExecutionContextServiceStub();
 	~ExecutionContextServiceStub();
 
-	static ExecutionContextServiceStub *CreateServiceStub();
-
 	omg_rtc::ExecutionContext *Create(const omg_rtc::UniqueIdentifier& id) const override;
 	omg_rtc::ExecutionContext *Retrieve(const omg_rtc::UniqueIdentifier& id) const override;
-	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::ExecutionContext& execution_context) const override;
-	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
 	void AttachLightweightRTObjectService(omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
 

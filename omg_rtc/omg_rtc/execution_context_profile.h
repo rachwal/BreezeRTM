@@ -12,8 +12,6 @@ namespace breeze_rtm
 {
 namespace omg_rtc
 {
-class RTObject;
-
 struct ExecutionContextProfile
 {
 	UniqueIdentifier id;

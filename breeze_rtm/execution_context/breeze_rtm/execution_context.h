@@ -8,9 +8,9 @@
 #include <omg_rtc/execution_context.h>
 #include <omg_rtc/lightweight_rt_object.h>
 #include <omg_rtc/lightweight_rt_object_service.h>
+#include <omg_rtc/execution_context_service.h>
 
 #include <map>
-#include <omg_rtc/execution_context_service.h>
 
 namespace breeze_rtm
 {
@@ -28,23 +28,23 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	virtual omg_rtc::ReturnCode_t Start() override;
 	virtual omg_rtc::ReturnCode_t Stop() override;
 
-	virtual omg_rtc::ReturnCode_t AddComponent(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t RemoveComponent(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t ActivateComponent(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t DeactivateComponent(omg_rtc::LightweightRTObject* comp) override;
-	virtual omg_rtc::ReturnCode_t ResetComponent(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::ReturnCode_t AddComponent(const omg_rtc::UniqueIdentifier& component_id) override;
+	virtual omg_rtc::ReturnCode_t RemoveComponent(const omg_rtc::UniqueIdentifier& component_id) override;
+	virtual omg_rtc::ReturnCode_t ActivateComponent(const omg_rtc::UniqueIdentifier& component_id) override;
+	virtual omg_rtc::ReturnCode_t DeactivateComponent(const omg_rtc::UniqueIdentifier& component_id) override;
+	virtual omg_rtc::ReturnCode_t ResetComponent(const omg_rtc::UniqueIdentifier& component_id) override;
 
 	virtual double rate() override;
 	virtual omg_rtc::ReturnCode_t rate(double rate) override;
 
-	virtual omg_rtc::LifeCycleState component_state(omg_rtc::LightweightRTObject* comp) override;
+	virtual omg_rtc::LifeCycleState component_state(const omg_rtc::UniqueIdentifier& component_id) override;
 	virtual omg_rtc::ExecutionKind kind() override;
 
 	protected:
 	explicit ExecutionContext(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
 
-	std::map<omg_rtc::LightweightRTObject*, omg_rtc::ExecutionContextHandle_t>* components_;
-	omg_rtc::ExecutionContextProfile* profile_;
+	std::map<omg_rtc::UniqueIdentifier, omg_rtc::ExecutionContextHandle_t>* components_map_;
+	omg_rtc::ExecutionContextProfile profile_;
 
 	private:
 	double rate_;

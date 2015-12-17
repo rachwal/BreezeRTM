@@ -5,7 +5,6 @@
 #include "port_service_stub.h"
 #include "port_stub.h"
 #include "port_logging_stub.h"
-#include "connector_profile_service_stub.h"
 
 namespace breeze_rtm
 {
@@ -22,14 +21,6 @@ PortServiceStub::~PortServiceStub()
 	auto end = ports_->end();
 	ports_->erase(begin, end);
 	delete ports_;
-}
-
-PortServiceStub *PortServiceStub::CreateServiceStub()
-{
-	auto connector_profile_service = new ConnectorProfileServiceStub();
-	auto port_service = new PortServiceStub();
-	port_service->AttachConnectorProfileService(connector_profile_service);
-	return port_service;
 }
 
 omg_rtc::Port *PortServiceStub::Create(const omg_rtc::UniqueIdentifier& id) const
@@ -53,13 +44,6 @@ omg_rtc::Port *PortServiceStub::Create(const std::string& name, const omg_rtc::U
 omg_rtc::Port *PortServiceStub::Retrieve(const omg_rtc::UniqueIdentifier& id) const
 {
 	return ports_->operator[](id);
-}
-
-void PortServiceStub::Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::Port& port) const { }
-
-void PortServiceStub::Destroy(const omg_rtc::UniqueIdentifier& id) const
-{
-	ports_->erase(id);
 }
 
 void PortServiceStub::AttachConnectorProfileService(omg_rtc::ConnectorProfileService* connector_profile_service)

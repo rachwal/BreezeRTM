@@ -126,6 +126,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\breeze_rtm\data_flow_component\data_flow_component.vcxproj">
+      <Project>{73b77ef3-9ac3-4f28-90c2-1d58d9864017}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\breeze_rtm\execution_context\execution_context.vcxproj">
       <Project>{3264fee4-6d2d-4cfa-8f70-e5ee51b24922}</Project>
     </ProjectReference>

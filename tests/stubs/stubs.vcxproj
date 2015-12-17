@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="tests\connector_profile_service_stub.h" />
+    <ClInclude Include="tests\data_flow_component_service_stub.h" />
     <ClInclude Include="tests\data_flow_component_stub.h" />
     <ClInclude Include="tests\data_flow_logging_component_stub.h" />
     <ClInclude Include="tests\execution_context_service_stub.h" />
@@ -31,9 +32,11 @@
     <ClInclude Include="tests\port_stub.h" />
     <ClInclude Include="tests\rt_logging_object_stub.h" />
     <ClInclude Include="tests\rt_object_stub.h" />
+    <ClInclude Include="tests\system_builder_stub.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tests\connector_profile_service_stub.cc" />
+    <ClCompile Include="tests\data_flow_component_service_stub.cc" />
     <ClCompile Include="tests\data_flow_component_stub.cc" />
     <ClCompile Include="tests\data_flow_logging_component_stub.cc" />
     <ClCompile Include="tests\execution_context_service_stub.cc" />
@@ -45,6 +48,7 @@
     <ClCompile Include="tests\port_stub.cc" />
     <ClCompile Include="tests\rt_logging_object_stub.cc" />
     <ClCompile Include="tests\rt_object_stub.cc" />
+    <ClCompile Include="tests\system_builder_stub.cc" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{33BD4F2C-2B46-4B3A-9D9E-C8B496725721}</ProjectGuid>

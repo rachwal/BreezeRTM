@@ -151,6 +151,12 @@
     <ClInclude Include="omg_rtc\lightweight_rt_object_service.h">
       <Filter>Header Files\rt_object</Filter>
     </ClInclude>
+    <ClInclude Include="omg_rtc\data_flow_component_service.h">
+      <Filter>Header Files\data_flow_component</Filter>
+    </ClInclude>
+    <ClInclude Include="omg_rtc\lightweight_rt_object_service_partner.h">
+      <Filter>Header Files\rt_object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="omg_rtc\connector_profile.cc">

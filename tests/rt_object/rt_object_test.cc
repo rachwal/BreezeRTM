@@ -5,8 +5,7 @@
 #include <CppUnitTest.h>
 
 #include <tests/execution_context_stub.h>
-#include <tests/execution_context_service_stub.h>
-#include <tests/lightweight_rt_object_service_stub.h>
+#include <tests/system_builder_stub.h>
 
 namespace breeze_rtm
 {
@@ -25,7 +24,9 @@ TEST_CLASS(RTObjectTest)
 	TEST_METHOD(RTObjectShouldInitialize)
 	{
 		//GIVEN
-		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		//WHEN
@@ -34,14 +35,15 @@ TEST_CLASS(RTObjectTest)
 		//THEN
 		Assert::AreEqual(0, static_cast<int>(return_code));
 
-		delete rt_object;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldNotInitializeMoreThanOnce)
 	{
 		//GIVEN
-		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		//WHEN
@@ -52,15 +54,16 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
 		Assert::AreEqual(5, static_cast<int>(second_return_code));
 
-		delete rt_object;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 
 	TEST_METHOD(RTObjectShouldFinalize)
 	{
 		//GIVEN
-		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		//WHEN
@@ -71,22 +74,21 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
 		Assert::AreEqual(0, static_cast<int>(second_return_code));
 
-		delete rt_object;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldNotFinalizeWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
-		auto rt_object = lightweight_rt_object_service->Create("rto1");
+		auto system_builder = new stubs::SystemBuilderStub();
 
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
+		auto rt_object = lightweight_rt_object_service->Create("rto1");
 		auto first_return_code = rt_object->Initialize("ec");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		auto external_execution_context = execution_context_service->Create("external_ec");
-		external_execution_context->AddComponent(rt_object);
+		external_execution_context->AddComponent("rto1");
 
 		//WHEN
 		auto second_return_code = rt_object->Finalize();
@@ -95,15 +97,15 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(0, static_cast<int>(first_return_code));
 		Assert::AreEqual(5, static_cast<int>(second_return_code));
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldNotFinalizeWhenIsNotInitialized)
 	{
 		//GIVEN
-		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		//WHEN
@@ -112,22 +114,22 @@ TEST_CLASS(RTObjectTest)
 		//THEN
 		Assert::AreEqual(5, static_cast<int>(return_code));
 
-		delete rt_object;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldBeAliveWhenParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		rt_object->Initialize("ec");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		auto external_execution_context = execution_context_service->Create("external_ec");
-		external_execution_context->AddComponent(rt_object);
+		external_execution_context->AddComponent("rto1");
 
 		//WHEN
 		auto is_alive = rt_object->IsAlive("external_ec");
@@ -135,21 +137,20 @@ TEST_CLASS(RTObjectTest)
 		//THEN
 		Assert::IsTrue(is_alive);
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldNotBeAliveWhenNotParticipatingInExecutionContext)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		rt_object->Initialize("ec");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		execution_context_service->Create("external_ec");
 
 		//WHEN
@@ -158,9 +159,7 @@ TEST_CLASS(RTObjectTest)
 		//THEN
 		Assert::IsFalse(is_alive);
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldExit)
@@ -177,11 +176,12 @@ TEST_CLASS(RTObjectTest)
 	TEST_METHOD(RTObjectShouldAttachContext)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		execution_context_service->Create("external_ec");
 
 		//WHEN
@@ -190,19 +190,18 @@ TEST_CLASS(RTObjectTest)
 		//THEN
 		Assert::AreEqual(1L, handle);
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldNotAttachTheSameContextMoreThanOnce)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		execution_context_service->Create("external_ec");
 
 		//WHEN
@@ -213,19 +212,18 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(1L, first_handle);
 		Assert::AreEqual(1L, second_handle);
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldAttachTwoDifferentContexts)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		execution_context_service->Create("first_ec");
 		execution_context_service->Create("second_ec");
 
@@ -237,19 +235,18 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(1L, first_handle);
 		Assert::AreEqual(2L, second_handle);
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldDetachContext)
 	{
 		//GIVEN
-		auto execution_context_service = stubs::ExecutionContextServiceStub::CreateServiceStub();
-		auto lightweight_rt_object_service = new stubs::LightweightRTObjectServiceStub();
-		lightweight_rt_object_service->AttachExecutionContextService(execution_context_service);
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
+		auto execution_context_service = system_builder->execution_context_service();
 		execution_context_service->Create("first_ec");
 		execution_context_service->Create("second_ec");
 		execution_context_service->Create("third_ec");
@@ -269,15 +266,15 @@ TEST_CLASS(RTObjectTest)
 		Assert::AreEqual(1L, third_handle);
 		Assert::AreEqual(3L, fourth_handle);
 
-		delete rt_object;
-		delete execution_context_service;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 
 	TEST_METHOD(RTObjectShouldNotFinalizeWhenNotInitializedBefore)
 	{
 		//GIVEN
-		auto lightweight_rt_object_service = stubs::LightweightRTObjectServiceStub::CreateServiceStub();
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
 		auto rt_object = lightweight_rt_object_service->Create("rto1");
 
 		//WHEN
@@ -286,8 +283,7 @@ TEST_CLASS(RTObjectTest)
 		//THEN
 		Assert::AreEqual(5, static_cast<int>(finalize_component_return_code));
 
-		delete rt_object;
-		delete lightweight_rt_object_service;
+		delete system_builder;
 	}
 };
 }

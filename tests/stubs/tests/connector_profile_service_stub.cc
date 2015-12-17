@@ -36,13 +36,6 @@ omg_rtc::ConnectorProfile *ConnectorProfileServiceStub::Retrieve(const omg_rtc::
 {
 	return profiles_->operator[](id);
 }
-
-void ConnectorProfileServiceStub::Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::ConnectorProfile& port) const {}
-
-void ConnectorProfileServiceStub::Destroy(const omg_rtc::UniqueIdentifier& id) const
-{
-	profiles_->erase(id);
-}
 }
 }
 

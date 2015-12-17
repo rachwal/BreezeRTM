@@ -10,12 +10,12 @@ namespace stubs
 {
 ExecutionContextStub::ExecutionContextStub(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service): ExecutionContext(execution_context_service, lightweight_rt_object_service)
 {
-	profile_->kind = omg_rtc::ExecutionKind::PERIODIC;
+	profile_.kind = omg_rtc::ExecutionKind::PERIODIC;
 }
 
 omg_rtc::ExecutionContextProfile *ExecutionContextStub::profile()
 {
-	return profile_;
+	return &profile_;
 }
 }
 }

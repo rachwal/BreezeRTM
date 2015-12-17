@@ -22,8 +22,6 @@ class ConnectorProfileServiceStub : public omg_rtc::ConnectorProfileService
 
 	omg_rtc::ConnectorProfile *Create(const std::string name, const omg_rtc::UniqueIdentifier& id) const override;
 	omg_rtc::ConnectorProfile *Retrieve(const omg_rtc::UniqueIdentifier& id) const override;
-	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::ConnectorProfile& port) const override;
-	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
 	private:
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::ConnectorProfile*>* profiles_;

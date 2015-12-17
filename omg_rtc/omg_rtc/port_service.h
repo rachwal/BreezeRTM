@@ -20,8 +20,6 @@ class PortService
 	virtual Port *Create(const UniqueIdentifier& id) const = 0;
 	virtual Port *Create(const std::string&, const UniqueIdentifier& id, Logger*) const = 0;
 	virtual Port *Retrieve(const UniqueIdentifier& id) const = 0;
-	virtual void Update(const UniqueIdentifier& id, const Port& port) const = 0;
-	virtual void Destroy(const UniqueIdentifier& id) const = 0;
 };
 }
 }

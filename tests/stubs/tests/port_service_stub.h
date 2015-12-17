@@ -21,13 +21,9 @@ class PortServiceStub : public omg_rtc::PortService
 	explicit PortServiceStub();
 	~PortServiceStub();
 
-	static PortServiceStub *CreateServiceStub();
-
 	omg_rtc::Port *Create(const omg_rtc::UniqueIdentifier& id) const override;
 	omg_rtc::Port *Create(const std::string&, const omg_rtc::UniqueIdentifier& id, omg_rtc::Logger*) const override;
 	omg_rtc::Port *Retrieve(const omg_rtc::UniqueIdentifier& id) const override;
-	void Update(const omg_rtc::UniqueIdentifier& id, const omg_rtc::Port& port) const override;
-	void Destroy(const omg_rtc::UniqueIdentifier& id) const override;
 
 	void AttachConnectorProfileService(omg_rtc::ConnectorProfileService* connector_profile_service);
 
