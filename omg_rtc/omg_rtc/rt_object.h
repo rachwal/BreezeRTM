@@ -7,13 +7,12 @@
 
 #include "lightweight_rt_object.h"
 #include "component_profile.h"
+#include "port_interface.h"
 
 namespace breeze_rtm
 {
 namespace omg_rtc
 {
-class PortInterface;
-
 class RTObject : public LightweightRTObject
 {
 	public:
