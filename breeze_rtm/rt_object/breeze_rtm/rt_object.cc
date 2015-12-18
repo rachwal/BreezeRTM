@@ -41,11 +41,6 @@ omg_rtc::ReturnCode_t RTObject::Initialize(const omg_rtc::UniqueIdentifier& exec
 		return omg_rtc::ReturnCode_t::PRECONDITION_NOT_MET;
 	}
 
-	if (&execution_context_id == nullptr)
-	{
-		return omg_rtc::RTC_ERROR;
-	}
-
 	owned_contexts_->push_back(execution_context_id);
 
 	initialized_ = true;
@@ -77,10 +72,9 @@ omg_rtc::ReturnCode_t RTObject::Finalize()
 
 bool RTObject::IsAlive(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
-	for (auto iterator = owned_contexts_->begin(); iterator != owned_contexts_->end(); ++iterator)
+	for (auto owned_context_id = owned_contexts_->begin(); owned_context_id != owned_contexts_->end(); ++owned_context_id)
 	{
-		auto context = *iterator;
-		if (context == execution_context_id)
+		if (*owned_context_id == execution_context_id)
 		{
 			return true;
 		}
@@ -88,8 +82,8 @@ bool RTObject::IsAlive(const omg_rtc::UniqueIdentifier& execution_context_id)
 
 	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
 	{
-		auto context = iterator->second;
-		if (context == execution_context_id)
+		auto participating_context_id = iterator->second;
+		if (participating_context_id == execution_context_id)
 		{
 			return true;
 		}
@@ -106,10 +100,10 @@ omg_rtc::ExecutionContextHandle_t RTObject::AttachContext(const omg_rtc::UniqueI
 {
 	omg_rtc::ExecutionContextHandle_t new_handle = 1;
 
-	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
+	for (auto participating_context = participating_contexts_->begin(); participating_context != participating_contexts_->end(); ++participating_context)
 	{
-		auto context = iterator->second;
-		auto handle = iterator->first;
+		auto context = participating_context->second;
+		auto handle = participating_context->first;
 
 		if (handle == new_handle)
 		{
@@ -152,10 +146,10 @@ std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier> *RTObject
 
 omg_rtc::ExecutionContextHandle_t RTObject::GetContextHandle(const omg_rtc::UniqueIdentifier& execution_context_id)
 {
-	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
+	for (auto participating_context = participating_contexts_->begin(); participating_context != participating_contexts_->end(); ++participating_context)
 	{
-		auto context = iterator->second;
-		auto handle = iterator->first;
+		auto context = participating_context->second;
+		auto handle = participating_context->first;
 
 		if (context == execution_context_id)
 		{

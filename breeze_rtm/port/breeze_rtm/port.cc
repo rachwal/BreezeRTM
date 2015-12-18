@@ -38,7 +38,6 @@ omg_rtc::ReturnCode_t Port::Connect(const omg_rtc::UniqueIdentifier& connector_i
 	NotifyConnect(connector_id);
 
 	auto port_id_list = profile->GetPortIds();
-
 	for (auto port_id = port_id_list->begin(); port_id != port_id_list->end(); ++port_id)
 	{
 		auto port = port_service_->Retrieve(*port_id);
@@ -74,6 +73,8 @@ omg_rtc::ReturnCode_t Port::Disconnect(const omg_rtc::UniqueIdentifier& connecto
 			port->Disconnect(connector_id);
 		}
 	}
+	delete port_id_list;
+
 	return omg_rtc::RTC_OK;
 }
 
@@ -90,7 +91,6 @@ omg_rtc::ReturnCode_t Port::NotifyDisconnect(const omg_rtc::UniqueIdentifier&)
 omg_rtc::ReturnCode_t Port::DisconnectAll()
 {
 	auto connector_id_list = profile_->connector_id_list();
-
 	for (auto connector_id = connector_id_list->begin(); connector_id != connector_id_list->end(); ++connector_id)
 	{
 		Disconnect(*connector_id);
@@ -110,6 +110,8 @@ bool Port::IsConnected(const omg_rtc::UniqueIdentifier& connector_id)
 			return true;
 		}
 	}
+	delete connector_id_list;
+
 	return false;
 }
 
