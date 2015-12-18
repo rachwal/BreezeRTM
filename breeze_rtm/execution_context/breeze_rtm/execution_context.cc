@@ -68,9 +68,9 @@ omg_rtc::ReturnCode_t ExecutionContext::rate(double rate)
 
 omg_rtc::ReturnCode_t ExecutionContext::AddComponent(const omg_rtc::UniqueIdentifier& component_id)
 {
-	for (auto iterator = components_map_->begin(); iterator != components_map_->end(); ++iterator)
+	for (auto entry = components_map_->begin(); entry != components_map_->end(); ++entry)
 	{
-		auto component = iterator->first;
+		auto component = entry->first;
 		if (component == component_id)
 		{
 			return omg_rtc::PRECONDITION_NOT_MET;
