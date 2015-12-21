@@ -111,6 +111,8 @@ omg_rtc::ReturnCode_t RTObject::Exit()
 		auto execution_context = execution_context_service_->Retrieve(participating_context_id);
 		execution_context->DeactivateComponent(profile_.id);
 	}
+	
+	Finalize();
 
 	return omg_rtc::RTC_OK;
 }
