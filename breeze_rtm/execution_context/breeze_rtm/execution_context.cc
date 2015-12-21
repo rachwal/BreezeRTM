@@ -29,7 +29,7 @@ omg_rtc::ExecutionContextProfile *ExecutionContext::profile()
 
 bool ExecutionContext::IsRunning()
 {
-	return components_state_map_->operator[](profile_.id);
+	return components_state_map_->operator[](profile_.id) == omg_rtc::ACTIVE_STATE;
 }
 
 omg_rtc::ReturnCode_t ExecutionContext::Start()
