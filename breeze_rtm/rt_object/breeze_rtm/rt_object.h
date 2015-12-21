@@ -6,7 +6,6 @@
 #define BREEZE_RTM_RT_OBJECT_RT_OBJECT_H_
 
 #include <omg_rtc/rt_object.h>
-#include <omg_rtc/port.h>
 #include <omg_rtc/component_profile.h>
 #include <omg_rtc/execution_context_service.h>
 #include <omg_rtc/port_service.h>

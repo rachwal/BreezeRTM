@@ -27,8 +27,8 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: alpha: connect(c1)\n") +
-			std::string("TRACE: alpha: notify_connect(c1)\n");
+			std::string("TRACE: alpha: Connect(c1)\n") +
+			std::string("TRACE: alpha: NotifyConnect(c1)\n");
 
 		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
@@ -55,14 +55,14 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: Port 1: connect(c1)\n") +
-			std::string("TRACE: Port 1: notify_connect(c1)\n") +
-			std::string("TRACE: Port 0: connect(c1)\n") +
-			std::string("TRACE: Port 0: notify_connect(c1)\n") +
-			std::string("TRACE: Port 2: connect(c1)\n") +
-			std::string("TRACE: Port 2: notify_connect(c1)\n") +
-			std::string("TRACE: Port 3: connect(c1)\n") +
-			std::string("TRACE: Port 3: notify_connect(c1)\n");
+			std::string("TRACE: Port 1: Connect(c1)\n") +
+			std::string("TRACE: Port 1: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 0: Connect(c1)\n") +
+			std::string("TRACE: Port 0: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 2: Connect(c1)\n") +
+			std::string("TRACE: Port 2: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 3: Connect(c1)\n") +
+			std::string("TRACE: Port 3: NotifyConnect(c1)\n");
 
 		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
@@ -98,22 +98,22 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: Port 1: connect(c1)\n") +
-			std::string("TRACE: Port 1: notify_connect(c1)\n") +
-			std::string("TRACE: Port 0: connect(c1)\n") +
-			std::string("TRACE: Port 0: notify_connect(c1)\n") +
-			std::string("TRACE: Port 2: connect(c1)\n") +
-			std::string("TRACE: Port 2: notify_connect(c1)\n") +
-			std::string("TRACE: Port 3: connect(c1)\n") +
-			std::string("TRACE: Port 3: notify_connect(c1)\n") +
-			std::string("TRACE: Port 1: disconnect(c1)\n") +
-			std::string("TRACE: Port 1: notify_disconnect(c1)\n") +
-			std::string("TRACE: Port 0: disconnect(c1)\n") +
-			std::string("TRACE: Port 0: notify_disconnect(c1)\n") +
-			std::string("TRACE: Port 2: disconnect(c1)\n") +
-			std::string("TRACE: Port 2: notify_disconnect(c1)\n") +
-			std::string("TRACE: Port 3: disconnect(c1)\n") +
-			std::string("TRACE: Port 3: notify_disconnect(c1)\n");
+			std::string("TRACE: Port 1: Connect(c1)\n") +
+			std::string("TRACE: Port 1: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 0: Connect(c1)\n") +
+			std::string("TRACE: Port 0: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 2: Connect(c1)\n") +
+			std::string("TRACE: Port 2: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 3: Connect(c1)\n") +
+			std::string("TRACE: Port 3: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 1: Disconnect(c1)\n") +
+			std::string("TRACE: Port 1: NotifyDisconnect(c1)\n") +
+			std::string("TRACE: Port 0: Disconnect(c1)\n") +
+			std::string("TRACE: Port 0: NotifyDisconnect(c1)\n") +
+			std::string("TRACE: Port 2: Disconnect(c1)\n") +
+			std::string("TRACE: Port 2: NotifyDisconnect(c1)\n") +
+			std::string("TRACE: Port 3: Disconnect(c1)\n") +
+			std::string("TRACE: Port 3: NotifyDisconnect(c1)\n");
 
 		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();
@@ -149,23 +149,23 @@ TEST_CLASS(PortLoggingTest)
 	{
 		//GIVEN
 		auto expected_logger_content =
-			std::string("TRACE: Port 1: connect(c1)\n") +
-			std::string("TRACE: Port 1: notify_connect(c1)\n") +
-			std::string("TRACE: Port 0: connect(c1)\n") +
-			std::string("TRACE: Port 0: notify_connect(c1)\n") +
-			std::string("TRACE: Port 2: connect(c1)\n") +
-			std::string("TRACE: Port 2: notify_connect(c1)\n") +
-			std::string("TRACE: Port 3: connect(c1)\n") +
-			std::string("TRACE: Port 3: notify_connect(c1)\n") +
-			std::string("TRACE: Port 1: disconnect_all()\n") +
-			std::string("TRACE: Port 1: disconnect(c1)\n") +
-			std::string("TRACE: Port 1: notify_disconnect(c1)\n") +
-			std::string("TRACE: Port 0: disconnect(c1)\n") +
-			std::string("TRACE: Port 0: notify_disconnect(c1)\n") +
-			std::string("TRACE: Port 2: disconnect(c1)\n") +
-			std::string("TRACE: Port 2: notify_disconnect(c1)\n") +
-			std::string("TRACE: Port 3: disconnect(c1)\n") +
-			std::string("TRACE: Port 3: notify_disconnect(c1)\n");
+			std::string("TRACE: Port 1: Connect(c1)\n") +
+			std::string("TRACE: Port 1: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 0: Connect(c1)\n") +
+			std::string("TRACE: Port 0: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 2: Connect(c1)\n") +
+			std::string("TRACE: Port 2: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 3: Connect(c1)\n") +
+			std::string("TRACE: Port 3: NotifyConnect(c1)\n") +
+			std::string("TRACE: Port 1: DisconnectAll()\n") +
+			std::string("TRACE: Port 1: Disconnect(c1)\n") +
+			std::string("TRACE: Port 1: NotifyDisconnect(c1)\n") +
+			std::string("TRACE: Port 0: Disconnect(c1)\n") +
+			std::string("TRACE: Port 0: NotifyDisconnect(c1)\n") +
+			std::string("TRACE: Port 2: Disconnect(c1)\n") +
+			std::string("TRACE: Port 2: NotifyDisconnect(c1)\n") +
+			std::string("TRACE: Port 3: Disconnect(c1)\n") +
+			std::string("TRACE: Port 3: NotifyDisconnect(c1)\n");
 
 		auto system_builder = new stubs::SystemBuilderStub();
 		auto logger = new stubs::LoggerStub();

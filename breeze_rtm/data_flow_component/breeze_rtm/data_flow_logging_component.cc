@@ -10,13 +10,13 @@ namespace breeze_rtm
 {
 namespace data_flow_component
 {
-DataFlowLoggingComponent::DataFlowLoggingComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) 
+DataFlowLoggingComponent::DataFlowLoggingComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger)
 	: DataFlowComponent(execution_context_service, port_service), logger_(logger) {}
 
 omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnExecute(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
-	stream << "on_execute" << "(" << handle << ")";
+	stream << "OnExecute" << "(" << handle << ")";
 	logger_->Trace(profile_.instance_name, stream.str());
 
 	return omg_rtc::RTC_OK;
@@ -25,7 +25,7 @@ omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnExecute(omg_rtc::ExecutionCont
 omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnStateUpdate(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
-	stream << "on_state_update" << "(" << handle << ")";
+	stream << "OnStateUpdate" << "(" << handle << ")";
 	logger_->Trace(profile_.instance_name, stream.str());
 
 	return omg_rtc::RTC_OK;
@@ -34,7 +34,7 @@ omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnStateUpdate(omg_rtc::Execution
 omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnRateChanged(omg_rtc::ExecutionContextHandle_t handle)
 {
 	std::stringstream stream;
-	stream << "on_rate_changed" << "(" << handle << ")";
+	stream << "OnRateChanged" << "(" << handle << ")";
 	logger_->Trace(profile_.instance_name, stream.str());
 
 	return omg_rtc::RTC_OK;

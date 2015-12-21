@@ -135,7 +135,6 @@ omg_rtc::ReturnCode_t ExecutionContext::DeactivateComponent(const omg_rtc::Uniqu
 
 	auto handle = components_map_->operator[](component_id);
 	auto component = lightweight_rt_object_service_->Retrieve(component_id);
-
 	component->OnDeactivated(handle);
 
 	return omg_rtc::RTC_OK;
