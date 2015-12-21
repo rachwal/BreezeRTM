@@ -24,9 +24,9 @@ RTObject::~RTObject()
 	delete participating_contexts_;
 }
 
-omg_rtc::ComponentProfile RTObject::GetComponentProfile()
+omg_rtc::ComponentProfile *RTObject::GetComponentProfile()
 {
-	return profile_;
+	return &profile_;
 }
 
 std::list<omg_rtc::PortInterface*> *RTObject::GetPorts()
@@ -52,7 +52,7 @@ omg_rtc::ReturnCode_t RTObject::Initialize(const omg_rtc::UniqueIdentifier& exec
 	{
 		execution_context = execution_context_service_->Create(execution_context_id);
 	}
-
+	execution_context->Initialize(profile_.id);
 	execution_context->Start();
 
 	return omg_rtc::RTC_OK;
@@ -93,6 +93,24 @@ bool RTObject::IsAlive(const omg_rtc::UniqueIdentifier& execution_context_id)
 
 omg_rtc::ReturnCode_t RTObject::Exit()
 {
+	if (!initialized_)
+	{
+		return omg_rtc::PRECONDITION_NOT_MET;
+	}
+
+	for (auto owned_context_id = owned_contexts_->begin(); owned_context_id != owned_contexts_->end(); ++owned_context_id)
+	{
+		auto execution_context = execution_context_service_->Retrieve(*owned_context_id);
+		execution_context->Stop();
+	}
+
+	for (auto iterator = participating_contexts_->begin(); iterator != participating_contexts_->end(); ++iterator)
+	{
+		auto participating_context_id = iterator->second;
+		auto execution_context = execution_context_service_->Retrieve(participating_context_id);
+		execution_context->DeactivateComponent(profile_.id);
+	}
+
 	return omg_rtc::RTC_OK;
 }
 
@@ -117,6 +135,7 @@ omg_rtc::ExecutionContextHandle_t RTObject::AttachContext(const omg_rtc::UniqueI
 	}
 
 	participating_contexts_->operator[](new_handle) = execution_context_id;
+
 	return new_handle;
 }
 

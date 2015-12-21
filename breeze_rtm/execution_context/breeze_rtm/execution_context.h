@@ -23,6 +23,8 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 
 	virtual omg_rtc::ExecutionContextProfile *profile() override;
 
+	virtual omg_rtc::ReturnCode_t Initialize(const omg_rtc::UniqueIdentifier& component_id) override;
+
 	virtual bool IsRunning() override;
 
 	virtual omg_rtc::ReturnCode_t Start() override;
@@ -37,17 +39,18 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	virtual double rate() override;
 	virtual omg_rtc::ReturnCode_t rate(double rate) override;
 
-	virtual omg_rtc::LifeCycleState component_state(const omg_rtc::UniqueIdentifier& component_id) override;
+	virtual omg_rtc::LifeCycleState GetComponentState(const omg_rtc::UniqueIdentifier& component_id) override;
 	virtual omg_rtc::ExecutionKind kind() override;
 
 	protected:
 	ExecutionContext(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service);
 
 	std::map<omg_rtc::UniqueIdentifier, omg_rtc::ExecutionContextHandle_t>* components_map_;
+	std::map<omg_rtc::UniqueIdentifier, omg_rtc::LifeCycleState>* components_state_map_;
 	omg_rtc::ExecutionContextProfile profile_;
 
 	private:
-	double rate_;
+	bool is_running_;
 
 	omg_rtc::LightweightRTObjectService* lightweight_rt_object_service_;
 	const omg_rtc::ExecutionContextService* execution_context_service_;

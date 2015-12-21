@@ -17,6 +17,12 @@ struct ExecutionContextProfile
 	UniqueIdentifier id;
 	ExecutionKind kind;
 	double rate;
+
+	ExecutionContextProfile()
+	{
+		kind = OTHER;
+		rate = 0;
+	}
 };
 }
 }

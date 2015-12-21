@@ -8,17 +8,17 @@ namespace breeze_rtm
 {
 namespace execution_context
 {
-ExecutionContext::ExecutionContext(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service) : rate_(1), lightweight_rt_object_service_(lightweight_rt_object_service), execution_context_service_(execution_context_service)
+ExecutionContext::ExecutionContext(const omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::LightweightRTObjectService* lightweight_rt_object_service) : is_running_(false), lightweight_rt_object_service_(lightweight_rt_object_service), execution_context_service_(execution_context_service)
 {
 	profile_ = omg_rtc::ExecutionContextProfile();
-	profile_.kind = omg_rtc::OTHER;
-
 	components_map_ = new std::map<omg_rtc::UniqueIdentifier, omg_rtc::ExecutionContextHandle_t>();
+	components_state_map_ = new std::map<omg_rtc::UniqueIdentifier, omg_rtc::LifeCycleState>();
 }
 
 ExecutionContext::~ExecutionContext()
 {
 	delete components_map_;
+	delete components_state_map_;
 }
 
 omg_rtc::ExecutionContextProfile *ExecutionContext::profile()
@@ -26,9 +26,16 @@ omg_rtc::ExecutionContextProfile *ExecutionContext::profile()
 	return &profile_;
 }
 
+omg_rtc::ReturnCode_t ExecutionContext::Initialize(const omg_rtc::UniqueIdentifier& component_id)
+{
+	components_state_map_->operator[](component_id) = omg_rtc::CREATED_STATE;
+
+	return omg_rtc::RTC_OK;
+}
+
 bool ExecutionContext::IsRunning()
 {
-	return true;
+	return is_running_;
 }
 
 omg_rtc::ReturnCode_t ExecutionContext::Start()
@@ -36,10 +43,14 @@ omg_rtc::ReturnCode_t ExecutionContext::Start()
 	for (auto entry = components_map_->begin(); entry != components_map_->end(); ++entry)
 	{
 		auto component_id = entry->first;
+		ActivateComponent(component_id);
+
 		auto execution_context_handle = entry->second;
 		auto component = lightweight_rt_object_service_->Retrieve(component_id);
 		component->OnStartup(execution_context_handle);
 	}
+
+	is_running_ = true;
 	return omg_rtc::RTC_OK;
 }
 
@@ -48,21 +59,25 @@ omg_rtc::ReturnCode_t ExecutionContext::Stop()
 	for (auto entry = components_map_->begin(); entry != components_map_->end(); ++entry)
 	{
 		auto component_id = entry->first;
+		DeactivateComponent(component_id);
+
 		auto execution_context_handle = entry->second;
 		auto component = lightweight_rt_object_service_->Retrieve(component_id);
 		component->OnShutdown(execution_context_handle);
 	}
+
+	is_running_ = false;
 	return omg_rtc::RTC_OK;
 }
 
 double ExecutionContext::rate()
 {
-	return rate_;
+	return profile_.rate;
 }
 
 omg_rtc::ReturnCode_t ExecutionContext::rate(double rate)
 {
-	rate_ = rate;
+	profile_.rate = rate;
 	return omg_rtc::RTC_OK;
 }
 
@@ -77,9 +92,10 @@ omg_rtc::ReturnCode_t ExecutionContext::AddComponent(const omg_rtc::UniqueIdenti
 		}
 	}
 	auto component = lightweight_rt_object_service_->Retrieve(component_id);
-
 	auto handle = component->AttachContext(profile_.id);
+
 	components_map_->operator[](component_id) = handle;
+	components_state_map_->operator[](component_id) = omg_rtc::CREATED_STATE;
 
 	return omg_rtc::RTC_OK;
 }
@@ -94,6 +110,7 @@ omg_rtc::ReturnCode_t ExecutionContext::RemoveComponent(const omg_rtc::UniqueIde
 	if (detach_return_code == omg_rtc::RTC_OK)
 	{
 		components_map_->erase(component_id);
+		components_state_map_->erase(component_id);
 		return omg_rtc::RTC_OK;
 	}
 
@@ -102,11 +119,24 @@ omg_rtc::ReturnCode_t ExecutionContext::RemoveComponent(const omg_rtc::UniqueIde
 
 omg_rtc::ReturnCode_t ExecutionContext::ActivateComponent(const omg_rtc::UniqueIdentifier& component_id)
 {
+	components_state_map_->operator[](component_id) = omg_rtc::ACTIVE_STATE;
+
+	auto handle = components_map_->operator[](component_id);
+	auto component = lightweight_rt_object_service_->Retrieve(component_id);
+	component->OnActivated(handle);
+
 	return omg_rtc::RTC_OK;
 }
 
 omg_rtc::ReturnCode_t ExecutionContext::DeactivateComponent(const omg_rtc::UniqueIdentifier& component_id)
 {
+	components_state_map_->operator[](component_id) = omg_rtc::INACTIVE_STATE;
+
+	auto handle = components_map_->operator[](component_id);
+	auto component = lightweight_rt_object_service_->Retrieve(component_id);
+
+	component->OnDeactivated(handle);
+
 	return omg_rtc::RTC_OK;
 }
 
@@ -115,9 +145,9 @@ omg_rtc::ReturnCode_t ExecutionContext::ResetComponent(const omg_rtc::UniqueIden
 	return omg_rtc::RTC_OK;
 }
 
-omg_rtc::LifeCycleState ExecutionContext::component_state(const omg_rtc::UniqueIdentifier& component_id)
+omg_rtc::LifeCycleState ExecutionContext::GetComponentState(const omg_rtc::UniqueIdentifier& component_id)
 {
-	return omg_rtc::LifeCycleState::CREATED_STATE;
+	return components_state_map_->operator[](component_id);
 }
 
 omg_rtc::ExecutionKind ExecutionContext::kind()

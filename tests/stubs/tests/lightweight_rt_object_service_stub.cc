@@ -28,6 +28,9 @@ LightweightRTObjectServiceStub::~LightweightRTObjectServiceStub()
 omg_rtc::LightweightRTObject *LightweightRTObjectServiceStub::Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id) const
 {
 	auto rt_object = new RTObjectStub(execution_context_service_, port_service_);
+	auto profile = rt_object->GetComponentProfile();
+	profile->id = lightweight_rt_object_id;
+
 	lightweight_rt_object_map_->operator[](lightweight_rt_object_id) = rt_object;
 
 	Register(lightweight_rt_object_id, nullptr);
@@ -38,6 +41,9 @@ omg_rtc::LightweightRTObject *LightweightRTObjectServiceStub::Create(const omg_r
 omg_rtc::LightweightRTObject *LightweightRTObjectServiceStub::Create(const omg_rtc::UniqueIdentifier& lightweight_rt_object_id, omg_rtc::Logger* logger) const
 {
 	auto rt_object = new RTLoggingObjectStub(execution_context_service_, port_service_, logger);
+	auto profile = rt_object->GetComponentProfile();
+	profile->id = lightweight_rt_object_id;
+
 	lightweight_rt_object_map_->operator[](lightweight_rt_object_id) = rt_object;
 
 	Register(lightweight_rt_object_id, nullptr);

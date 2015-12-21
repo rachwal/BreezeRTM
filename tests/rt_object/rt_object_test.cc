@@ -150,9 +150,6 @@ TEST_CLASS(RTObjectTest)
 
 		rt_object->Initialize("ec");
 
-		auto execution_context_service = system_builder->execution_context_service();
-		execution_context_service->Create("external_ec");
-
 		//WHEN
 		auto is_alive = rt_object->IsAlive("external_ec");
 
@@ -165,13 +162,47 @@ TEST_CLASS(RTObjectTest)
 	TEST_METHOD(RTObjectShouldExit)
 	{
 		//GIVEN
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
+		auto rt_object = lightweight_rt_object_service->Create("rto1");
+
+		rt_object->Initialize("ec");
+
+		auto execution_context_service = system_builder->execution_context_service();
+		auto external_execution_context = execution_context_service->Create("external_ec");
+		external_execution_context->AddComponent("rto1");
 
 		//WHEN
+		rt_object->Exit();
 
 		//THEN
-		Assert::Fail();
+		auto component_execution_context = execution_context_service->Retrieve("ec");
+		auto component_state_in_execution_context = component_execution_context->GetComponentState("rto1");
+		auto component_state_in_external_execution_context = external_execution_context->GetComponentState("rto1");
+
+		Assert::AreEqual(static_cast<int>(omg_rtc::LifeCycleState::INACTIVE_STATE), static_cast<int>(component_state_in_execution_context));
+		Assert::AreEqual(static_cast<int>(omg_rtc::LifeCycleState::INACTIVE_STATE), static_cast<int>(component_state_in_external_execution_context));
+
+		delete system_builder;
 	}
 
+	TEST_METHOD(RTObjectShouldNotExitWhenNotInitialized)
+	{
+		//GIVEN
+		auto system_builder = new stubs::SystemBuilderStub();
+
+		auto lightweight_rt_object_service = system_builder->lightweight_rt_object_service();
+		auto rt_object = lightweight_rt_object_service->Create("rto1");
+
+		//WHEN
+		auto exit_return_code = rt_object->Exit();
+
+		//THEN
+		Assert::AreEqual(5, static_cast<int>(exit_return_code));
+
+		delete system_builder;
+	}
 
 	TEST_METHOD(RTObjectShouldAttachContext)
 	{

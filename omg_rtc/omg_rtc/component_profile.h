@@ -19,6 +19,7 @@ struct ComponentProfile
 	std::string version;
 	std::string vendor;
 	std::string category;
+	UniqueIdentifier id;
 };
 }
 }

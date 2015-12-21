@@ -22,6 +22,8 @@ class ExecutionContext
 
 	virtual ExecutionContextProfile *profile() = 0;
 
+	virtual ReturnCode_t Initialize(const UniqueIdentifier& component_id) = 0;
+
 	virtual bool IsRunning() = 0;
 
 	virtual ReturnCode_t Start() = 0;
@@ -36,7 +38,7 @@ class ExecutionContext
 	virtual ReturnCode_t DeactivateComponent(const UniqueIdentifier& component_id) = 0;
 	virtual ReturnCode_t ResetComponent(const UniqueIdentifier& component_id) = 0;
 
-	virtual LifeCycleState component_state(const UniqueIdentifier& component_id) = 0;
+	virtual LifeCycleState GetComponentState(const UniqueIdentifier& component_id) = 0;
 
 	virtual ExecutionKind kind() = 0;
 };

@@ -26,6 +26,8 @@ DataFlowComponentServiceStub::~DataFlowComponentServiceStub()
 omg_rtc::DataFlowComponent *DataFlowComponentServiceStub::Create(const omg_rtc::UniqueIdentifier& data_flow_component_id) const
 {
 	auto data_flow_component = new DataFlowComponentStub(execution_context_service_, port_service_);
+	auto profile = data_flow_component->GetComponentProfile();
+	profile->id = data_flow_component_id;
 	data_flow_component_map_->operator[](data_flow_component_id) = data_flow_component;
 	lightweight_rt_object_service_->Register(data_flow_component_id, this);
 
@@ -35,6 +37,8 @@ omg_rtc::DataFlowComponent *DataFlowComponentServiceStub::Create(const omg_rtc::
 omg_rtc::DataFlowComponent *DataFlowComponentServiceStub::Create(const omg_rtc::UniqueIdentifier& data_flow_component_id, omg_rtc::Logger* logger) const
 {
 	auto data_flow_component = new DataFlowLoggingComponentStub(execution_context_service_, port_service_, logger);
+	auto profile = data_flow_component->GetComponentProfile();
+	profile->id = data_flow_component_id;
 	data_flow_component_map_->operator[](data_flow_component_id) = data_flow_component;
 	lightweight_rt_object_service_->Register(data_flow_component_id, this);
 

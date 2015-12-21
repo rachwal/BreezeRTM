@@ -7,9 +7,9 @@
 
 #include <omg_rtc/lightweight_rt_object_service.h>
 #include <omg_rtc/port_service.h>
+#include <omg_rtc/execution_context_service.h>
 
 #include <map>
-#include <omg_rtc/execution_context_service.h>
 
 namespace breeze_rtm
 {
