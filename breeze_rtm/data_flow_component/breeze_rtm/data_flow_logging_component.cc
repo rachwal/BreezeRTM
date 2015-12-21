@@ -10,7 +10,8 @@ namespace breeze_rtm
 {
 namespace data_flow_component
 {
-DataFlowLoggingComponent::DataFlowLoggingComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) : DataFlowComponent(execution_context_service, port_service), logger_(logger) {}
+DataFlowLoggingComponent::DataFlowLoggingComponent(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) 
+	: DataFlowComponent(execution_context_service, port_service), logger_(logger) {}
 
 omg_rtc::ReturnCode_t DataFlowLoggingComponent::OnExecute(omg_rtc::ExecutionContextHandle_t handle)
 {

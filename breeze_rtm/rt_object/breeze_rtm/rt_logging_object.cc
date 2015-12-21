@@ -10,7 +10,8 @@ namespace breeze_rtm
 {
 namespace rt_object
 {
-RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) : RTObject(execution_context_service, port_service), logger_(logger) {}
+RTLoggingObject::RTLoggingObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service, omg_rtc::Logger* logger) 
+	: RTObject(execution_context_service, port_service), logger_(logger) {}
 
 std::list<omg_rtc::PortInterface*> *RTLoggingObject::GetPorts()
 {

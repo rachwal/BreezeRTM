@@ -8,7 +8,8 @@ namespace breeze_rtm
 {
 namespace rt_object
 {
-RTObject::RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service) : initialized_(false), execution_context_service_(execution_context_service), port_service_(port_service)
+RTObject::RTObject(omg_rtc::ExecutionContextService* execution_context_service, omg_rtc::PortService* port_service) 
+	: initialized_(false), execution_context_service_(execution_context_service), port_service_(port_service)
 {
 	owned_contexts_ = new std::list<omg_rtc::UniqueIdentifier>();
 	participating_contexts_ = new std::map<omg_rtc::ExecutionContextHandle_t, omg_rtc::UniqueIdentifier>();
