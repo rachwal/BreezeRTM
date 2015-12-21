@@ -22,8 +22,6 @@ class ExecutionContext
 
 	virtual ExecutionContextProfile *profile() = 0;
 
-	virtual ReturnCode_t Initialize(const UniqueIdentifier& component_id) = 0;
-
 	virtual bool IsRunning() = 0;
 
 	virtual ReturnCode_t Start() = 0;

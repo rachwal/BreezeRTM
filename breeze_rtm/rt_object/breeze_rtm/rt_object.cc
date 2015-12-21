@@ -52,7 +52,7 @@ omg_rtc::ReturnCode_t RTObject::Initialize(const omg_rtc::UniqueIdentifier& exec
 	{
 		execution_context = execution_context_service_->Create(execution_context_id);
 	}
-	execution_context->Initialize(profile_.id);
+	execution_context->AddComponent(profile_.id);
 	execution_context->Start();
 
 	return omg_rtc::RTC_OK;

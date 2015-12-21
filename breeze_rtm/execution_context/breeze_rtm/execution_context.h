@@ -23,8 +23,6 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 
 	virtual omg_rtc::ExecutionContextProfile *profile() override;
 
-	virtual omg_rtc::ReturnCode_t Initialize(const omg_rtc::UniqueIdentifier& component_id) override;
-
 	virtual bool IsRunning() override;
 
 	virtual omg_rtc::ReturnCode_t Start() override;
@@ -50,8 +48,6 @@ class ExecutionContext : public omg_rtc::ExecutionContext
 	omg_rtc::ExecutionContextProfile profile_;
 
 	private:
-	bool is_running_;
-
 	omg_rtc::LightweightRTObjectService* lightweight_rt_object_service_;
 	const omg_rtc::ExecutionContextService* execution_context_service_;
 };

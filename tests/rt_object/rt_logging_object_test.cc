@@ -27,6 +27,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto expected_logger_content =
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_startup(0)\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_activated(0)\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n");
 
 		auto system_builder = new stubs::SystemBuilderStub();
@@ -52,6 +54,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto expected_logger_content =
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_startup(0)\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_activated(0)\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n") +
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n");
 
@@ -81,6 +85,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto expected_logger_content =
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_startup(0)\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_activated(0)\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n") +
 			std::string("TRACE: RTLoggingObjectStub: finalize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_finalize()\n");
@@ -111,6 +117,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto expected_logger_content =
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_startup(0)\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_activated(0)\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n") +
 			std::string("TRACE: RTLoggingObjectStub: attach_context()\n") +
 			std::string("TRACE: RTLoggingObjectStub: finalize()\n");
@@ -168,6 +176,8 @@ TEST_CLASS(RTLoggingObjectTest)
 		auto expected_logger_content =
 			std::string("TRACE: RTLoggingObjectStub: initialize()\n") +
 			std::string("TRACE: RTLoggingObjectStub: on_initialize()\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_startup(0)\n") +
+			std::string("TRACE: RTLoggingObjectStub: on_activated(0)\n") +
 			std::string("DEBUG: RTLoggingObjectStub: Starting Execution Context\n") +
 			std::string("TRACE: RTLoggingObjectStub: attach_context()\n") +
 			std::string("TRACE: RTLoggingObjectStub: is_alive()\n");
